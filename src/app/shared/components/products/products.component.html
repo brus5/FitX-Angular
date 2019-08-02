@@ -1,0 +1,41 @@
+<div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
+
+  <a
+    class="btn btn-primary"
+    routerLink="/products/new">
+    Nowy Produkt
+  </a>
+  <input
+    #query
+    (keyup)="filter(query.value)"
+    type="text"
+    class="form-control"
+    placeholder="Nazwa produktu..."
+  >
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th></th>
+      <th class="text-left">Nazwa produktu</th>
+      <th class="text-center">Ilość</th>
+      <th class="text-right" style="width: 200px">Kalorie</th>
+      <th class="text-right"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products | filterProduct: query.value">
+      <th style="width: 100px;">
+        <div [style.backgroundImage]="'url(' + product.imageUrl + ')'" class="thumbnail"></div>
+      </th>
+      <th class="text-left">{{product.name}}</th>
+      <th class="text-center">{{product}}</th>
+      <th class="text-right">{{product.nutrition.kcal}}</th>
+      <th class="text-right">
+        <button [routerLink]="['/products/edit', product.key]" >Edit</button>
+      </th>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

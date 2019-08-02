@@ -1,0 +1,37 @@
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.card {
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+}
+
+.card-body {
+  margin-top: 20px;
+}
+
+.rounded-top {
+  border-radius: 5px 5px 0 0;
+}
+
+[hidden] {
+  display: none !important;
+  margin-top: 50px;
+}
+
+.custom-file-upload {
+  text-align: center;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 30%;
+  margin-left: -1px;
+}

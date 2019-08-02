@@ -1,0 +1,97 @@
+<responsive-switcher>
+
+  <form #form="ngForm">
+
+    <div class="col-md-6">
+
+      <div class="row">
+        <label for="name">Nazwa produktu</label>
+        <input #name="ngModel" [(ngModel)]="product.name" class="form-control" name="name" id="name" type="text"
+               required placeholder="Nazwa produktu" maxlength="100">
+        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+          <div *ngIf="name.errors.required">Wpisz nazwę produktu.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="category">Kategoria</label>
+        <dropdown-list #dropdownListComponent id="category" (item)="onCategoryChoosed($event)"
+                       [items]="getCategories()"></dropdown-list>
+      </div>
+
+      <div class="row">
+        <label for="proteins">Białko</label>
+        <div class="input-group">
+          <span class="input-group-addon">g</span>
+          <input #proteins="ngModel" [(ngModel)]="nutrition.proteins" (ngModelChange)="countCalories()"
+                 class="form-control" name="proteins" id="proteins"
+                 type="number" required placeholder="Proteiny" min="0" max="100">
+          <span class="input-group-addon">.00</span>
+        </div>
+        <div class="alert alert-danger" *ngIf="proteins.touched && proteins.invalid">
+          <div *ngIf="proteins.errors.required">Podaj ilość białka.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="carbs">Węglowodany</label>
+        <div class="input-group">
+          <span class="input-group-addon">g</span>
+          <input #carbs="ngModel" [(ngModel)]="nutrition.carbs" (ngModelChange)="countCalories()" class="form-control"
+                 name="carbs" id="carbs"
+                 type="number" required placeholder="Węglowodany">
+          <span class="input-group-addon">.00</span>
+        </div>
+        <div class="alert alert-danger" *ngIf="carbs.touched && carbs.invalid">
+          <div *ngIf="carbs.errors.required">Podaj ilość węglowodanów.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="fats">Tłuszcze</label>
+        <div class="input-group">
+          <span class="input-group-addon">g</span>
+          <input #fats="ngModel" [(ngModel)]="nutrition.fats" (ngModelChange)="countCalories()" class="form-control"
+                 name="fats" id="fats"
+                 type="number" required placeholder="Tłuszcze" maxlength="3">
+          <span class="input-group-addon">.00</span>
+        </div>
+        <div class="alert alert-danger" *ngIf="fats.touched && fats.invalid">
+          <div *ngIf="fats.errors.required">Podaj ilość tłuszczy.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="photo">Zdjęcie*</label>
+        <input #inputElement id="photo" type="file" (change)="selectFileAndUpload($event)" required>
+      </div>
+      <div class="alert alert-danger" *ngIf="inputElement.oninvalid">
+        <div>Wprowadź zdjęcie produktu.</div>
+      </div>
+
+      <div class="row mt-10">
+        <button [disabled]="!form.valid || !photoUploaded || !product.category" (click)="save(); resetForm()"
+                class="btn btn-primary">Zapisz
+        </button>
+        <button (click)="resetForm()" class="btn btn-secondary pull-right">Resetuj</button>
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <div *ngIf="product.name" class="card">
+        <img *ngIf="tempImageUrl$" [src]="tempImageUrl$" class="rounded-top" style="width: 100%;"
+             alt="{{product.name}}">
+        <div class="card-body">
+          <mat-progress-bar [hidden]="photoUploaded" value="{{uploadProgress$}}" mode="determinate"></mat-progress-bar>
+          <h4 class="card-title">{{product.name}}</h4>
+          <p *ngIf="getCalories()" class="card-text">{{getCalories()}} kcal</p>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+
+</responsive-switcher>

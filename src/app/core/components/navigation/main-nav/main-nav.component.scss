@@ -1,0 +1,117 @@
+$content-padding-desktop: 15%;
+$content-padding-mobile: 3%;
+$text-color: white;
+$text-color-menu: #313131;
+$font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+$background-color: #FFF;
+$menu-background-color: #313131;
+
+/* Provides styles for components in application */
+:host ::ng-deep .desktop-content {
+  margin-left: $content-padding-desktop;
+  margin-right: $content-padding-desktop;
+}
+
+:host ::ng-deep .mobile-content {
+  margin-left: $content-padding-mobile;
+  margin-right: $content-padding-mobile;
+}
+
+mat-toolbar div, a {
+  letter-spacing: 1px;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 100%;
+  outline: none;
+}
+
+.mat-toolbar {
+  padding-right: $content-padding-desktop;
+  padding-left: $content-padding-desktop;
+  background: $menu-background-color;
+}
+
+.mat-toolbar .mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.sidenav {
+  background-color: $background-color;
+  width: 250px;
+}
+
+.sidenav .mat-toolbar {
+  color: $text-color;
+  background-color: $menu-background-color;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.desktop-nav a {
+  color: $text-color;
+  font-family: $font-family;
+  font-weight: lighter;
+  display: inline-block;
+  padding: 5px 15px 5px 15px;
+  border-right: 1px dotted white;
+  min-height: 40px;
+}
+
+.desktop-nav a:hover {
+  color: #b6b6b6;
+  cursor: pointer;
+}
+
+.desktop-nav > .app-title {
+  margin-left: -35%;
+}
+
+.mobile-nav {
+  outline: none;
+  margin-top: -10px;
+}
+
+.mobile-nav a {
+  color: $text-color-menu;
+  font-family: $font-family;
+  display: inline-block;
+  padding: 15px 0 16px 15px;
+  border-bottom: 1px dashed black;
+  min-width: 250px;
+}
+
+.mobile-nav a:hover {
+  color: #b6b6b6;
+  cursor: pointer;
+  background-color: inherit;
+}
+
+.mobile-nav > .app-title {
+  margin-left: -20%;
+}
+
+.mobile-menu {
+  padding-left: 0;
+  background: $menu-background-color;
+}
+
+.app-title {
+  color: $text-color;
+  font-size: 100%;
+  text-decoration: none;
+  font-family: $font-family;
+  font-weight: 800;
+  letter-spacing: 10px;
+}

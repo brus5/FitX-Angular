@@ -1,0 +1,39 @@
+<div id="nav">
+
+  <div [ngClass]="(isHandset$ | async) ? 'mobile-nav' : 'desktop-nav'">
+
+    <div *ngIf="appUser$ as user; else loginButton">
+      <div class="login-btn">
+
+        <a>{{user.name}}</a>
+
+        <div class="profile-buttons" *ngIf="appUser$">
+
+          <ul>
+
+            <li *ngFor="let profileLink of profileLinks" routerLink="{{profileLink.destination}}">
+              <a>{{profileLink.name}}</a>
+            </li>
+
+            <div class="admin-buttons" *ngIf="appUser$.isAdmin">
+              <li *ngFor="let adminLink of adminLinks" routerLink="{{adminLink.destination}}">
+                <a>{{adminLink.name}}</a>
+              </li>
+            </div>
+
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<ng-template #loginButton>
+  <div class="login-btn" routerLink="/login">
+    <a>Login</a>
+  </div>
+</ng-template>

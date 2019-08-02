@@ -1,0 +1,31 @@
+$border-radius-thumbnail: 100%;
+$background-size-thumbnail: cover;
+$margin-thumbnail: 0;
+
+.mobile-content .thumbnail {
+  width: 35px;
+  height: 35px;
+  border-radius: $border-radius-thumbnail;
+  background-size: $background-size-thumbnail;
+  margin: $margin-thumbnail;
+}
+
+.desktop-content .thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: $border-radius-thumbnail;
+  background-size: $background-size-thumbnail;
+  margin: $margin-thumbnail;
+}
+
+.form-control {
+  margin: 16px 0 16px 0;
+}
+
+table > tbody > tr > th {
+  font-weight: normal;
+}
+
+a {
+  margin-top: 16px;
+}

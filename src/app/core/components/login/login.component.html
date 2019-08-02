@@ -1,0 +1,21 @@
+<responsive-switcher>
+
+  <button
+    (click)="login()"
+    class="btn btn-primary">Login
+  </button>
+
+  <div *ngIf="(uid$ | async) as user else notLogged">
+    logged as {{user.uid}}
+  </div>
+
+  <ng-template #notLogged>
+    you are not logged in
+  </ng-template>
+
+  <button
+    (click)="logout()"
+    class="mat-button mat-raised-button">Logout
+  </button>
+
+</responsive-switcher>

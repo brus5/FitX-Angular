@@ -1,0 +1,11 @@
+<div *ngIf="(items$ | async).length">
+  <ng-select #ngSelectComponent
+             [items]="items$ | async"
+             (selected)="selected($event); isSelected($event)"
+             (focusout)="onFocusOut($event)"
+             [allowClear]="true"
+  ></ng-select>
+  <div class="alert alert-danger" *ngIf="dirtyTouched">
+    <div>Wybierz kategorię.</div>
+  </div>
+</div>

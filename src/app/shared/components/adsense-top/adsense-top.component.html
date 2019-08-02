@@ -1,0 +1,10 @@
+<responsive-switcher>
+
+  <div [ngClass]="(isHandset$ | async) ? 'mobile-ad' : 'desktop-ad'">
+
+    <div *ngIf="isHandset$ | async">mobile ad</div>
+    <div *ngIf="!(isHandset$ | async)">desktop ad</div>
+
+  </div>
+
+</responsive-switcher>

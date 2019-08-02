@@ -1,0 +1,79 @@
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+               [ngClass]="{hidden: !(isHandset$ | async)}"
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="!(isHandset$ | async) "
+  >
+    <mat-toolbar>
+      <div [ngClass]="(isHandset$ | async) ? 'mobile-nav': 'desktop-nav'">
+        <span class="app-title">{{appTitle}}</span>
+      </div>
+    </mat-toolbar>
+
+    <mat-nav-list (click)="hideMenu()">
+
+      <ng-container *ngTemplateOutlet="menu"></ng-container>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <div (swiperight)="swipe($event)">
+
+      <mat-toolbar color="primary" [ngClass]="(isHandset$ | async) ? 'mobile-menu' : 'mat-toolbar'">
+        <button
+          style="color: white"
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
+        >
+
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+
+        </button>
+
+        <span class="app-title">{{appTitle}}</span>
+
+        <span class="spacer"></span>
+
+        <div *ngIf="!(isHandset$ | async)">
+
+          <ng-container *ngTemplateOutlet="menu"></ng-container>
+
+        </div>
+
+      </mat-toolbar>
+
+    </div>
+
+    <!--      AD IN FUTURE <ng-adsense></ng-adsense>      -->
+
+    <ng-content></ng-content>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
+<ng-template #menu>
+
+  <div [ngClass]="(isHandset$ | async) ? 'mobile-nav' : 'desktop-nav'">
+
+    <div *ngFor="let link of menuLinks">
+      <div style="outline: none;" routerLink="{{link.destination}}">
+        <a>{{link.name}}</a>
+      </div>
+    </div>
+
+    <a style="border: none; padding: 0">
+      <profile-nav></profile-nav>
+    </a>
+  </div>
+
+</ng-template>

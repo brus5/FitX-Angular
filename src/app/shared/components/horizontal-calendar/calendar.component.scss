@@ -1,0 +1,58 @@
+$calendar-highlight-color: #313131;
+$calendar-row-size: 40px;
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  .card {
+    display: inline-block;
+    margin: 0 6px 0 6px;
+  }
+}
+
+.scrolling-wrapper {
+  -webkit-overflow-scrolling: touch;
+}
+
+:host ::ng-deep ngb-datepicker {
+  margin-top: 16px;
+}
+
+:host ::ng-deep button.calendar, button.calendar:active {
+  width: 2.75rem;
+  background-repeat: no-repeat;
+  background-size: 23px;
+  background-position: center;
+}
+
+::ng-deep div.ngb-dp-arrow > button {
+  color: $calendar-highlight-color;
+}
+
+:host ::ng-deep .ngb-dp-day {
+  width: $calendar-row-size !important;
+  height: $calendar-row-size !important;
+}
+
+:host ::ng-deep .ngb-dp-day > div {
+  width: $calendar-row-size !important;
+  height: $calendar-row-size !important;
+  line-height: $calendar-row-size !important;
+}
+
+:host ::ng-deep .ngb-dp-weekday {
+  width: $calendar-row-size !important;
+}
+
+:host ::ng-deep .bg-primary {
+  background-color: $calendar-highlight-color;
+}
+
+:host ::ng-deep .ngb-dp-day {
+  outline: 0;
+  border: none;
+}
+
+
