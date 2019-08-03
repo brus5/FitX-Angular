@@ -18,7 +18,7 @@ import {ProductComponent} from './components/product/product.component';
 import {AdsenseTopComponent} from './components/adsense-top/adsense-top.component';
 import {ResponsiveComponent} from './components/responsive/responsive.component';
 import {DropdownListComponent} from './components/dropdown-list/dropdown-list.component';
-import {CalendarComponent} from './components/horizontal-calendar/calendar.component';
+import {CalendarComponent} from './components/calendar/calendar.component';
 
 import {FilterProductPipe} from './pipes/filterProduct.pipe';
 

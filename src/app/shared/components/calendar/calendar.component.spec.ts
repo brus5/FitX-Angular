@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HorizontalCalendarComponent } from './horizontal-calendar.component';
+import { HorizontalCalendarComponent } from './calendar.component';
 
 describe('HorizontalCalendarComponent', () => {
   let component: HorizontalCalendarComponent;

@@ -22,6 +22,7 @@
 
   <mat-sidenav-content>
 
+    <!--suppress AngularUndefinedBinding -->
     <div (swiperight)="swipe($event)">
 
       <mat-toolbar color="primary" [ngClass]="(isHandset$ | async) ? 'mobile-menu' : 'mat-toolbar'">

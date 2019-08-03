@@ -25,7 +25,7 @@ export class ImageUploadService {
   }
 
   private get formData(): FormData {
-    let fd = new FormData();
+    const fd = new FormData();
     fd.append('image', this.selectedFile, this.selectedFile.name);
     return fd;
   }

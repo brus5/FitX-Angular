@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {CanActivate, Router} from '@angular/router';
 import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
 import 'rxjs-compat/add/operator/map';
@@ -13,7 +13,7 @@ export class AuthGuardService implements CanActivate {
               private _router: Router) {
   }
 
-  canActivate(router, state: RouterStateSnapshot,): Observable<boolean> {
+  canActivate(): Observable<boolean> {
     return this._auth.appUser$$.map(user => {
       if (user)
         return true;
@@ -22,6 +22,4 @@ export class AuthGuardService implements CanActivate {
       return false;
     });
   }
-
-
 }

@@ -23,16 +23,16 @@ export class ProductFormComponent implements OnInit {
   @ViewChild('imageElement', {static: false}) private imageElement: ElementRef;
   @ViewChild('dropdownListComponent', {static: false}) private dropdownListComponent: DropdownListComponent;
 
-  @Input('productId') productId: string;
+  @Input() productId: string;
 
-  product = <Product> {};
-  nutrition = <ProductNutrition> {};
+  product = {} as Product;
+  nutrition = {} as ProductNutrition;
   categories: Array<string> = [];
   categories$;
 
   uploadProgress$;
   tempImageUrl$;
-  photoUploaded: boolean = false;
+  photoUploaded = false;
   selectedFile: File;
 
   constructor(private _productService: ProductService,
@@ -51,10 +51,9 @@ export class ProductFormComponent implements OnInit {
 
     this.productId = this._activatedRoute.snapshot.paramMap.get('id');
 
-    if (this.productId) {
+    if (this.productId)
       this._productService.getProduct(this.productId)
-        .subscribe(product => this.fetchProduct(product));
-    }
+      .subscribe(product => this.fetchProduct(product));
   }
 
   public resetForm() {
@@ -68,7 +67,7 @@ export class ProductFormComponent implements OnInit {
     this.product.nutrition = this.nutrition;
     if (this.productId) {
       this._productService.update(this.productId, this.product);
-      this._router.navigate(['/products'])
+      this._router.navigate(['/products']);
     } else this._productService.create(this.product);
   }
 
@@ -112,7 +111,7 @@ export class ProductFormComponent implements OnInit {
     return this.nutrition.kcal;
   }
 
-  private fetchProduct(product: Product){
+  private fetchProduct(product: Product) {
     this.product = product;
     this.nutrition = product.nutrition;
     this.tempImageUrl$ = product.imageUrl;

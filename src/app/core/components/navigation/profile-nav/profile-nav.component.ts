@@ -31,7 +31,7 @@ export class ProfileNavComponent implements OnInit {
     return PROFILE_LINKS;
   }
 
-  get adminLinks(){
+  get adminLinks() {
     return ADMIN_LINKS;
   }
 }

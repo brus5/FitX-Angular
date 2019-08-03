@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Product} from '../../models/product';
 import {ProductService} from '../../services/product.service';
 import {Observable, Subscription} from 'rxjs';
@@ -35,7 +35,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   filter(query: string) {
-    let filteredProducts = (query) ?
+    const filteredProducts = (query) ?
       this.products.filter(p => p.name.toLowerCase().includes(query.toLowerCase())) :
       this.products;
     this.initializeTable(filteredProducts);

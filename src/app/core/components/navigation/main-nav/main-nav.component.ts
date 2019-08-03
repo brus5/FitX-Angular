@@ -35,11 +35,10 @@ export class MainNavComponent implements OnInit {
   }
 
   swipe($event: HammerInput) {
-    if ($event.deltaX > 200) {
+    if ($event.deltaX > 200)
       this.sidenav.open();
-    } else {
+    else
       this.sidenav.close();
-    }
   }
 
   hideMenu() {

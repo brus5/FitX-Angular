@@ -14,6 +14,6 @@ export class FilterProductPipe implements PipeTransform {
 
     return products.filter((product: Product) => {
       return product.name.toLowerCase().includes(searchProduct);
-    })
+    });
   }
 }
