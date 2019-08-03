@@ -17,7 +17,6 @@ import {ProductComponent} from './components/product/product.component';
 
 import {AdsenseTopComponent} from './components/adsense-top/adsense-top.component';
 import {ResponsiveComponent} from './components/responsive/responsive.component';
-import {ErrorComponent} from './components/error/error.component';
 import {DropdownListComponent} from './components/dropdown-list/dropdown-list.component';
 import {CalendarComponent} from './components/horizontal-calendar/calendar.component';
 
@@ -36,7 +35,6 @@ import {ImageUploadService} from './services/image-upload.service';
 
     AdsenseTopComponent,
     ResponsiveComponent,
-    ErrorComponent,
     DropdownListComponent,
     ProductComponent,
     CalendarComponent,
@@ -71,7 +69,6 @@ import {ImageUploadService} from './services/image-upload.service';
     AdsenseTopComponent,
     ResponsiveComponent,
     ProductFormComponent,
-    ErrorComponent,
     DropdownListComponent,
     ProductComponent,
     CalendarComponent,
