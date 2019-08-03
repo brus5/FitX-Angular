@@ -20,7 +20,7 @@ export class AppComponent {
 
         _userService.save(user);
 
-        let returnUrl = localStorage.getItem('returnUrl');
+        const returnUrl = localStorage.getItem('returnUrl');
         if (!returnUrl) return;
 
         localStorage.removeItem('returnUrl');
