@@ -6,6 +6,10 @@
     "variable-name": [
       true,
       "allow-leading-underscore"
+    ],
+    "curly": [
+      true,
+      "as-needed"
     ]
   }
 }
