@@ -25,6 +25,7 @@ import {FilterProductPipe} from './pipes/filterProduct.pipe';
 import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
+import {DietService} from './services/diet.service';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import {ImageUploadService} from './services/image-upload.service';
   providers: [
     UserService,
     AuthService,
-    ImageUploadService
+    ImageUploadService,
+    DietService
   ]
 })
 
