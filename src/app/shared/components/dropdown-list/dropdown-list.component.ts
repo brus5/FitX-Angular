@@ -9,9 +9,9 @@ import {SelectComponent} from 'ng2-select';
 })
 export class DropdownListComponent {
 
-  @Input('items') public items$: Observable<string[]>;
+  @Input() public items$: Observable<string[]>;
 
-  @Output('item') public item = new EventEmitter<string>();
+  @Output() public item = new EventEmitter<string>();
 
   @ViewChild('ngSelectComponent', {static: false}) public ngSelect: SelectComponent;
 

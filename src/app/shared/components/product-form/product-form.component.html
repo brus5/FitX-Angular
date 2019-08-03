@@ -16,7 +16,7 @@
       <div class="row">
         <label for="category">Kategoria</label>
         <dropdown-list #dropdownListComponent id="category" (item)="onCategoryChoosed($event)"
-                       [items]="getCategories()"></dropdown-list>
+                       [items$]="getCategories()"></dropdown-list>
       </div>
 
       <div class="row">
