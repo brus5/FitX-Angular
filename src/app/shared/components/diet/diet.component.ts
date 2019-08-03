@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {NavService} from '../../../core/components/services/nav.service';
+import {DietService} from '../../services/diet.service';
 
 @Component({
   selector: 'diet',
@@ -11,13 +12,15 @@ export class DietComponent implements OnInit {
 
   public isHandset$: Observable<boolean>;
 
-  constructor(private _navService: NavService) {}
+  constructor(private _navService: NavService,
+              private _dietService: DietService) {}
 
   ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
   }
 
-  public onSelectedDate(event: string) {
-    console.log(event);
+  public onSelectedDate(date: string) {
+    this._dietService.getDailyDiet(date)
+      .subscribe(diet => console.log(diet));
   }
 }
