@@ -16,8 +16,8 @@ import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [ 
-    FormsModule,  
+  imports: [
+    FormsModule,
     CoreModule,
     SharedModule,
     ProfileModule,
