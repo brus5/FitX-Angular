@@ -15,7 +15,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Personal diet tracker with database of products with nutrition. <br>
 Stay tuned for more details later. <br>
-Work in progress...
+Work in progress!...
 
 ## Development server
 
