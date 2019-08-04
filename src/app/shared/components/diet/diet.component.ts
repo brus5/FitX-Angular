@@ -21,6 +21,8 @@ export class DietComponent implements OnInit {
 
   public onSelectedDate(date: string) {
     this._dietService.getDailyDiet(date)
-      .subscribe(diet => console.log(diet));
+      .subscribe(diet => {
+        if (diet) console.log(diet);
+      });
   }
 }
