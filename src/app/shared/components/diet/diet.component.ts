@@ -15,18 +15,23 @@ export class DietComponent implements OnInit {
 
   constructor(private _navService: NavService,
               private _dietService: DietService,
-              private _mealsService: MealsService) {}
+              private _mealsService: MealsService) {
+  }
 
   ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
     this._mealsService.getMealsTime()
-      .subscribe(value => console.log(value));
+      .subscribe(value => {
+        console.log(value)
+      });
   }
 
   public onSelectedDate(date: string) {
     this._dietService.getDailyDiet(date)
       .subscribe(diet => {
-        if (diet) console.log(diet);
+        if (diet) {
+          console.log(diet);
+        }
       });
   }
 }
