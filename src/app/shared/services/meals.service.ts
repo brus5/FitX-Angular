@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 })
 export class MealsService {
 
-  firebaseUser = {} as firebase.User;
+  private firebaseUser = {} as firebase.User;
 
   constructor(private _db: AngularFireDatabase,
               private _auth: AuthService) {
@@ -21,8 +21,18 @@ export class MealsService {
     this._auth.appUser$.subscribe(user => this.firebaseUser = user);
   }
 
-  public getMealsTime(): Observable<MealsTime[]> {
-    return this._db.object<MealsTime[]>('/meals/' + this.firebaseUser.uid + '/meals-time').valueChanges();
+  public get getMealsTime$(): Observable<MealsTime[]> {
+    return this._auth.appUser$
+      .switchMap(user => {
+        if (user)
+          return this._db.object<MealsTime[]>('/meals/' + this.firebaseUser.uid + '/meals-time').valueChanges();
+        else
+          return Observable.of(null);
+      });
+  }
+
+  public addMealTime(mealTime: string, mealName: string) {
+    return this._db.list('/meals/' + this.firebaseUser.uid + '/meals-time').set(mealTime, mealName);
   }
 }
 

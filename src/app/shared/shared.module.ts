@@ -26,6 +26,7 @@ import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
 import {DietService} from './services/diet.service';
+import {MealsService} from './services/meals.service';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import {DietService} from './services/diet.service';
     UserService,
     AuthService,
     ImageUploadService,
-    DietService
+    DietService,
+    MealsService
   ]
 })
 

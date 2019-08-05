@@ -1,3 +1,3 @@
 export interface MealsTime {
-  mealsTime: string;
+  mealsTime: Map<string, string>;
 }
