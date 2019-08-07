@@ -7,6 +7,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FormsModule} from '@angular/forms';
 import {MatFormFieldModule, MatSelectModule, MatProgressBarModule} from '@angular/material';
 import {SelectModule} from 'ng2-select';
+import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
 
 import {HomeComponent} from './components/home/home.component';
@@ -56,6 +57,12 @@ import {MealsService} from './services/meals.service';
     MatProgressBarModule,
     SelectModule,
     RouterModule,
+
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true
+    }),
     RouterModule.forChild([
       {
         path: 'products/new',

@@ -1,7 +1,27 @@
 <responsive-switcher>
 
   <calendar (date)="onSelectedDate($event)"></calendar>
-  <input [(ngModel)]="mealName">
-  <input [(ngModel)]="mealTime">
-  <button (click)="onSendMealTime()">SEND MEAL TIME</button>
+
+
+  <div *ngFor="let meal of meals; let i = index">
+    <li>{{meal | json}}
+      <button (click)="removeMeal(i)">remove</button>
+    </li>
+  </div>
+  <a #buttonElement (click)="buttonElement.hidden = true">
+    dodaj posiłek
+  </a>
+  <div *ngIf="!buttonElement.hidden; else newMealTime"></div>
+  <a *ngIf="buttonElement.hidden" (click)="buttonElement.hidden = false">x</a>
+
+  <hr/>
+
+
 </responsive-switcher>
+
+<ng-template #newMealTime>
+  <input [(ngModel)]="meal.name" #mealName="ngModel" placeholder="Nazwa posiłku">
+  <input [(ngModel)]="meal.time" #mealTime="ngModel" placeholder="Godzina">
+
+  <button (click)="onSendMealTime()" style="margin-right: 16px;">accept</button>
+</ng-template>
