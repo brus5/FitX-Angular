@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
 import {NavService} from '../../../core/components/services/nav.service';
 import {DietService} from '../../services/diet.service';
 import {MealsService} from '../../services/meals.service';
-import {MealTime} from '../../models/meals-time';
+import {MealTime} from '../../models/meal-time';
 import {ToastrService} from 'ngx-toastr';
+import {DropdownListComponent} from '../dropdown-list/dropdown-list.component';
+import {NgForm} from '@angular/forms';
 import 'rxjs/add/operator/mergeMap';
 
 @Component({
@@ -13,6 +15,12 @@ import 'rxjs/add/operator/mergeMap';
   styleUrls: ['./diet.component.scss']
 })
 export class DietComponent implements OnInit {
+
+  @ViewChild('form', {static: false}) private formElement: NgForm;
+  @ViewChild('addMealButtonElement', {static: false}) private addMelaButton: ElementRef;
+  @ViewChild('dropdownListComponent', {static: false}) private dropdownListComponent: DropdownListComponent;
+
+  hours$: Array<string> = [];
 
   public isHandset$: Observable<boolean>;
 
@@ -26,11 +34,12 @@ export class DietComponent implements OnInit {
   constructor(private _navService: NavService,
               private _dietService: DietService,
               private _mealsService: MealsService,
-              private _toastrService: ToastrService) {}
+              private _toastrService: ToastrService) {
+  }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
-    this._mealsService.getAll
+    await this._mealsService.getAll
       .subscribe(mealsTime => {
 
         this.meals = mealsTime || [];
@@ -41,6 +50,10 @@ export class DietComponent implements OnInit {
 
         this._mealsService.update(mealTimes);
       });
+
+    await this._mealsService.getMealHours
+      .subscribe(hours => this.hours$ = hours);
+
   }
 
   onSelectedDate(date: string) {
@@ -57,11 +70,27 @@ export class DietComponent implements OnInit {
       this.setMeals();
 
       this.resetMealValues();
+      this.hideForm();
     } else this.toastWarning();
   }
 
-  removeMeal(id: number): void {
+  delete(id: number): void {
+    if (!confirm('Chcesz usunąć posiłek?')) return;
     this._mealsService.remove(id);
+  }
+
+  getCategories(): Observable<string[]> {
+    return Observable.of(this.hours$);
+  }
+
+  onTimeSelected($event: string) {
+    this.meal.time = $event;
+  }
+
+  resetForm() {
+    this.resetMealValues();
+    this.formElement.reset();
+    this.dropdownListComponent.onClear();
   }
 
   private mealExists(): boolean {
@@ -92,5 +121,9 @@ export class DietComponent implements OnInit {
 
   private toastWarning() {
     this._toastrService.warning('Nie dodano', 'Podana godzina już istnieje');
+  }
+
+  private hideForm() {
+    this.addMelaButton.nativeElement.hidden = false;
   }
 }

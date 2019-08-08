@@ -1,27 +1,84 @@
-<responsive-switcher>
+<div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
 
   <calendar (date)="onSelectedDate($event)"></calendar>
 
 
-  <div *ngFor="let meal of meals; let i = index">
-    <li>{{meal | json}}
-      <button (click)="removeMeal(i)">remove</button>
-    </li>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="text-left">Nazwa</th>
+      <th class="text-center">Godzina</th>
+      <th class="text-right">Usuń</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let meal of meals; let i = index">
+      <th class="text-left">{{meal.name}}</th>
+      <th class="text-center">{{meal.time}}</th>
+      <th class="text-right">
+        <a type="button" class="close" aria-label="Close" >
+          <span
+            (click)="delete(i)"
+            aria-hidden="true"
+          >
+            &times;
+          </span>
+        </a>
+      </th>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="row mt-10">
+    <a
+      #addMealButtonElement
+      class="btn btn-primary"
+      [ngClass]="(addMealButtonElement.hidden) ? 'hidden' : 'visible'"
+      (click)="addMealButtonElement.hidden = true"
+    >
+      Dodaj posiłek
+    </a>
   </div>
-  <a #buttonElement (click)="buttonElement.hidden = true">
-    dodaj posiłek
-  </a>
-  <div *ngIf="!buttonElement.hidden; else newMealTime"></div>
-  <a *ngIf="buttonElement.hidden" (click)="buttonElement.hidden = false">x</a>
 
-  <hr/>
+  <div class="row mt-10">
+    <button class="btn btn-secondary pull-right" *ngIf="addMealButtonElement.hidden"
+            (click)="addMealButtonElement.hidden = false">Zamknij
+    </button>
+  </div>
+  <div *ngIf="!addMealButtonElement.hidden; else newMealTime"></div>
 
+  <ng-template #newMealTime>
 
-</responsive-switcher>
+    <form #form="ngForm">
 
-<ng-template #newMealTime>
-  <input [(ngModel)]="meal.name" #mealName="ngModel" placeholder="Nazwa posiłku">
-  <input [(ngModel)]="meal.time" #mealTime="ngModel" placeholder="Godzina">
+      <div class="row">
+        <label for="name">Nazwa posiłku</label>
+        <input #name="ngModel" [(ngModel)]="meal.name" class="form-control" name="name" id="name" type="text"
+               required placeholder="Nazwa posiłku" maxlength="100">
+        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+          <div *ngIf="name.errors.required">Wpisz nazwę posiłku</div>
+        </div>
+      </div>
 
-  <button (click)="onSendMealTime()" style="margin-right: 16px;">accept</button>
-</ng-template>
+      <div class="row">
+        <label for="category">Godzina</label>
+        <dropdown-list #dropdownListComponent id="category" (item)="onTimeSelected($event)"
+                       [items$]="getCategories()"></dropdown-list>
+      </div>
+
+      <div class="row mt-10">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="!form.valid || !meal.time"
+          (click)="onSendMealTime()"
+        >
+          Zapisz
+        </button>
+        <button (click)="resetForm()" class="btn btn-secondary pull-right">Resetuj</button>
+      </div>
+
+    </form>
+  </ng-template>
+
+</div>

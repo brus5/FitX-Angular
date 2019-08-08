@@ -37,7 +37,7 @@ export class DropdownListComponent {
 
   private onFocusOut(event: FocusEvent) {
     const value = (event.target as HTMLInputElement).textContent;
-    if (!(value)) {
+    if (!value) {
       this.dirtyTouched = true;
       this._changeDetector.detectChanges();
     } else {

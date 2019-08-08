@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {AuthService} from './auth.service';
 import * as firebase from 'firebase/app';
-import {MealTime} from '../models/meals-time';
+import {MealTime} from '../models/meal-time';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -17,15 +17,21 @@ export class MealsService {
     this.initialize();
   }
 
-  private initialize() {
-    this._auth.appUser$.subscribe(user => this.firebaseUser = user);
-  }
-
   public get getAll(): Observable<MealTime[]> {
     return this._auth.appUser$
       .switchMap(user => {
         if (user)
           return this._db.object<MealTime[]>('/meals/' + this.firebaseUser.uid + '/meals-time').valueChanges();
+        else
+          return Observable.of(null);
+      });
+  }
+
+  public get getMealHours(): Observable<string[]> {
+    return this._auth.appUser$
+      .switchMap(user => {
+        if (user)
+          return this._db.object<string[]>('/meals/meal-hours/').valueChanges();
         else
           return Observable.of(null);
       });
@@ -37,6 +43,10 @@ export class MealsService {
 
   public remove(id: number) {
     return this._db.object('/meals/' + this.firebaseUser.uid + '/meals-time/' + id).remove();
+  }
+
+  private initialize() {
+    this._auth.appUser$.subscribe(user => this.firebaseUser = user);
   }
 }
 
