@@ -26,7 +26,7 @@ export class MealsService {
           return Observable.of(null);
       });
   }
-// test
+
   public get getMealHours(): Observable<string[]> {
     return this._auth.appUser$
       .switchMap(user => {
