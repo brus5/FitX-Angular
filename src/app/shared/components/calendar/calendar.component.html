@@ -1,6 +1,8 @@
 <div class="text-center">
   <ngb-datepicker [(ngModel)]="model" (ngModelChange)="selectedDate()"></ngb-datepicker>
 </div>
+<div class="text-left">
+  <button class="btn btn-primary mt-10" (click)="selectToday()">Dzisiaj</button>
+</div>
 <hr/>
 
-<button class="btn btn-sm btn-outline-primary mr-2" (click)="selectToday()">Dzisiaj</button>
