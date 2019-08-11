@@ -31,7 +31,7 @@ export class MealsService {
     return this._auth.appUser$
       .switchMap(user => {
         if (user)
-          return this._db.object<string[]>('/meals/meal-hours/').valueChanges();
+          return this._db.object<string[]>('/meals/hours/').valueChanges();
         else
           return Observable.of(null);
       });
