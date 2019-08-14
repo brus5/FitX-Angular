@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Injectable, OnInit, Output} from '@angular/core';
-import {NgbCalendar, NgbDatepickerI18n, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCalendar, NgbDateParserFormatter, NgbDatepickerI18n, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 const CALENDAR_VALUES = {
   pl: {
@@ -58,11 +58,25 @@ export class CalendarComponent implements OnInit {
   public selectedDate() {
     this.date.emit(
       this.model.year +
-      '-' + this.model.month +
-      '-' + this.model.day);
+      '-' + this.month +
+      '-' + this.day);
   }
 
   public selectToday() {
     this.model = this._calendar.getToday();
+  }
+
+  private get month() {
+    if (this.model.month.toString().length === 1)
+      return '0' + this.model.month;
+    else
+      return this.model.month.toString();
+  }
+
+  private get day() {
+    if (this.model.day.toString().length === 1)
+      return '0' + this.model.day;
+    else
+      return this.model.day.toString();
   }
 }
