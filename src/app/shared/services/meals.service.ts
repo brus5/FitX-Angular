@@ -17,7 +17,7 @@ export class MealsService {
     this.initialize();
   }
 
-  public get getAll(): Observable<MealTime[]> {
+  public get getUserHours(): Observable<MealTime[]> {
     return this._auth.appUser$
       .switchMap(user => {
         if (user)
@@ -27,11 +27,11 @@ export class MealsService {
       });
   }
 
-  public get getMealHours(): Observable<string[]> {
+  public get getAllHours(): Observable<string[]> {
     return this._auth.appUser$
       .switchMap(user => {
         if (user)
-          return this._db.object<string[]>('/meals/hours/').valueChanges();
+          return this._db.object<string[]>('/meal-hours').valueChanges();
         else
           return Observable.of(null);
       });

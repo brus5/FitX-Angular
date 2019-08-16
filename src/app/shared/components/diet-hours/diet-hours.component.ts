@@ -35,7 +35,7 @@ export class DietHoursComponent implements OnInit {
 
   async ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
-    await this._mealsService.getAll
+    await this._mealsService.getUserHours
       .subscribe(mealsTime => {
 
         this.meals = mealsTime || [];
@@ -47,7 +47,7 @@ export class DietHoursComponent implements OnInit {
         this._mealsService.update(mealTimes);
       });
 
-    await this._mealsService.getMealHours
+    await this._mealsService.getAllHours
       .subscribe(hours => this.hours$ = hours);
 
   }
