@@ -13,6 +13,7 @@ import {RouterModule} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {DietComponent} from './components/diet/diet.component';
 import {DietHoursComponent} from './components/diet-hours/diet-hours.component';
+import {DietAddProductComponent} from './components/diet-add-product/diet-add-product.component';
 import {ProductsComponent} from './components/products/products.component';
 import {ProductFormComponent} from './components/product-form/product-form.component';
 import {ProductComponent} from './components/product/product.component';
@@ -35,6 +36,7 @@ import {MealsService} from './services/meals.service';
     HomeComponent,
     DietComponent,
     DietHoursComponent,
+    DietAddProductComponent,
     ProductsComponent,
     ProductFormComponent,
 
