@@ -2,4 +2,25 @@
 
   <calendar (date)="onSelectedDate($event)"></calendar>
 
+  <button (click)="onSend()">send</button>
+
+  <table
+    *ngFor="let meal of meals; let i = index"
+    class="table table-striped"
+  >
+
+    <thead>
+      <tr>
+        <th class="text-left">{{meal.time}} - {{meal.name}}</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th><button>DODAJ</button></th>
+    </tr>
+    </tbody>
+
+  </table>
 </div>
