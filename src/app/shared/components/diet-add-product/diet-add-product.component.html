@@ -1,1 +1,34 @@
-<p>diet-add-product works!</p>
+<div class="row mt-10">
+
+  <a
+    #addProductButtonElement
+    class="btn btn-primary"
+    [ngClass]="(addProductButtonElement.hidden) ? 'hidden' : 'visible'"
+    (click)="addProductButtonElement.hidden = true"
+  >
+    Dodaj posiłek
+  </a>
+
+  <div *ngIf="!addProductButtonElement.hidden; else newProduct"></div>
+
+</div>
+
+
+<ng-template #newProduct>
+
+  <form #form="ngForm">
+
+    <div class="row mt-10">
+
+      <div class="input-group">
+        <input autocomplete="off" class="form-control" name="name" id="name" type="text" maxlength="100">
+        <span class="input-group-btn">
+          <button class="btn btn-default" *ngIf="addProductButtonElement.hidden"
+                  (click)="addProductButtonElement.hidden = false">X</button>
+        </span>
+      </div>
+    </div>
+
+  </form>
+
+</ng-template>

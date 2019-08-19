@@ -9,7 +9,8 @@ import {map} from 'rxjs/operators';
 })
 export class ProductService {
 
-  constructor(private _db: AngularFireDatabase) {}
+  constructor(private _db: AngularFireDatabase) {
+  }
 
   public getAll() {
     return this._db.list('/products')
@@ -35,5 +36,18 @@ export class ProductService {
 
   public remove(product: string) {
     return this._db.list<Product>('/products/' + product).remove();
+  }
+
+  public getByName(phrase: string) {
+    // TODO: `poprawić wyszukiwanie z DB
+    //  https://console.firebase.google.com/u/0/project/fitx-beba9/database/fitx-beba9/data
+    return this._db.list('products',
+      ref => ref.orderByChild('name').startAt(phrase))
+      .snapshotChanges().pipe(
+        map(actions =>
+          actions.map(action => (
+            {key: action.payload.key, ...action.payload.val() as Product}))
+        )
+      );
   }
 }

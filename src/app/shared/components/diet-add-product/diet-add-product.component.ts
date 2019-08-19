@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'diet-add-product',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DietAddProductComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _productService: ProductService) {
+  }
 
-  ngOnInit() {
+  async ngOnInit() {
+// TODO: `zrobić wyszukiwanie
+    await this._productService.getByName('ku')
+      .subscribe(products => {
+        console.log(products);
+      });
   }
 
 }
