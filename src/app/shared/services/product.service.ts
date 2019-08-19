@@ -3,6 +3,7 @@ import {AngularFireDatabase} from '@angular/fire/database';
 import {Observable} from 'rxjs';
 import {Product} from '../models/product';
 import {map} from 'rxjs/operators';
+import {FirebaseListObservable} from '@angular/fire/database-deprecated';
 
 @Injectable({
   providedIn: 'root'
@@ -41,8 +42,8 @@ export class ProductService {
   public getByName(phrase: string) {
     // TODO: `poprawić wyszukiwanie z DB
     //  https://console.firebase.google.com/u/0/project/fitx-beba9/database/fitx-beba9/data
-    return this._db.list('products',
-      ref => ref.orderByChild('name').startAt(phrase))
+    return this._db.list('/products',
+      ref => ref.orderByChild('/name').startAt(phrase).limitToFirst(5))
       .snapshotChanges().pipe(
         map(actions =>
           actions.map(action => (
@@ -50,4 +51,5 @@ export class ProductService {
         )
       );
   }
+
 }
