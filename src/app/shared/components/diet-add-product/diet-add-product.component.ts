@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/product';
-import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
-import {fromEvent, Subject, Subscription} from 'rxjs';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {Subject, Subscription} from 'rxjs';
 
 @Component({
   selector: 'diet-add-product',
@@ -13,21 +13,14 @@ export class DietAddProductComponent implements OnInit, OnDestroy {
 
   products$: Product[] = [];
   searchedProduct: string;
-  changeCount: number = 0;
-
   isSearching: boolean;
+
+  keyUp = new Subject<string>();
 
   private searchSubscription: Subscription = new Subscription();
   private productsSubscription: Subscription = new Subscription();
 
-  public keyUp = new Subject<string>();
-
-  apiResponse: any;
-
-  constructor(private _productService: ProductService) {
-    this.isSearching = false;
-    this.apiResponse = [];
-  }
+  constructor(private _productService: ProductService) {}
 
   ngOnInit() {
     this.searchSubscription = this.keyUp.pipe(
@@ -41,15 +34,10 @@ export class DietAddProductComponent implements OnInit, OnDestroy {
     this.searchSubscription.unsubscribe();
   }
 
-  private filterProducts(value: string){
-    // TODO: `zrobić wyszukiwanie
-    this.productsSubscription = this._productService.getByName(value)
-      .subscribe(products => {
-        this.products$ = products;
-        console.log(products);
-      });
+  private filterProducts(productName: string) {
+    this.productsSubscription = this._productService.getProductByName(productName)
+      .subscribe(products => this.products$ = products);
   }
-
 
 }
 

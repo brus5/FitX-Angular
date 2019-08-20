@@ -39,17 +39,16 @@ export class ProductService {
     return this._db.list<Product>('/products/' + product).remove();
   }
 
-  public getByName(phrase: string) {
-    // TODO: `poprawić wyszukiwanie z DB
-    //  https://console.firebase.google.com/u/0/project/fitx-beba9/database/fitx-beba9/data
+  public getProductByName(productPhrase: string) {
     return this._db.list('/products',
-      ref => ref.orderByChild('/name').startAt(phrase).limitToFirst(5))
+      ref => ref.orderByChild('/name')
+        .startAt(productPhrase)
+        // '\uf88f' has very high code point in the Unicode range. It is after most regular chars in Unicode.
+        .endAt(productPhrase + '\uf88f'))
       .snapshotChanges().pipe(
         map(actions =>
           actions.map(action => (
             {key: action.payload.key, ...action.payload.val() as Product}))
-        )
-      );
+        ));
   }
-
 }
