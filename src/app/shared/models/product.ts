@@ -6,4 +6,5 @@ export interface Product {
   imageUrl: string;
   category: string;
   nutrition: ProductNutrition;
+  weight?: number;
 }

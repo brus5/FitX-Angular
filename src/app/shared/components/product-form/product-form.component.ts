@@ -41,8 +41,8 @@ export class ProductFormComponent implements OnInit {
               private _activatedRoute: ActivatedRoute,
               private _router: Router) {}
 
-  async ngOnInit() {
-    await this._categoriesService.getAll().subscribe(categories => {
+  ngOnInit() {
+    this._categoriesService.getAll().subscribe(categories => {
       this.categories$ = categories;
       this.categories$.map((category) => {
         this.categories.push(category.name);

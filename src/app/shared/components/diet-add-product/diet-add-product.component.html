@@ -1,5 +1,7 @@
 <div class="row mt-10">
-
+  <div *ngFor="let product of dailyProducts$; let i = index">
+    {{product.name}} {{product.weight}} g <a type="button" (click)="removeMeal(i)">X</a>
+  </div>
   <a
       #addProductButtonElement
       class="btn btn-primary"
@@ -12,7 +14,6 @@
   <div *ngIf="!addProductButtonElement.hidden; else newProduct"></div>
 
 </div>
-
 
 <ng-template #newProduct>
 
@@ -29,16 +30,52 @@
             class="form-control"
             name="name" id="name" type="text" maxlength="100">
         <span class="input-group-btn">
-          <button class="btn btn-default" *ngIf="addProductButtonElement.hidden"
+          <button class="btn btn-danger" *ngIf="addProductButtonElement.hidden"
                   (click)="addProductButtonElement.hidden = false">X</button>
         </span>
       </div>
     </div>
-    <div>{{changeCount}}</div>
-    <div *ngFor="let product of products$">
-      {{product.name}}
+    <div *ngFor="let product of filteredProducts$">
+      <li>{{product.name}}
+        <a
+            #addProductWeightButtonElement
+            class="btn btn-sm"
+            [ngClass]="(addProductWeightButtonElement.hidden) ? 'hidden' : 'visible'"
+            (click)="addProductWeightButtonElement.hidden = true"
+        >
+          Dodaj
+        </a>
+      </li>
+      <div *ngIf="addProductWeightButtonElement.hidden">
+        <ng-container [ngTemplateOutlet]="addWeight"
+                      [ngTemplateOutletContext]="{product:product}"></ng-container>
+      </div>
     </div>
 
   </form>
+
+</ng-template>
+
+<ng-template #addWeight let-product="product">
+
+  <div class="input-group">
+    <input
+        #weight
+        (keyup)="setProductWeight(weight.value)"
+        autocomplete="off"
+        class="form-control"
+        name="weight" id="weight" type="number">
+
+    <span class="input-group-btn">
+  <button
+    class="btn btn-success"
+    type="button"
+    (click)="addProductButtonElement.hidden = false;
+    addProductToList(product, weight.value)"
+  >
+    OK
+  </button>
+    </span>
+  </div>
 
 </ng-template>

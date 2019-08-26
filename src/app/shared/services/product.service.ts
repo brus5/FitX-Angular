@@ -3,17 +3,15 @@ import {AngularFireDatabase} from '@angular/fire/database';
 import {Observable} from 'rxjs';
 import {Product} from '../models/product';
 import {map} from 'rxjs/operators';
-import {FirebaseListObservable} from '@angular/fire/database-deprecated';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private _db: AngularFireDatabase) {
-  }
+  constructor(private _db: AngularFireDatabase) {}
 
-  public getAll() {
+  public getAll(): Observable<Product[]> {
     return this._db.list('/products')
       .snapshotChanges().pipe(
         map(actions =>
@@ -39,7 +37,7 @@ export class ProductService {
     return this._db.list<Product>('/products/' + product).remove();
   }
 
-  public getProductByName(productPhrase: string) {
+  public getProductByName(productPhrase: string): Observable<Product[]> {
     return this._db.list('/products',
       ref => ref.orderByChild('/name')
         .startAt(productPhrase)

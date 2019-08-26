@@ -2,8 +2,6 @@
 
   <calendar (date)="onSelectedDate($event)"></calendar>
 
-  <button (click)="onSend()">send</button>
-
   <table
     *ngFor="let meal of mealsTime; let i = index"
     class="table table-striped"
@@ -16,7 +14,7 @@
     </thead>
     <tbody>
     <tr>
-      <th><diet-add-product></diet-add-product></th>
+      <th><diet-add-product [date]="selectedDate" [time]="meal.time"></diet-add-product></th>
     </tr>
     </tbody>
 
