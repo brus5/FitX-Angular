@@ -18,3 +18,24 @@ table > tbody > tr > th {
 .table {
   background-color: #fafafa;
 }
+
+a.btn.btn-primary {
+  margin-top: -12px;
+}
+
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+  padding: 8px;
+}
+
+.table > tbody > tr:first-child > th {
+  border-top: none;
+}
+
+.table {
+  margin-top: -16px;
+}
