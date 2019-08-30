@@ -21,8 +21,8 @@ export class DietService {
     this._auth.appUser$.subscribe(user => this.firebaseUser = user);
   }
 
-  public addMeal(date: string, hour: string, meal: Meal) {
-    return this._db.list('/diets/' + this.firebaseUser.uid + '/' + date + '/' + hour).push(meal);
+  public addMeal(meal: Meal) {
+    return this._db.list('/diets/' + this.firebaseUser.uid + '/' + meal.date + '/' + meal.hour).push(meal);
   }
 
   public getAll(date: string) {
