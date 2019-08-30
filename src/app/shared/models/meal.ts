@@ -4,5 +4,6 @@ export interface Meal {
   key?: string;
   date: string;
   hour: string;
-  products: Product[];
+  product?: Product;
+  products?: Product[];
 }

@@ -5,6 +5,7 @@ import {Product} from '../../models/product';
 import {Meal} from '../../models/meal';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'diet-add-product',
@@ -32,7 +33,8 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   private productsSubscription: Subscription = new Subscription();
 
   constructor(private _productService: ProductService,
-              private _dietService: DietService) {}
+              private _dietService: DietService,
+              private _toastrService: ToastrService) {}
 
   ngOnInit() {
     this.searchSubscription = this.keyUp.pipe(
@@ -58,18 +60,24 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
 
   addProductToList(product: Product, weight: number) {
     product.weight = weight;
-    this.dailyProducts$.push(product);
     let meal: Meal = {
       date: this.date,
       hour: this.time,
-      products: this.dailyProducts$
+      product: product
     };
 
-    this._dietService.addMeal(this.date, this.time, meal);
+    this._dietService.addMeal(meal);
   }
 
   removeMeal(index: number) {
-    this._dietService.remove(this.date, this.time, this.meals[index].key);
+    this._dietService.remove(this.date, this.time, this.meals[index].key)
+      .then(() => this._toastrService.success('Usunięto'));
+  }
+
+  get caloriesSum(){
+    let calSum = null;
+    this.dailyProducts$.forEach(prod => calSum += prod.nutrition.kcal);
+    return calSum;
   }
 
   private filterProducts(productName: string) {
@@ -79,9 +87,8 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
 
   private fillMeals(meals: Meal[]) {
     this.meals = meals;
-    meals.map(value => this.dailyProducts$ = value.products);
-    if (meals.length === 0)
-      this.clearDailyProducts();
+    this.clearDailyProducts();
+    meals.forEach(value => this.dailyProducts$.push(value.product));
   }
 
   private clearDailyProducts() {

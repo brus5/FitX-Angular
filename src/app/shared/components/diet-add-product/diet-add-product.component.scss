@@ -10,3 +10,11 @@
 .visible {
   visibility: visible;
 }
+
+table > tbody > tr > th {
+  font-weight: normal;
+}
+
+.table {
+  background-color: #fafafa;
+}

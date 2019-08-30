@@ -1,22 +1,26 @@
-<div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
+<responsive-switcher>
+  <div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
 
-  <calendar (date)="onSelectedDate($event)"></calendar>
+    <calendar (date)="onSelectedDate($event)"></calendar>
 
-  <table
-    *ngFor="let meal of mealsTime; let i = index"
-    class="table table-striped"
-  >
+    <table
+      *ngFor="let meal of mealsTime; let i = index"
+      class="table table-striped"
+    >
 
-    <thead>
+      <thead>
       <tr>
         <th class="text-left">{{meal.time}} - {{meal.name}}</th>
       </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <th><diet-add-product [date]="selectedDate" [time]="meal.time"></diet-add-product></th>
-    </tr>
-    </tbody>
+      </thead>
+      <tbody>
+      <tr>
+        <th>
+          <diet-add-product [date]="selectedDate" [time]="meal.time"></diet-add-product>
+        </th>
+      </tr>
+      </tbody>
 
-  </table>
-</div>
+    </table>
+  </div>
+</responsive-switcher>
