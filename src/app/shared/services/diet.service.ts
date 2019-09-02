@@ -4,6 +4,7 @@ import {AuthService} from './auth.service';
 import * as firebase from 'firebase/app';
 import {Meal} from '../models/meal';
 import {map} from 'rxjs/operators';
+import {Product} from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,19 @@ export class DietService {
       + date + '/'
       + time + '/'
       + mealKey).remove();
+  }
+
+  public createMeal(date: string, time: string, product: Product, weight: number): Meal {
+    product.weight = weight;
+    product.nutrition = {
+      proteins: ((product.nutrition.proteins * weight) / 100),
+      fats: ((product.nutrition.fats * weight) / 100),
+      carbs: ((product.nutrition.carbs * weight) / 100),
+      kcal: ((product.nutrition.proteins * 4) +
+        (product.nutrition.carbs * 4) +
+        (product.nutrition.fats * 9)) * weight / 100
+    };
+    return {date: date, hour: time, product: product};
   }
 
 }

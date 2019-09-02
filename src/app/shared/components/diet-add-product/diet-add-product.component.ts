@@ -6,6 +6,8 @@ import {Meal} from '../../models/meal';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
+import {DietCalculator} from '../../models/diet-calculator';
+import {MealsHours} from '../../services/meals-hours.service';
 
 @Component({
   selector: 'diet-add-product',
@@ -34,7 +36,9 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(private _productService: ProductService,
               private _dietService: DietService,
-              private _toastrService: ToastrService) {}
+              private _toastrService: ToastrService,
+              private _dietCalc: DietCalculator,
+              private _mealService: MealsHours) {}
 
   ngOnInit() {
     this.searchSubscription = this.keyUp.pipe(
@@ -59,25 +63,15 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   addProductToList(product: Product, weight: number) {
-    product.weight = weight;
-    let meal: Meal = {
-      date: this.date,
-      hour: this.time,
-      product: product
-    };
-
+    let meal = this._dietService.createMeal(this.date, this.time, product, weight);
     this._dietService.addMeal(meal);
+    this.clearFilteredProducts();
+    this.clearQueryElement();
   }
 
   removeMeal(index: number) {
     this._dietService.remove(this.date, this.time, this.meals[index].key)
       .then(() => this._toastrService.success('Usunięto'));
-  }
-
-  get caloriesSum(){
-    let calSum = null;
-    this.dailyProducts$.forEach(prod => calSum += prod.nutrition.kcal);
-    return calSum;
   }
 
   private filterProducts(productName: string) {
@@ -89,9 +83,18 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
     this.meals = meals;
     this.clearDailyProducts();
     meals.forEach(value => this.dailyProducts$.push(value.product));
+    this._dietCalc = new DietCalculator(this.dailyProducts$);
   }
 
   private clearDailyProducts() {
     this.dailyProducts$ = [];
+  }
+
+  private clearFilteredProducts() {
+    this.filteredProducts$ = [];
+  }
+
+  private clearQueryElement() {
+    this.searchedProduct = '';
   }
 }

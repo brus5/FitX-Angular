@@ -8,14 +8,17 @@
     <tbody >
     <tr *ngFor="let product of dailyProducts$; let i = index">
       <th class="text-left">{{product.name}}</th>
-      <th class="text-right">{{product.nutrition.kcal}}</th>
+      <th class="text-right">{{product.nutrition.kcal | number: '1.0-0'}}</th>
       <th class="text-right"><a type="button" (click)="removeMeal(i)">X</a></th>
     </tr>
     </tbody>
     <tfoot>
     <tr>
-      <th></th>
-      <th class="text-right">{{caloriesSum | number:'1.0-0'}} kcal</th>
+      <th class="text-left">
+        P: {{_dietCalc.totalProteins | number: '1.0-0'}}
+        C: {{_dietCalc.totalCarbs | number: '1.0-0'}}
+        T: {{_dietCalc.totalFats | number: '1.0-0'}}</th>
+      <th class="text-right">{{_dietCalc.totalCalories | number:'1.0-0'}} kcal</th>
       <th></th>
     </tr>
     </tfoot>
@@ -90,7 +93,8 @@
     class="btn btn-success"
     type="button"
     (click)="addProductButtonElement.hidden = false;
-    addProductToList(product, weight.value)"
+    addProductToList(product, weight.value);
+    "
   >
     OK
   </button>

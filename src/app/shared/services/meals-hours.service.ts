@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MealsService {
+export class MealsHours {
 
   private firebaseUser = {} as firebase.User;
 

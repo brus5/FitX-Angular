@@ -5,7 +5,7 @@ import {DietService} from '../../services/diet.service';
 import 'rxjs/add/operator/mergeMap';
 import {Product} from '../../models/product';
 import {Meal} from '../../models/meal';
-import {MealsService} from '../../services/meals.service';
+import {MealsHours} from '../../services/meals-hours.service';
 import {MealTime} from '../../models/meal-time';
 
 @Component({
@@ -27,7 +27,7 @@ export class DietComponent implements OnInit {
 
   constructor(private _navService: NavService,
               private _dietService: DietService,
-              private _mealsService: MealsService) {
+              private _mealsService: MealsHours) {
   }
 
   ngOnInit() {
