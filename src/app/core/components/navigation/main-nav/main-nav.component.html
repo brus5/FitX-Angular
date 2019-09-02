@@ -25,7 +25,7 @@
     <!--suppress AngularUndefinedBinding -->
     <div (swiperight)="swipe($event)">
 
-      <mat-toolbar color="primary" [ngClass]="(isHandset$ | async) ? 'mobile-menu' : 'mat-toolbar'">
+      <mat-toolbar color="primary" [ngClass]="(isHandset$ | async) ? 'mobile-menu' : 'mat-toolbar'" class="position-fixed">
         <button
           style="color: white"
           type="button"
