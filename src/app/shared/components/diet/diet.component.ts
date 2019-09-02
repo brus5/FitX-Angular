@@ -27,13 +27,13 @@ export class DietComponent implements OnInit {
 
   constructor(private _navService: NavService,
               private _dietService: DietService,
-              private _mealsService: MealsHours) {
+              private _mealsHoursService: MealsHours) {
   }
 
   ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
 
-    this._mealsService.getUserHours
+    this._mealsHoursService.getUserHours
       .subscribe(mealsTime => this.mealsTime = mealsTime || []);
 
     this.products.push();

@@ -38,7 +38,7 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
               private _dietService: DietService,
               private _toastrService: ToastrService,
               private _dietCalc: DietCalculator,
-              private _mealService: MealsHours) {}
+              private _mealsHoursService: MealsHours) {}
 
   ngOnInit() {
     this.searchSubscription = this.keyUp.pipe(

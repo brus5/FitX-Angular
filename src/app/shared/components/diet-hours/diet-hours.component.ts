@@ -29,13 +29,13 @@ export class DietHoursComponent implements OnInit {
 
   constructor(private _navService: NavService,
               private _dietService: DietService,
-              private _mealsService: MealsHours,
+              private _mealsHoursService: MealsHours,
               private _toastrService: ToastrService) {
   }
 
   async ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
-    await this._mealsService.getUserHours
+    await this._mealsHoursService.getUserHours
       .subscribe(mealsTime => {
 
         this.meals = mealsTime || [];
@@ -44,10 +44,10 @@ export class DietHoursComponent implements OnInit {
 
         this.meals.forEach(value => mealTimes.push(value));
 
-        this._mealsService.update(mealTimes);
+        this._mealsHoursService.update(mealTimes);
       });
 
-    await this._mealsService.getAllHours
+    await this._mealsHoursService.getAllHours
       .subscribe(hours => this.hours$ = hours);
 
   }
@@ -65,7 +65,7 @@ export class DietHoursComponent implements OnInit {
 
   delete(id: number): void {
     if (!confirm('Chcesz usunąć posiłek?')) return;
-    this._mealsService.remove(id)
+    this._mealsHoursService.remove(id)
       .then(() => this.removedSuccessful());
   }
 
@@ -97,7 +97,7 @@ export class DietHoursComponent implements OnInit {
   }
 
   private setMeals() {
-    this._mealsService.update(this.meals)
+    this._mealsHoursService.update(this.meals)
       .finally(() => this.toastSuccessful());
   }
 
