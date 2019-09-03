@@ -6,7 +6,6 @@ import {Meal} from '../../models/meal';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
-import {DietCalculator} from '../../models/diet-calculator';
 import {MealsHours} from '../../services/meals-hours.service';
 
 @Component({
@@ -37,7 +36,6 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   constructor(private _productService: ProductService,
               private _dietService: DietService,
               private _toastrService: ToastrService,
-              private _dietCalc: DietCalculator,
               private _mealsHoursService: MealsHours) {}
 
   ngOnInit() {
@@ -83,7 +81,6 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
     this.meals = meals;
     this.clearDailyProducts();
     meals.forEach(value => this.dailyProducts$.push(value.product));
-    this._dietCalc = new DietCalculator(this.dailyProducts$);
   }
 
   private clearDailyProducts() {
@@ -96,5 +93,29 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
 
   private clearQueryElement() {
     this.searchedProduct = '';
+  }
+
+  get totalCalories() {
+    let totalCalories = null;
+    this.dailyProducts$.forEach(product => totalCalories += product.nutrition.kcal);
+    return totalCalories;
+  }
+
+  get totalProteins() {
+    let totalProtiens = null;
+    this.dailyProducts$.forEach(product => totalProtiens += product.nutrition.proteins);
+    return totalProtiens;
+  }
+
+  get totalCarbs() {
+    let totalCarbs = null;
+    this.dailyProducts$.forEach(product => totalCarbs += product.nutrition.carbs);
+    return totalCarbs;
+  }
+
+  get totalFats() {
+    let totalFats = null;
+    this.dailyProducts$.forEach(product => totalFats += product.nutrition.fats);
+    return totalFats;
   }
 }

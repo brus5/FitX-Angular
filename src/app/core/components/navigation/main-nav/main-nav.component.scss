@@ -48,6 +48,7 @@ mat-toolbar div, a {
 .sidenav .mat-toolbar {
   color: $text-color;
   background-color: $menu-background-color;
+  z-index: 100 !important;
 }
 
 .sidenav-container {
@@ -102,12 +103,13 @@ mat-toolbar div, a {
 }
 
 .mobile-nav > .app-title {
-  margin-left: -20%;
+  margin-left: 20%;
 }
 
 .mobile-menu {
   padding-left: 0;
   background: $menu-background-color;
+  z-index: 100 !important;
 }
 
 .app-title {
@@ -119,7 +121,7 @@ mat-toolbar div, a {
   letter-spacing: 10px;
 }
 
-.position-fixed{
+.position-fixed {
   position: fixed
 }
 

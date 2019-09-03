@@ -1,0 +1,33 @@
+$content-margin-desktop: -15%;
+$content-margin-mobile: -3%;
+
+$menu-background-color: #fafafa;
+
+mat-toolbar {
+  bottom: 0;
+  position: fixed;
+  display: inline-block;
+}
+
+.desktop-menu {
+  margin-left: $content-margin-desktop;
+  background: $menu-background-color;
+  opacity: 0.9;
+}
+
+.mobile-menu {
+  margin-left: $content-margin-mobile;
+  background: $menu-background-color;
+  opacity: 0.9;
+}
+
+#content {
+  color: #282828;
+  vertical-align: middle;
+  margin-top: 16px;
+}
+
+#content, span {
+  text-align: center;
+  position: center;
+}

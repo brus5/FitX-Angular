@@ -5,7 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FormsModule} from '@angular/forms';
-import {MatFormFieldModule, MatSelectModule, MatProgressBarModule} from '@angular/material';
+import {MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatToolbarModule} from '@angular/material';
 import {SelectModule} from 'ng2-select';
 import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
@@ -22,6 +22,7 @@ import {AdsenseTopComponent} from './components/adsense-top/adsense-top.componen
 import {ResponsiveComponent} from './components/responsive/responsive.component';
 import {DropdownListComponent} from './components/dropdown-list/dropdown-list.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
+import {DietMenuComponent} from './components/diet-menu/diet-menu.component';
 
 import {FilterProductPipe} from './pipes/filterProduct.pipe';
 
@@ -30,7 +31,6 @@ import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
 import {DietService} from './services/diet.service';
 import {MealsHours} from './services/meals-hours.service';
-import {DietCalculator} from './models/diet-calculator';
 
 @NgModule({
   declarations: [
@@ -46,6 +46,7 @@ import {DietCalculator} from './models/diet-calculator';
     DropdownListComponent,
     ProductComponent,
     CalendarComponent,
+    DietMenuComponent,
 
     FilterProductPipe,
   ],
@@ -59,6 +60,7 @@ import {DietCalculator} from './models/diet-calculator';
     MatFormFieldModule,
     MatSelectModule,
     MatProgressBarModule,
+    MatToolbarModule,
     SelectModule,
     RouterModule,
 
@@ -100,8 +102,7 @@ import {DietCalculator} from './models/diet-calculator';
     AuthService,
     ImageUploadService,
     DietService,
-    MealsHours,
-    DietCalculator
+    MealsHours
   ]
 })
 
