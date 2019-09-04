@@ -30,10 +30,8 @@ export class DietService {
     return this._db.list('/diets/' + this.firebaseUser.uid + '/' + date)
       .snapshotChanges().pipe(
         map(actions =>
-          actions.map(action => (
-            {key: action.payload.key, ...action.payload.val() as Meal}))
-        )
-      );
+          actions.map(action => (action.payload.val() as Meal))
+      ));
   }
 
   public getMeals(date: string, time: string) {

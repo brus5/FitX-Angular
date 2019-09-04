@@ -1,33 +1,58 @@
 $content-margin-desktop: -15%;
 $content-margin-mobile: -3%;
 
-$menu-background-color: #fafafa;
+$menu-background-color: #313131;
 
 mat-toolbar {
   bottom: 0;
   position: fixed;
   display: inline-block;
+  z-index: 100 !important;
 }
 
 .desktop-menu {
   margin-left: $content-margin-desktop;
   background: $menu-background-color;
-  opacity: 0.9;
 }
 
 .mobile-menu {
   margin-left: $content-margin-mobile;
   background: $menu-background-color;
-  opacity: 0.9;
 }
 
 #content {
   color: #282828;
   vertical-align: middle;
-  margin-top: 16px;
 }
 
 #content, span {
   text-align: center;
   position: center;
+}
+
+.title {
+  font-size: 14px;
+  margin: -6px auto 0 auto;
+}
+
+.number {
+  font-size: 14px;
+  margin: -4px auto -8px auto;
+}
+
+.proteins {
+  color: dodgerblue;
+}
+
+.carbs {
+  color: firebrick;
+}
+
+.fats {
+  color: yellow;
+}
+
+.calories {
+  margin: -8px auto -8px auto;
+  color: green;
 }

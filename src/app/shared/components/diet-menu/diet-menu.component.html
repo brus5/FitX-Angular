@@ -1,7 +1,27 @@
-<!--<div class="diet-menu"></div>-->
 <mat-toolbar [ngClass]="(isHandset$ | async) ? 'mobile-menu': 'desktop-menu'"
              color="primary" class="position-fixed">
   <div id="content">
-    <span>Something will be very good...</span>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-4">
+          <p class="number proteins">B: {{proteins | number: '1.0-0'}}</p>
+          <mat-progress-bar value="80"></mat-progress-bar>
+        </div>
+        <div class="col-xs-4">
+          <p class="number carbs">W: {{carbs | number: '1.0-0'}}</p>
+          <mat-progress-bar value="60"></mat-progress-bar>
+        </div>
+        <div class="col-xs-4">
+          <p class="number fats">T: {{fats | number: '1.0-0'}}</p>
+          <p>
+            <mat-progress-bar value="40"></mat-progress-bar>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <p class="number calories">KCAL: {{calories | number: '1.0-0'}}</p>
+      <mat-progress-bar value="20"></mat-progress-bar>
+    </div>
   </div>
 </mat-toolbar>

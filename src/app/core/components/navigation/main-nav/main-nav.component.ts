@@ -1,4 +1,4 @@
-import {Component, HostListener, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -53,20 +53,5 @@ export class MainNavComponent implements OnInit {
 
   get menuLinks() {
     return NAV_LINKS;
-  }
-
-  @HostListener('scroll', ['$event'])
-  onWindowScroll(e) {
-
-    const offset = this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
-    console.log(offset);
-
-    if (window.pageYOffset > 550) {
-      let element = document.getElementById('sidenav');
-      element.classList.add('sticky');
-    } else {
-      let element = document.getElementById('sidenav');
-      element.classList.remove('sticky');
-    }
   }
 }
