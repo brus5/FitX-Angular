@@ -53,6 +53,11 @@ mat-toolbar {
 }
 
 .calories {
+  text-align: center;
   margin: -8px auto -8px auto;
   color: green;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  white-space: normal;
 }
