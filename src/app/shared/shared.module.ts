@@ -17,6 +17,9 @@ import {CalendarComponent} from './components/calendar/calendar.component';
 
 import {FilterProductPipe} from './pipes/filterProduct.pipe';
 
+import {MinValueDirectiveDirective} from './directives/min-value-directive.directive';
+import {MaxValueDirectiveDirective} from './directives/max-value-directive.directive';
+
 import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
@@ -30,6 +33,9 @@ import {MealHoursService} from './services/meals-hours.service';
     CalendarComponent,
 
     FilterProductPipe,
+
+    MinValueDirectiveDirective,
+    MaxValueDirectiveDirective
   ],
   imports: [
     CommonModule,
@@ -59,6 +65,9 @@ import {MealHoursService} from './services/meals-hours.service';
 
     FilterProductPipe,
 
+    MinValueDirectiveDirective,
+    MaxValueDirectiveDirective,
+
     CommonModule,
     NgbModule,
     AngularFireDatabaseModule,
@@ -68,7 +77,7 @@ import {MealHoursService} from './services/meals-hours.service';
     MatSelectModule,
     MatProgressBarModule,
     MatToolbarModule,
-    SelectModule
+    SelectModule,
   ],
   providers: [
     UserService,

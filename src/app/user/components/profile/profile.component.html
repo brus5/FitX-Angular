@@ -1,6 +1,49 @@
 <responsive-switcher>
 
-  profile works!
+  <form #form="ngForm">
+
+    <div class="col-md-12">
+
+      <div class="row">
+        <label for="name">Nazwa konta</label>
+        <input #name="ngModel" [(ngModel)]="user.name" class="form-control" name="name" id="name" type="text"
+               required placeholder="Nazwa konta" maxlength="100">
+        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+          <div *ngIf="name.errors.required">Wpisz nazwę konta.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="somatotype">Typ ciała</label>
+        <dropdown-list #dropdownListComponent id="somatotype" (item)="onSomatotypeChoosed($event)"
+                       [items$]="getSomatotypes()"></dropdown-list>
+      </div>
+
+      <div class="row">
+        <label for="weight">Waga</label>
+        <div class="input-group">
+          <input #weight="ngModel" [(ngModel)]="user.weight" class="form-control"
+                 minValue="10" maxValue="250"
+                 name="weight" id="weight"
+                 type="number" required placeholder="Waga" minlength="3">
+          <span class="input-group-addon">kg</span>
+        </div>
+        <div class="alert alert-danger" *ngIf="weight.touched && weight.invalid">
+          <div *ngIf="weight.errors.required">Podaj swoją wagę.</div>
+          <div *ngIf="weight.errors?.minValue">Waga nie może być mniejsza od 10.</div>
+          <div *ngIf="weight.errors?.maxValue">Waga nie może być większa od 250.</div>
+        </div>
+      </div>
+
+      <div class="row mt-10">
+        <button [disabled]="!form.valid "
+                class="btn btn-primary">Zapisz
+        </button>
+      </div>
+
+    </div>
+
+  </form>
 
 </responsive-switcher>
 
