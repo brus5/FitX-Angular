@@ -20,7 +20,7 @@ import {FilterProductPipe} from './pipes/filterProduct.pipe';
 import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
-import {MealsHours} from './services/meals-hours.service';
+import {MealHoursService} from './services/meals-hours.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +74,7 @@ import {MealsHours} from './services/meals-hours.service';
     UserService,
     AuthService,
     ImageUploadService,
-    MealsHours
+    MealHoursService
   ]
 })
 

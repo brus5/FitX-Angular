@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NavService} from '../../../core/components/services/nav.service';
 import {Observable} from 'rxjs';
 import {DietService} from '../../services/diet.service';
-import {MealsHours} from '../../../shared/services/meals-hours.service';
+import {MealHoursService} from '../../../shared/services/meals-hours.service';
 import {ToastrService} from 'ngx-toastr';
 import {MealTime} from '../../../shared/models/meal-time';
 import {NgForm} from '@angular/forms';
@@ -29,7 +29,7 @@ export class DietHoursComponent implements OnInit {
 
   constructor(private _navService: NavService,
               private _dietService: DietService,
-              private _mealsHoursService: MealsHours,
+              private _mealsHoursService: MealHoursService,
               private _toastrService: ToastrService) {
   }
 

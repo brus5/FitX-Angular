@@ -6,7 +6,7 @@ import {Meal} from '../../../shared/models/meal';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
-import {MealsHours} from '../../../shared/services/meals-hours.service';
+import {MealHoursService} from '../../../shared/services/meals-hours.service';
 
 @Component({
   selector: 'diet-add-product',
@@ -36,7 +36,7 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   constructor(private _productService: ProductService,
               private _dietService: DietService,
               private _toastrService: ToastrService,
-              private _mealsHoursService: MealsHours) {}
+              private _mealsHoursService: MealHoursService) {}
 
   ngOnInit() {
     this.searchSubscription = this.keyUp.pipe(
