@@ -1,12 +1,12 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 import {NavService} from '../../../core/components/services/nav.service';
 import {DietService} from '../../services/diet.service';
 import 'rxjs/add/operator/mergeMap';
-import {Product} from '../../models/product';
-import {Meal} from '../../models/meal';
-import {MealsHours} from '../../services/meals-hours.service';
-import {MealTime} from '../../models/meal-time';
+import {Product} from '../../../shared/models/product';
+import {Meal} from '../../../shared/models/meal';
+import {MealsHours} from '../../../shared/services/meals-hours.service';
+import {MealTime} from '../../../shared/models/meal-time';
 
 @Component({
   selector: 'diet',

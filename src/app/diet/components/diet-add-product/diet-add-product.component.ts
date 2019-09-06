@@ -1,12 +1,12 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {ProductService} from '../../services/product.service';
+import {ProductService} from '../../../shared/services/product.service';
 import {DietService} from '../../services/diet.service';
-import {Product} from '../../models/product';
-import {Meal} from '../../models/meal';
+import {Product} from '../../../shared/models/product';
+import {Meal} from '../../../shared/models/meal';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
-import {MealsHours} from '../../services/meals-hours.service';
+import {MealsHours} from '../../../shared/services/meals-hours.service';
 
 @Component({
   selector: 'diet-add-product',

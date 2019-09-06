@@ -2,11 +2,11 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NavService} from '../../../core/components/services/nav.service';
 import {Observable} from 'rxjs';
 import {DietService} from '../../services/diet.service';
-import {MealsHours} from '../../services/meals-hours.service';
+import {MealsHours} from '../../../shared/services/meals-hours.service';
 import {ToastrService} from 'ngx-toastr';
-import {MealTime} from '../../models/meal-time';
+import {MealTime} from '../../../shared/models/meal-time';
 import {NgForm} from '@angular/forms';
-import {DropdownListComponent} from '../dropdown-list/dropdown-list.component';
+import {DropdownListComponent} from '../../../shared/components/dropdown-list/dropdown-list.component';
 
 @Component({
   selector: 'diet-hours',

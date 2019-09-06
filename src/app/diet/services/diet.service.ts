@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from '@angular/fire/database';
-import {AuthService} from './auth.service';
+import {AuthService} from '../../shared/services/auth.service';
 import * as firebase from 'firebase/app';
-import {Meal} from '../models/meal';
+import {Meal} from '../../shared/models/meal';
 import {map} from 'rxjs/operators';
-import {Product} from '../models/product';
+import {Product} from '../../shared/models/product';
 
 @Injectable({
   providedIn: 'root'

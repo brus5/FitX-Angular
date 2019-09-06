@@ -2,8 +2,8 @@ import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@an
 import {NavService} from '../../../core/components/services/nav.service';
 import {Observable, Subscription} from 'rxjs';
 import {DietService} from '../../services/diet.service';
-import {Meal} from '../../models/meal';
-import {Product} from '../../models/product';
+import {Meal} from '../../../shared/models/meal';
+import {Product} from '../../../shared/models/product';
 
 @Component({
   selector: 'diet-menu',

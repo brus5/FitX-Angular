@@ -11,9 +11,6 @@ import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
 
 import {HomeComponent} from './components/home/home.component';
-import {DietComponent} from './components/diet/diet.component';
-import {DietHoursComponent} from './components/diet-hours/diet-hours.component';
-import {DietAddProductComponent} from './components/diet-add-product/diet-add-product.component';
 import {ProductsComponent} from './components/products/products.component';
 import {ProductFormComponent} from './components/product-form/product-form.component';
 import {ProductComponent} from './components/product/product.component';
@@ -22,22 +19,17 @@ import {AdsenseTopComponent} from './components/adsense-top/adsense-top.componen
 import {ResponsiveComponent} from './components/responsive/responsive.component';
 import {DropdownListComponent} from './components/dropdown-list/dropdown-list.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
-import {DietMenuComponent} from './components/diet-menu/diet-menu.component';
 
 import {FilterProductPipe} from './pipes/filterProduct.pipe';
 
 import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
-import {DietService} from './services/diet.service';
 import {MealsHours} from './services/meals-hours.service';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    DietComponent,
-    DietHoursComponent,
-    DietAddProductComponent,
     ProductsComponent,
     ProductFormComponent,
 
@@ -46,7 +38,6 @@ import {MealsHours} from './services/meals-hours.service';
     DropdownListComponent,
     ProductComponent,
     CalendarComponent,
-    DietMenuComponent,
 
     FilterProductPipe,
   ],
@@ -95,13 +86,16 @@ import {MealsHours} from './services/meals-hours.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatProgressBarModule,
+    MatToolbarModule,
     SelectModule
   ],
   providers: [
     UserService,
     AuthService,
     ImageUploadService,
-    DietService,
     MealsHours
   ]
 })
