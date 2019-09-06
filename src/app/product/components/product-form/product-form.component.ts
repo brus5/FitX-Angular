@@ -1,13 +1,13 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../services/product.service';
-import {Product} from '../../models/product';
-import {ProductNutrition} from '../../models/product-nutrition';
-import {CategoryService} from '../../services/category.service';
+import {Product} from '../../../shared/models/product';
+import {ProductNutrition} from '../../../shared/models/product-nutrition';
+import {CategoryService} from '../../../shared/services/category.service';
 import {Observable} from 'rxjs';
-import {ImageUploadService} from '../../services/image-upload.service';
+import {ImageUploadService} from '../../../shared/services/image-upload.service';
 import {HttpEventType} from '@angular/common/http';
 import {NgForm} from '@angular/forms';
-import {DropdownListComponent} from '../dropdown-list/dropdown-list.component';
+import {DropdownListComponent} from '../../../shared/components/dropdown-list/dropdown-list.component';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

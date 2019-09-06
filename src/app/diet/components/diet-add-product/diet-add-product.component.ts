@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {ProductService} from '../../../shared/services/product.service';
+import {ProductService} from '../../../product/services/product.service';
 import {DietService} from '../../services/diet.service';
 import {Product} from '../../../shared/models/product';
 import {Meal} from '../../../shared/models/meal';

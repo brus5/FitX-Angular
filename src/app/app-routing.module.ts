@@ -1,14 +1,14 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {HomeComponent} from './shared/components/home/home.component';
+import {HomeComponent} from './home/components/home/home.component';
 import {LoginComponent} from './core/components/login/login.component';
 import {DietComponent} from './diet/components/diet/diet.component';
 import {DietHoursComponent} from './diet/components/diet-hours/diet-hours.component';
 import {ProfileComponent} from './user/components/profile/profile.component';
 import {LogoffComponent} from './core/components/logoff/logoff.component';
 import {AuthGuardService} from './shared/services/auth-guard.service';
-import {ProductsComponent} from './shared/components/products/products.component';
+import {ProductsComponent} from './product/components/products/products.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},

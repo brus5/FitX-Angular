@@ -10,11 +10,6 @@ import {SelectModule} from 'ng2-select';
 import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
 
-import {HomeComponent} from './components/home/home.component';
-import {ProductsComponent} from './components/products/products.component';
-import {ProductFormComponent} from './components/product-form/product-form.component';
-import {ProductComponent} from './components/product/product.component';
-
 import {AdsenseTopComponent} from './components/adsense-top/adsense-top.component';
 import {ResponsiveComponent} from './components/responsive/responsive.component';
 import {DropdownListComponent} from './components/dropdown-list/dropdown-list.component';
@@ -29,14 +24,9 @@ import {MealsHours} from './services/meals-hours.service';
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    ProductsComponent,
-    ProductFormComponent,
-
     AdsenseTopComponent,
     ResponsiveComponent,
     DropdownListComponent,
-    ProductComponent,
     CalendarComponent,
 
     FilterProductPipe,
@@ -59,24 +49,12 @@ import {MealsHours} from './services/meals-hours.service';
       timeOut: 3000,
       positionClass: 'toast-top-right',
       preventDuplicates: true
-    }),
-    RouterModule.forChild([
-      {
-        path: 'products/new',
-        component: ProductFormComponent
-      },
-      {
-        path: 'products/edit/:id',
-        component: ProductFormComponent
-      }
-    ]),
+    })
   ],
   exports: [
     AdsenseTopComponent,
     ResponsiveComponent,
-    ProductFormComponent,
     DropdownListComponent,
-    ProductComponent,
     CalendarComponent,
 
     FilterProductPipe,
