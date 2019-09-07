@@ -74,7 +74,7 @@ a:hover {
   background-color: #282828;
   position: relative;
   z-index: 100;
-  border-top: 1px dashed #fff;
+  border-top: 1px dotted #737373;
   outline: none;
   padding-left: 10px;
   padding-top: 0;
@@ -114,14 +114,27 @@ a:hover {
 }
 
 .mobile-nav .profile-buttons > ul > .admin-buttons > li, li {
-  border-bottom: 1px dashed #8c8c8c;
+  //border-bottom: 1px solid #e6e6e6;
   background-color: white;
   outline: none;
   padding: 15px 0 15px 0;
 }
 
+.mobile-nav li {
+  border-bottom: 1px solid #e6e6e6;
+  background-color: white;
+}
+
+.mobile-nav li:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav .admin-buttons li {
+  border-top: none;
+}
+
 .mobile-nav .profile-buttons > ul > li:first-child {
-  border-top: 1px dashed #8c8c8c;
+  border-top: 1px solid #e6e6e6;
   margin-top: 15px;
 }
 
@@ -140,4 +153,8 @@ a:hover {
 
 .mobile-nav .profile-buttons > ul > .admin-buttons > li {
   height: 52px;
+}
+
+.mobile-nav .profile-buttons > ul > li, .admin-buttons > li {
+  //border-top: none;
 }
