@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ProductService} from '../../../product/services/product.service';
 import {DietService} from '../../services/diet.service';
 import {Product} from '../../../shared/models/product';
@@ -15,6 +15,7 @@ import {MealHoursService} from '../../../shared/services/meals-hours.service';
 })
 export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
 
+  @ViewChild('confirmProductElement', {static: false}) private confirmProductElement: ElementRef;
   @Input() public date: string;
   @Input() public time: string;
 
@@ -70,6 +71,15 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   removeMeal(index: number) {
     this._dietService.remove(this.date, this.time, this.meals[index].key)
       .then(() => this._toastrService.success('Usunięto'));
+  }
+
+  onEnterPressed($event) {
+    // TODO zrobić żeby po enterze się wprowadzała wartość
+    if ($event.key === 'Enter') {
+      // const element: HTMLElement = document.getElementById('confirmProductElement') as HTMLElement;
+      // element.click();
+      this.confirmProductElement.nativeElement.click();
+    }
   }
 
   private filterProducts(productName: string) {

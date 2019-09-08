@@ -5,11 +5,11 @@
     class="table table-condensed"
   >
     <thead></thead>
-    <tbody >
+    <tbody>
     <tr *ngFor="let product of dailyProducts$; let i = index">
       <th class="text-left">{{product.name}}</th>
       <th class="text-right">{{product.nutrition.kcal | number: '1.0-0'}}</th>
-      <th class="text-right"><a type="button" (click)="removeMeal(i)">X</a></th>
+      <th class="text-right"><a id="deleteElement" type="button" (click)="removeMeal(i)">X</a></th>
     </tr>
     </tbody>
     <tfoot>
@@ -44,7 +44,7 @@
 
       <div class="input-group">
         <input
-            #query
+            #query="ngModel"
             (keyup)="keyUp.next(query.value)"
             [(ngModel)]="searchedProduct"
             placeholder="Wpisz nazwę produktu"
@@ -57,48 +57,56 @@
         </span>
       </div>
     </div>
-    <div *ngFor="let product of filteredProducts$">
-      <li>{{product.name}}
+    <div class="searched-products" *ngFor="let product of filteredProducts$">
+      <ul class="row mt-10">
+        <a>{{product.name}}</a>
         <a
             #addProductWeightButtonElement
-            class="btn btn-sm"
+            class="pull-right" id="addProductWeightButtonElement"
             [ngClass]="(addProductWeightButtonElement.hidden) ? 'hidden' : 'visible'"
             (click)="addProductWeightButtonElement.hidden = true"
         >
           Dodaj
         </a>
-      </li>
+      </ul>
       <div *ngIf="addProductWeightButtonElement.hidden">
-        <ng-container [ngTemplateOutlet]="addWeight"
-                      [ngTemplateOutletContext]="{product:product}"></ng-container>
+
+        <div class="row">
+          <div class="input-group">
+            <span class="input-group-addon">g</span>
+            <input
+                #weight="ngModel" ngModel
+                (keyup)="setProductWeight(weight.value)"
+                (keypress)="onEnterPressed($event)"
+                placeholder="Podaj wagę produktu"
+                minValue="0.1" maxValue="1000"
+                autocomplete="off"
+                class="form-control"
+                name="weight" required id="weight" type="number">
+
+            <span class="input-group-btn">
+                <button
+                    #confirmProductElement
+                    class="btn btn-success"
+                    type="button"
+                    id="confirmProductElement"
+                    [disabled]="form.invalid"
+                    (click)="addProductButtonElement.hidden = false;
+                  addProductToList(product, weight.value);">
+                  OK
+                </button>
+            </span>
+          </div>
+          <div class="alert alert-danger" *ngIf="weight.touched && weight.invalid">
+            <div *ngIf="weight.errors.required">Podaj wagę produktu.</div>
+            <div *ngIf="weight.errors?.minValue">Waga nie może być mniejsza od 0.1.</div>
+            <div *ngIf="weight.errors?.maxValue">Waga nie może być większa od 1000.</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
   </form>
-
-</ng-template>
-
-<ng-template #addWeight let-product="product">
-
-  <div class="input-group">
-    <input
-        #weight
-        (keyup)="setProductWeight(weight.value)"
-        autocomplete="off"
-        class="form-control"
-        name="weight" id="weight" type="number">
-
-    <span class="input-group-btn">
-  <button
-    class="btn btn-success"
-    type="button"
-    (click)="addProductButtonElement.hidden = false;
-    addProductToList(product, weight.value);
-    "
-  >
-    OK
-  </button>
-    </span>
-  </div>
 
 </ng-template>

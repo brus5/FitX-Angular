@@ -39,3 +39,21 @@ a.btn.btn-primary {
 .table {
   margin-top: -16px;
 }
+
+.searched-products {
+  font-weight: normal;
+  margin-top: auto;
+}
+
+.searched-products a {
+  cursor: pointer;
+}
+
+.spacer {
+  flex: 1 0 0;
+}
+
+#deleteElement {
+  cursor: pointer;
+  color: #d1504d;
+}
