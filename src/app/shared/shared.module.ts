@@ -5,7 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FormsModule} from '@angular/forms';
-import {MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatToolbarModule} from '@angular/material';
+import {MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatToolbarModule, MatProgressSpinnerModule} from '@angular/material';
 import {SelectModule} from 'ng2-select';
 import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
@@ -14,6 +14,7 @@ import {AdsenseTopComponent} from './components/adsense-top/adsense-top.componen
 import {ResponsiveComponent} from './components/responsive/responsive.component';
 import {DropdownListComponent} from './components/dropdown-list/dropdown-list.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
+import {ProgressSpinnerComponent} from './components/progress-spinner/progress-spinner.component';
 
 import {FilterProductPipe} from './pipes/filterProduct.pipe';
 
@@ -31,6 +32,7 @@ import {MealHoursService} from './services/meals-hours.service';
     ResponsiveComponent,
     DropdownListComponent,
     CalendarComponent,
+    ProgressSpinnerComponent,
 
     FilterProductPipe,
 
@@ -48,6 +50,7 @@ import {MealHoursService} from './services/meals-hours.service';
     MatSelectModule,
     MatProgressBarModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
     SelectModule,
     RouterModule,
 
@@ -62,6 +65,7 @@ import {MealHoursService} from './services/meals-hours.service';
     ResponsiveComponent,
     DropdownListComponent,
     CalendarComponent,
+    ProgressSpinnerComponent,
 
     FilterProductPipe,
 
@@ -77,6 +81,7 @@ import {MealHoursService} from './services/meals-hours.service';
     MatSelectModule,
     MatProgressBarModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
     SelectModule,
   ],
   providers: [

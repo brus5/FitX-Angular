@@ -41,7 +41,6 @@ a.btn.btn-primary {
 }
 
 .searched-products {
-  font-weight: normal;
   margin-top: auto;
 }
 
@@ -56,4 +55,22 @@ a.btn.btn-primary {
 #deleteElement {
   cursor: pointer;
   color: #d1504d;
+}
+
+progress-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-products {
+  margin: 16px auto auto 16px;
+}
+
+.text-normal {
+  font-weight: normal;
+}
+
+ul > a {
+  margin-left: -34px;
 }

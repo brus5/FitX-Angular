@@ -16,20 +16,18 @@ import {MealHoursService} from '../../../shared/services/meals-hours.service';
 export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
 
   @ViewChild('confirmProductElement', {static: false}) private confirmProductElement: ElementRef;
+  @ViewChild('addProductWeightButtonElement', {static: false}) private addProductWeightButtonElement: ElementRef;
+  @ViewChild('weightInputElement', {static: false}) private weightInputElement: HTMLElement;
   @Input() public date: string;
   @Input() public time: string;
-
   keyUp = new Subject<string>();
-
   filteredProducts$: Product[] = [];
-
   dailyProducts$: Product[] = [];
-
   meals: Meal[] = [];
-
   searchedProduct: string;
-
   productWeight: number;
+  isSearching: boolean;
+  wasSearching: boolean;
 
   private searchSubscription: Subscription = new Subscription();
   private productsSubscription: Subscription = new Subscription();
@@ -66,6 +64,7 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
     this._dietService.addMeal(meal);
     this.clearFilteredProducts();
     this.clearQueryElement();
+    this.productWeight = null;
   }
 
   removeMeal(index: number) {
@@ -74,23 +73,35 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onEnterPressed($event) {
-    // TODO zrobić żeby po enterze się wprowadzała wartość
-    if ($event.key === 'Enter') {
-      // const element: HTMLElement = document.getElementById('confirmProductElement') as HTMLElement;
-      // element.click();
+    if ($event.key === 'Enter')
       this.confirmProductElement.nativeElement.click();
-    }
+  }
+
+  onInputChanged() {
+    this.isSearching = true;
+    this.wasSearching = true;
+    this.filteredProducts$ = [];
+  }
+
+  onAddClicked(product) {
+    this.clearFilteredProducts();
+    this.filteredProducts$.push(product);
   }
 
   private filterProducts(productName: string) {
+    if (productName) productName = productName.toLocaleLowerCase();
     this.productsSubscription = this._productService.getProductByName(productName)
-      .subscribe(products => this.filteredProducts$ = products);
+      .subscribe(products => {
+        this.filteredProducts$ = products;
+        this.isSearching = false;
+      });
   }
 
   private fillMeals(meals: Meal[]) {
     this.meals = meals;
     this.clearDailyProducts();
     meals.forEach(value => this.dailyProducts$.push(value.product));
+    this.isSearching = false;
   }
 
   private clearDailyProducts() {

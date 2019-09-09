@@ -7,7 +7,7 @@
     <thead></thead>
     <tbody>
     <tr *ngFor="let product of dailyProducts$; let i = index">
-      <th class="text-left">{{product.name}}</th>
+      <th class="text-left">{{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}</th>
       <th class="text-right">{{product.nutrition.kcal | number: '1.0-0'}}</th>
       <th class="text-right"><a id="deleteElement" type="button" (click)="removeMeal(i)">X</a></th>
     </tr>
@@ -41,43 +41,52 @@
   <form #form="ngForm">
 
     <div class="row mt-10">
-
       <div class="input-group">
         <input
             #query="ngModel"
-            (keyup)="keyUp.next(query.value)"
+            (keyup)="keyUp.next(query.value); onInputChanged()"
             [(ngModel)]="searchedProduct"
             placeholder="Wpisz nazwę produktu"
             autocomplete="off"
+            [autofocus]="true"
             class="form-control"
             name="name" id="name" type="text" maxlength="100">
         <span class="input-group-btn">
           <button class="btn btn-danger" *ngIf="addProductButtonElement.hidden"
-                  (click)="addProductButtonElement.hidden = false">X</button>
+                  (click)="addProductButtonElement.hidden = false; clearFilteredProducts()">X</button>
         </span>
       </div>
     </div>
-    <div class="searched-products" *ngFor="let product of filteredProducts$">
+
+    <div *ngIf="isSearching; else noProductsOnLinst">
+      <progress-spinner></progress-spinner>
+    </div>
+
+    <div class="searched-products text-normal" *ngFor="let product of filteredProducts$; let i = index">
+
       <ul class="row mt-10">
-        <a>{{product.name}}</a>
+        <a>{{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}</a>
         <a
             #addProductWeightButtonElement
             class="pull-right" id="addProductWeightButtonElement"
             [ngClass]="(addProductWeightButtonElement.hidden) ? 'hidden' : 'visible'"
-            (click)="addProductWeightButtonElement.hidden = true"
+            (click)="addProductWeightButtonElement.hidden = true; onAddClicked(product)"
         >
           Dodaj
         </a>
       </ul>
+
       <div *ngIf="addProductWeightButtonElement.hidden">
 
         <div class="row">
           <div class="input-group">
             <span class="input-group-addon">g</span>
             <input
-                #weight="ngModel" ngModel
-                (keyup)="setProductWeight(weight.value)"
+                #weightInputElement="ngModel" ngModel [(ngModel)]="productWeight"
+                (keyup)="setProductWeight(weightInputElement.value)"
                 (keypress)="onEnterPressed($event)"
+                [autofocus]="true"
+                autofocus
                 placeholder="Podaj wagę produktu"
                 minValue="0.1" maxValue="1000"
                 autocomplete="off"
@@ -92,15 +101,15 @@
                     id="confirmProductElement"
                     [disabled]="form.invalid"
                     (click)="addProductButtonElement.hidden = false;
-                  addProductToList(product, weight.value);">
+                  addProductToList(product, weightInputElement.value);">
                   OK
                 </button>
             </span>
           </div>
-          <div class="alert alert-danger" *ngIf="weight.touched && weight.invalid">
-            <div *ngIf="weight.errors.required">Podaj wagę produktu.</div>
-            <div *ngIf="weight.errors?.minValue">Waga nie może być mniejsza od 0.1.</div>
-            <div *ngIf="weight.errors?.maxValue">Waga nie może być większa od 1000.</div>
+          <div class="alert alert-danger" *ngIf="weightInputElement.touched && weightInputElement.invalid">
+            <div *ngIf="weightInputElement.errors.required">Podaj wagę produktu.</div>
+            <div *ngIf="weightInputElement.errors?.minValue">Waga nie może być mniejsza od 0.1.</div>
+            <div *ngIf="weightInputElement.errors?.maxValue">Waga nie może być większa od 1000.</div>
           </div>
         </div>
 
@@ -108,5 +117,11 @@
     </div>
 
   </form>
+
+  <ng-template #noProductsOnLinst>
+    <div class="no-products text-normal" *ngIf="wasSearching && filteredProducts$.length === 0">
+      Brak produktów w bazie danych.
+    </div>
+  </ng-template>
 
 </ng-template>

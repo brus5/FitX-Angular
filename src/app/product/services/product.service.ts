@@ -40,6 +40,7 @@ export class ProductService {
   public getProductByName(productPhrase: string): Observable<Product[]> {
     return this._db.list('/products',
       ref => ref.orderByChild('/name')
+        .limitToFirst(10)
         .startAt(productPhrase)
         // '\uf88f' has very high code point in the Unicode range. It is after most regular chars in Unicode.
         .endAt(productPhrase + '\uf88f'))
