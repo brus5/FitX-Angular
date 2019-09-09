@@ -6,6 +6,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FormsModule} from '@angular/forms';
 import {MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatToolbarModule, MatProgressSpinnerModule} from '@angular/material';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {SelectModule} from 'ng2-select';
 import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
@@ -51,6 +52,7 @@ import {MealHoursService} from './services/meals-hours.service';
     MatProgressBarModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
     SelectModule,
     RouterModule,
 
@@ -82,6 +84,7 @@ import {MealHoursService} from './services/meals-hours.service';
     MatProgressBarModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
     SelectModule,
   ],
   providers: [

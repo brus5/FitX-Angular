@@ -7,7 +7,14 @@
     <thead></thead>
     <tbody>
     <tr *ngFor="let product of dailyProducts$; let i = index">
-      <th class="text-left">{{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}</th>
+      <th class="text-left">
+        <a matTooltip="B: {{product.nutrition.proteins | number: '1.0-0'}} |
+                       W: {{product.nutrition.carbs | number: '1.0-0'}} |
+                       T: {{product.nutrition.fats | number: '1.0-0'}}">
+          {{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}
+        </a>
+        <small>{{product.weight}} g</small>
+      </th>
       <th class="text-right">{{product.nutrition.kcal | number: '1.0-0'}}</th>
       <th class="text-right"><a id="deleteElement" type="button" (click)="removeMeal(i)">X</a></th>
     </tr>
@@ -65,7 +72,13 @@
     <div class="searched-products text-normal" *ngFor="let product of filteredProducts$; let i = index">
 
       <ul class="row mt-10">
-        <a>{{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}</a>
+        <a #productElement
+           matTooltip="B: {{product.nutrition.proteins | number: '1.0-0'}} |
+                       W: {{product.nutrition.carbs | number: '1.0-0'}} |
+                       T: {{product.nutrition.fats | number: '1.0-0'}} / 100 g">
+          {{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}
+          <product-details *ngIf="isHover"></product-details>
+        </a>
         <a
             #addProductWeightButtonElement
             class="pull-right" id="addProductWeightButtonElement"

@@ -28,6 +28,7 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   productWeight: number;
   isSearching: boolean;
   wasSearching: boolean;
+  isHover: boolean;
 
   private searchSubscription: Subscription = new Subscription();
   private productsSubscription: Subscription = new Subscription();
@@ -138,5 +139,9 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
     let totalFats = null;
     this.dailyProducts$.forEach(product => totalFats += product.nutrition.fats);
     return totalFats;
+  }
+
+  onOver($event: MouseEvent) {
+    console.log($event);
   }
 }

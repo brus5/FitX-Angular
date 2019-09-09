@@ -46,6 +46,7 @@ a.btn.btn-primary {
 
 .searched-products a {
   cursor: pointer;
+  text-underline: none;
 }
 
 .spacer {
@@ -73,4 +74,12 @@ progress-spinner {
 
 ul > a {
   margin-left: -34px;
+}
+
+th > small {
+  color: #9b9b9b;
+}
+
+th > a {
+  cursor: pointer;
 }
