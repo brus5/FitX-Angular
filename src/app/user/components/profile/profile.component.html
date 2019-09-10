@@ -2,7 +2,7 @@
 
   <form #form="ngForm">
 
-    <div class="col-md-12">
+    <div class="col-md-6">
 
       <div class="row">
         <label for="name">Nazwa konta</label>
@@ -15,7 +15,7 @@
 
       <div class="row">
         <label for="somatotype">Typ ciała</label>
-        <dropdown-list #dropdownListComponent id="somatotype" (item)="onSomatotypeChoosed($event)"
+        <dropdown-list #dropdownListComponent id="somatotype" (item)="onSomatotypeChoosed($event)" (error)="handleError($event)"
                        [items$]="getSomatotypes()"></dropdown-list>
       </div>
 
@@ -35,12 +35,32 @@
         </div>
       </div>
 
+      <div class="row">
+        <label for="calories">Maksymalna liczba kalorii</label>
+        <div class="input-group">
+          <input #calories="ngModel" [(ngModel)]="user.maxCalories" class="form-control"
+                 minValue="500" maxValue="10000"
+                 name="calories" id="calories"
+                 type="number" required placeholder="Kalorie" minlength="3">
+          <span class="input-group-addon">kcal</span>
+        </div>
+        <div class="alert alert-danger" *ngIf="calories.touched && calories.invalid">
+          <div *ngIf="calories.errors.required">Podaj swoją wagę.</div>
+          <div *ngIf="calories.errors?.minValue">Waga nie może być mniejsza od 500.</div>
+          <div *ngIf="calories.errors?.maxValue">Waga nie może być większa od 10000.</div>
+        </div>
+      </div>
+
       <div class="row mt-10">
-        <button [disabled]="!form.valid "
+        <button [disabled]="!form.valid || selectError"
                 class="btn btn-primary">Zapisz
         </button>
       </div>
 
+    </div>
+
+    <div class="col-md-6">
+      col-md-6
     </div>
 
   </form>

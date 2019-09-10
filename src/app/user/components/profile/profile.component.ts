@@ -19,6 +19,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   somatotypes = ['Ectomorfik', 'Mezomorfik', 'Endomorfik'];
 
+  choosedSomatotype: string;
+  selectError: boolean;
+
   private appUserSubscription: Subscription = new Subscription();
 
   constructor(private _navService: NavService,
@@ -41,7 +44,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
     return Observable.of(this.somatotypes);
   }
 
-  onSomatotypeChoosed($event: string) {
-    console.log($event);
+  onSomatotypeChoosed(somatotyope: string) {
+    this.choosedSomatotype = somatotyope;
+    console.log(somatotyope);
+  }
+
+  handleError($event: boolean) {
+    this.selectError = $event;
   }
 }

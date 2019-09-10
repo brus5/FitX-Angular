@@ -12,10 +12,11 @@ export class DropdownListComponent {
   @Input() public items$: Observable<string[]>;
 
   @Output() public item = new EventEmitter<string>();
+  @Output() public error = new EventEmitter<boolean>();
 
   @ViewChild('ngSelectComponent', {static: false}) public ngSelect: SelectComponent;
 
-  public dirtyTouched: boolean;
+  dirtyTouched: boolean;
 
   constructor(private _changeDetector: ChangeDetectorRef) {}
 
@@ -25,6 +26,13 @@ export class DropdownListComponent {
 
   public selected(value: any): void {
     this.item.emit(value.text);
+  }
+
+  public emitError() {
+    if (this.dirtyTouched)
+      this.error.emit(this.dirtyTouched);
+    else
+      this.error.emit(this.dirtyTouched);
   }
 
   public onClear() {
@@ -44,5 +52,6 @@ export class DropdownListComponent {
       this.dirtyTouched = false;
       this._changeDetector.detectChanges();
     }
+    this.emitError();
   }
 }
