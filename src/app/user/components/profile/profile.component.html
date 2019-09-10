@@ -6,8 +6,8 @@
 
       <div class="row">
         <label for="name">Nazwa konta</label>
-        <input #name="ngModel" [(ngModel)]="user.name" class="form-control" name="name" id="name" type="text"
-               required placeholder="Nazwa konta" maxlength="100">
+        <input #name="ngModel" [(ngModel)]="appUser$.name" class="form-control" name="name" id="name" type="text"
+               required placeholder="Nazwa konta" maxlength="100" disabled>
         <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
           <div *ngIf="name.errors.required">Wpisz nazwę konta.</div>
         </div>
@@ -15,14 +15,14 @@
 
       <div class="row">
         <label for="somatotype">Typ ciała</label>
-        <dropdown-list #dropdownListComponent id="somatotype" (item)="onSomatotypeChoosed($event)" (error)="handleError($event)"
-                       [items$]="getSomatotypes()"></dropdown-list>
+        <dropdown-list #dropdownListComponent id="somatotype" (item)="onSomatotypeSelected($event)"
+                       (error)="handleError($event)" [items$]="getSomatotypes()"></dropdown-list>
       </div>
 
       <div class="row">
         <label for="weight">Waga</label>
         <div class="input-group">
-          <input #weight="ngModel" [(ngModel)]="user.weight" class="form-control"
+          <input #weight="ngModel" [(ngModel)]="appUser$.weight" class="form-control"
                  minValue="10" maxValue="250"
                  name="weight" id="weight"
                  type="number" required placeholder="Waga" minlength="3">
@@ -38,21 +38,79 @@
       <div class="row">
         <label for="calories">Maksymalna liczba kalorii</label>
         <div class="input-group">
-          <input #calories="ngModel" [(ngModel)]="user.maxCalories" class="form-control"
+          <input #calories="ngModel" [(ngModel)]="appUser$.maxCalories" class="form-control"
                  minValue="500" maxValue="10000"
                  name="calories" id="calories"
                  type="number" required placeholder="Kalorie" minlength="3">
           <span class="input-group-addon">kcal</span>
         </div>
         <div class="alert alert-danger" *ngIf="calories.touched && calories.invalid">
-          <div *ngIf="calories.errors.required">Podaj swoją wagę.</div>
-          <div *ngIf="calories.errors?.minValue">Waga nie może być mniejsza od 500.</div>
+          <div *ngIf="calories.errors.required">Podaj liczbę kalorii.</div>
+          <div *ngIf="calories.errors?.minValue">Liczba kalorii nie może być mniejsza od 500.</div>
           <div *ngIf="calories.errors?.maxValue">Waga nie może być większa od 10000.</div>
         </div>
       </div>
 
+      <div [ngClass]="(areNutrientsValid) ? 'has-error' : ''">
+        <div class="row">
+          <label for="proteins">Procentowa liczba białek</label>
+          <div class="input-group">
+            <input #maxProteins="ngModel" [(ngModel)]="appUser$.maxProteins"
+                   class="form-control"
+                   minValue="1" maxValue="100"
+                   name="proteins" id="proteins"
+                   type="number" required placeholder="Procent białek" minlength="3">
+            <span class="input-group-addon">%</span>
+          </div>
+          <div class="alert alert-danger" *ngIf="maxProteins.touched && maxProteins.invalid">
+            <div *ngIf="maxProteins.errors.required">Podaj procentową ilość białek.</div>
+            <div *ngIf="maxProteins.errors?.minValue">Liczba nie może być mniejsza od 1.</div>
+            <div *ngIf="maxProteins.errors?.maxValue">Liczba nie może być większa od 100.</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="carbs">Procentowa liczba węglowodanów</label>
+          <div class="input-group">
+            <input #maxCarbs="ngModel" [(ngModel)]="appUser$.maxCarbs"
+                   class="form-control"
+                   minValue="1" maxValue="100"
+                   name="carbs" id="carbs"
+                   type="number" required placeholder="Procent węglowodanów" minlength="3">
+            <span class="input-group-addon">%</span>
+          </div>
+          <div class="alert alert-danger" *ngIf="maxCarbs.touched && maxCarbs.invalid">
+            <div *ngIf="maxCarbs.errors.required">Podaj procentową ilość węglowodanów.</div>
+            <div *ngIf="maxCarbs.errors?.minValue">Liczba nie może być mniejsza od 1.</div>
+            <div *ngIf="maxCarbs.errors?.maxValue">Liczba nie może być większa od 100.</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="fats">Procentowa liczba tłuszczów</label>
+          <div class="input-group">
+            <input #maxFats="ngModel" [(ngModel)]="appUser$.maxFats"
+                   class="form-control"
+                   minValue="1" maxValue="100"
+                   name="fats" id="fats"
+                   type="number" required placeholder="Procent tłuszczów" minlength="3">
+            <span class="input-group-addon">%</span>
+          </div>
+          <div class="alert alert-danger" *ngIf="maxFats.touched && maxFats.invalid">
+            <div *ngIf="maxFats.errors.required">Podaj procentową ilość tłuszczów.</div>
+            <div *ngIf="maxFats.errors?.minValue">Liczba nie może być mniejsza od 1.</div>
+            <div *ngIf="maxFats.errors?.maxValue">Liczba nie może być większa od 100.</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="alert alert-danger" *ngIf="areNutrientsValid">
+          <div>Procentowa suma makroskładników musi wynosić 100.</div>
+        </div>
+      </div>
       <div class="row mt-10">
-        <button [disabled]="!form.valid || selectError"
+        <button [disabled]="!form.valid || selectError || areNutrientsValid"
+                (click)="onAccept()"
                 class="btn btn-primary">Zapisz
         </button>
       </div>

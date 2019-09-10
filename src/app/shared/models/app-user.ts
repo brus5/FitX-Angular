@@ -3,7 +3,7 @@ export interface AppUser {
   name: string;
   email: string;
   isAdmin: boolean;
-  somatotype: number;
+  somatotype: string;
   weight?: number;
   maxCalories?: number;
   maxProteins?: number;

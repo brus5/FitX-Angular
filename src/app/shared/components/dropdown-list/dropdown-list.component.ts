@@ -28,13 +28,6 @@ export class DropdownListComponent {
     this.item.emit(value.text);
   }
 
-  public emitError() {
-    if (this.dirtyTouched)
-      this.error.emit(this.dirtyTouched);
-    else
-      this.error.emit(this.dirtyTouched);
-  }
-
   public onClear() {
     this.ngSelect.active = [];
   }
@@ -52,6 +45,6 @@ export class DropdownListComponent {
       this.dirtyTouched = false;
       this._changeDetector.detectChanges();
     }
-    this.emitError();
+    this.error.emit(this.dirtyTouched);
   }
 }
