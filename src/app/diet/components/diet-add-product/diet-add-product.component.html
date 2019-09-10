@@ -1,9 +1,6 @@
 <div class="row mt-10">
 
-  <table
-    *ngIf="dailyProducts$.length > 0"
-    class="table table-condensed"
-  >
+  <table *ngIf="dailyProducts$.length > 0" class="table table-condensed">
     <thead></thead>
     <tbody>
     <tr *ngFor="let product of dailyProducts$; let i = index">
@@ -24,7 +21,8 @@
       <th class="text-left">
         P: {{totalProteins | number: '1.0-0'}}
         C: {{totalCarbs | number: '1.0-0'}}
-        T: {{totalFats | number: '1.0-0'}}</th>
+        T: {{totalFats | number: '1.0-0'}}
+      </th>
       <th class="text-right">{{totalCalories | number:'1.0-0'}} kcal</th>
       <th></th>
     </tr>
@@ -32,12 +30,10 @@
 
   </table>
 </div>
-<a
-    #addProductButtonElement
-    class="btn btn-primary"
-    [ngClass]="(addProductButtonElement.hidden) ? 'hidden' : 'visible'"
-    (click)="addProductButtonElement.hidden = true"
->
+<a #addProductButtonElement
+   class="btn btn-primary"
+   [ngClass]="(addProductButtonElement.hidden) ? 'hidden' : 'visible'"
+   (click)="addProductButtonElement.hidden = true">
   Dodaj posiłek
 </a>
 
@@ -51,13 +47,11 @@
       <div class="input-group">
         <input
             #query="ngModel"
+            placeholder="Wpisz nazwę produktu" autocomplete="off" class="form-control"
+            name="name" id="name" type="text" maxlength="100"
             (keyup)="keyUp.next(query.value); onInputChanged()"
             [(ngModel)]="searchedProduct"
-            placeholder="Wpisz nazwę produktu"
-            autocomplete="off"
-            [autofocus]="true"
-            class="form-control"
-            name="name" id="name" type="text" maxlength="100">
+            [autofocus]="true">
         <span class="input-group-btn">
           <button class="btn btn-danger" *ngIf="addProductButtonElement.hidden"
                   (click)="addProductButtonElement.hidden = false; clearFilteredProducts()">X</button>
@@ -72,19 +66,15 @@
     <div class="searched-products text-normal" *ngFor="let product of filteredProducts$; let i = index">
 
       <ul class="row mt-10">
-        <a #productElement
-           matTooltip="B: {{product.nutrition.proteins | number: '1.0-0'}} |
+        <a matTooltip="B: {{product.nutrition.proteins | number: '1.0-0'}} |
                        W: {{product.nutrition.carbs | number: '1.0-0'}} |
                        T: {{product.nutrition.fats | number: '1.0-0'}} / 100 g">
           {{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}
-          <product-details *ngIf="isHover"></product-details>
         </a>
-        <a
-            #addProductWeightButtonElement
-            class="pull-right" id="addProductWeightButtonElement"
-            [ngClass]="(addProductWeightButtonElement.hidden) ? 'hidden' : 'visible'"
-            (click)="addProductWeightButtonElement.hidden = true; onAddClicked(product)"
-        >
+        <a #addProductWeightButtonElement
+           class="pull-right" id="addProductWeightButtonElement"
+           [ngClass]="(addProductWeightButtonElement.hidden) ? 'hidden' : 'visible'"
+           (click)="addProductWeightButtonElement.hidden = true; onAddClicked(product)">
           Dodaj
         </a>
       </ul>
@@ -96,22 +86,15 @@
             <span class="input-group-addon">g</span>
             <input
                 #weightInputElement="ngModel" ngModel [(ngModel)]="productWeight"
+                class="form-control" name="weight" required id="weight" type="number"
+                autofocus placeholder="Podaj wagę produktu"
+                minValue="0.1" maxValue="1000" autocomplete="off"
                 (keyup)="setProductWeight(weightInputElement.value)"
                 (keypress)="onEnterPressed($event)"
-                [autofocus]="true"
-                autofocus
-                placeholder="Podaj wagę produktu"
-                minValue="0.1" maxValue="1000"
-                autocomplete="off"
-                class="form-control"
-                name="weight" required id="weight" type="number">
-
+                [autofocus]="true">
             <span class="input-group-btn">
                 <button
-                    #confirmProductElement
-                    class="btn btn-success"
-                    type="button"
-                    id="confirmProductElement"
+                    #confirmProductElement class="btn btn-success" type="button" id="confirmProductElement"
                     [disabled]="form.invalid"
                     (click)="addProductButtonElement.hidden = false;
                   addProductToList(product, weightInputElement.value);">
