@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
 import {HomeModule} from './home/home.module';
-import {ProfileModule} from './user/profile.module';
+import {UserModule} from './user/user.module';
 import {DietModule} from './diet/diet.module';
 import {ProductModule} from './product/product.module';
 import {AdminModule} from './admin/admin.module';
@@ -24,7 +24,7 @@ import {environment} from '../environments/environment';
     CoreModule,
     SharedModule,
     HomeModule,
-    ProfileModule,
+    UserModule,
     DietModule,
     ProductModule,
     AdminModule,

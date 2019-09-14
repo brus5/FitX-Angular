@@ -5,7 +5,7 @@
              (focusout)="onFocusOut($event)"
              [allowClear]="true"
   ></ng-select>
-  <div class="alert alert-danger" *ngIf="dirtyTouched">
+  <div class="alert alert-danger" *ngIf="dirtyTouched && !this.ngSelect.active.length">
     <div>Dokonaj wyboru.</div>
   </div>
 </div>

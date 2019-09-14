@@ -1,0 +1,138 @@
+<responsive-switcher>
+
+  <form #form="ngForm">
+
+    <div class="col-md-6">
+
+      <div class="row">
+        <label for="gender">Płeć</label>
+        <mat-radio-group
+          id="gender"
+          [(ngModel)]="appUser$.isGender" [ngModelOptions]="{standalone: true}" (ngModelChange)="onAutoCounting()">
+          <mat-radio-button class="example-radio-button" [value]="true">Kobieta</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="false">Mężczyzna</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="row">
+        <label for="height">Wzrost</label>
+        <div class="input-group">
+          <input #height="ngModel" [(ngModel)]="appUser$.height" class="form-control" (ngModelChange)="onAutoCounting()"
+                 minValue="50" maxValue="250"
+                 name="height" id="height"
+                 type="number" required placeholder="Wzrost" minlength="3">
+          <span class="input-group-addon">cm</span>
+        </div>
+        <div class="alert alert-danger" *ngIf="height.touched && height.invalid">
+          <div *ngIf="height.errors.required">Podaj swoją wagę.</div>
+          <div *ngIf="height.errors?.minValue">Wzrost nie może być mniejszy od 50.</div>
+          <div *ngIf="height.errors?.maxValue">Wzrost nie może być większy od 250.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="weight">Waga</label>
+        <div class="input-group">
+          <input #weight="ngModel" [(ngModel)]="appUser$.weight" class="form-control" (ngModelChange)="onAutoCounting()"
+                 minValue="10" maxValue="250"
+                 name="weight" id="weight"
+                 type="number" required placeholder="Waga" minlength="3">
+          <span class="input-group-addon">kg</span>
+        </div>
+        <div class="alert alert-danger" *ngIf="weight.touched && weight.invalid">
+          <div *ngIf="weight.errors.required">Podaj swoją wagę.</div>
+          <div *ngIf="weight.errors?.minValue">Waga nie może być mniejsza od 10.</div>
+          <div *ngIf="weight.errors?.maxValue">Waga nie może być większa od 250.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="somatotype">Typ ciała</label>
+        <dropdown-list #dropdownListComponent id="somatotype" (item)="onSomatotypeSelected($event); onAutoCounting()"
+                       (error)="handleError($event)" [items$]="getSomatotypes()"></dropdown-list>
+      </div>
+
+      <div class="row">
+        <label for="calories">Maksymalna liczba kalorii</label>
+        <div class="input-group">
+          <input #calories="ngModel" [(ngModel)]="appUser$.maxNutrients.maxCalories"
+                 class="form-control"
+                 [disabled]="autoCountingCheckbox.checked"
+                 minValue="500" maxValue="10000"
+                 name="calories" id="calories"
+                 type="number" required placeholder="Kalorie" minlength="3">
+          <span class="input-group-addon">kcal</span>
+        </div>
+        <div class="alert alert-danger" *ngIf="calories.touched && calories.invalid">
+          <div *ngIf="calories.errors.required">Podaj liczbę kalorii.</div>
+          <div *ngIf="calories.errors?.minValue">Liczba kalorii nie może być mniejsza od 500.</div>
+          <div *ngIf="calories.errors?.maxValue">Waga nie może być większa od 10000.</div>
+        </div>
+        <mat-checkbox #autoCountingCheckbox [(ngModel)]="appUser$.maxNutrients.isAutoCounting"
+                      [ngModelOptions]="{standalone: true}" (change)="onAutoCounting()">
+          Automatyczne liczenie
+        </mat-checkbox>
+      </div>
+
+      <div class="row">
+        <label for="trainings">Minuty ćwiczeń siłowych w ciągu tygodnia</label>
+        <input #trainings="ngModel" ngModel [(ngModel)]="appUser$.trainings.strenghtTime" class="form-control"
+               (focusout)="onTrainingsFocusOut()" (ngModelChange)="onAutoCounting()"
+               min="0" minValue="0" maxValue="500"
+               name="trainings" id="trainings"
+               type="number" placeholder="Ile ćwiczysz w ciągu tygodnia" minlength="0">
+        <div class="alert alert-danger" *ngIf="trainings.invalid && (trainings.dirty || trainings.touched)">
+          <div *ngIf="trainings.errors.required">Podaj minuty treningów siłowych.</div>
+          <div *ngIf="trainings.errors?.minValue">Liczba nie może być mniejsza od 0.</div>
+          <div *ngIf="trainings.errors.maxValue">Nie może być więcej niż 500.</div>
+        </div>
+        <mat-checkbox #trainingCheckbox [(ngModel)]="appUser$.trainings.strenghtIntensity"
+                      [ngModelOptions]="{standalone: true}" (ngModelChange)="onAutoCounting()">
+          Wysoka intensywność
+        </mat-checkbox>
+      </div>
+
+      <div class="row">
+        <label for="areobic">Minuty ćwiczeń areobowych w ciągu tygodnia</label>
+        <input #areobics="ngModel" ngModel [(ngModel)]="appUser$.trainings.areobicTime" class="form-control"
+               (focusout)="onAreobicsFocusOut()" (ngModelChange)="onAutoCounting()"
+               min="0" minValue="0" maxValue="500"
+               name="areobic" id="areobic"
+               type="number" placeholder="Ile wykonujesz areobów w ciągu tygodnia" minlength="0">
+        <div class="alert alert-danger" *ngIf="areobics.invalid && (areobics.dirty || areobics.touched)">
+          <div *ngIf="areobics.errors.required">Podaj minuty ćwiczeń areobowych.</div>
+          <div *ngIf="areobics.errors?.minValue">Liczba nie może być mniejsza od 0.</div>
+          <div *ngIf="areobics.errors.maxValue">Nie może być więcej niż 500.</div>
+        </div>
+        <mat-checkbox #areobicCheckbox [(ngModel)]="appUser$.trainings.areobicIntensity"
+                      [ngModelOptions]="{standalone: true}" (ngModelChange)="onAutoCounting()">
+          Wysoka intensywność
+        </mat-checkbox>
+      </div>
+
+      <div class="row mt-10">
+        <button [disabled]="(form.invalid) || selectError"
+                (click)="onAccept()"
+                class="btn btn-primary">Zapisz
+        </button>
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <h4 class="card-title">TITLE MAN</h4>
+        <div class="card-body">
+          <p>strenghtTea: {{strenghtTea}}</p>
+          <p>areobicTea: {{areobicTea}}</p>
+          <p>epoc: {{epoc}}</p>
+          <p>strTea + areTea + epoc: {{totalTea}}</p>
+          <p>total: {{total}}</p>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+</responsive-switcher>
+

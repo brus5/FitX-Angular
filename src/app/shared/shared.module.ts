@@ -5,8 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FormsModule} from '@angular/forms';
-import {MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatToolbarModule, MatProgressSpinnerModule} from '@angular/material';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatToolbarModule, MatProgressSpinnerModule, MatTooltipModule, MatCheckboxModule, MatRadioModule} from '@angular/material';
 import {SelectModule} from 'ng2-select';
 import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
@@ -16,6 +15,7 @@ import {ResponsiveComponent} from './components/responsive/responsive.component'
 import {DropdownListComponent} from './components/dropdown-list/dropdown-list.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {ProgressSpinnerComponent} from './components/progress-spinner/progress-spinner.component';
+import {CaloriesCalculatorComponent} from './components/calories-calculator/calories-calculator.component';
 
 import {FilterProductPipe} from './pipes/filterProduct.pipe';
 
@@ -34,6 +34,7 @@ import {MealHoursService} from './services/meals-hours.service';
     DropdownListComponent,
     CalendarComponent,
     ProgressSpinnerComponent,
+    CaloriesCalculatorComponent,
 
     FilterProductPipe,
 
@@ -53,6 +54,8 @@ import {MealHoursService} from './services/meals-hours.service';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    MatCheckboxModule,
+    MatRadioModule,
     SelectModule,
     RouterModule,
 
@@ -68,6 +71,7 @@ import {MealHoursService} from './services/meals-hours.service';
     DropdownListComponent,
     CalendarComponent,
     ProgressSpinnerComponent,
+    CaloriesCalculatorComponent,
 
     FilterProductPipe,
 
@@ -85,6 +89,8 @@ import {MealHoursService} from './services/meals-hours.service';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    MatCheckboxModule,
+    MatRadioModule,
     SelectModule,
   ],
   providers: [

@@ -25,7 +25,8 @@
         <label for="proteins">Białko</label>
         <div class="input-group">
           <span class="input-group-addon">g</span>
-          <input #proteins="ngModel" [(ngModel)]="nutrition.proteins" (ngModelChange)="countCalories()" class="form-control"
+          <input #proteins="ngModel" [(ngModel)]="nutrition.proteins" (ngModelChange)="countCalories()"
+                 class="form-control"
                  minValue="0.1" maxValue="1000"
                  name="proteins" id="proteins"
                  type="number" required placeholder="Proteiny" min="0" max="100">
@@ -74,7 +75,11 @@
 
       <div class="row">
         <label for="photo">Zdjęcie*</label>
-        <input #inputElement id="photo" type="file" (change)="selectFileAndUpload($event)" required>
+        <input
+            #inputElement
+            (change)="selectFileAndUpload($event)"
+            id="photo" type="file" required
+            accept="image/x-png,image/gif,image/jpeg,image/jpg">
       </div>
       <div class="alert alert-danger" *ngIf="inputElement.oninvalid">
         <div>Wprowadź zdjęcie produktu.</div>
@@ -94,9 +99,13 @@
       <div *ngIf="product.name" class="card">
         <img *ngIf="tempImageUrl$" [src]="tempImageUrl$" class="rounded-top" style="width: 100%;"
              alt="{{product.name}}">
-        <div class="margin-top">
-          <mat-progress-bar [hidden]="photoUploaded" value="{{uploadProgress$}}" mode="determinate"></mat-progress-bar>
-          <h4 class="card-title">{{product.name}}</h4>
+        <mat-progress-bar
+          [hidden]="photoUploaded"
+          value="{{uploadProgress$}}"
+          mode="determinate">
+        </mat-progress-bar>
+        <h4 class="card-title">{{product.name}}</h4>
+        <div class="card-body">
           <p *ngIf="getCalories()" class="card-text">{{getCalories()}} kcal</p>
         </div>
       </div>

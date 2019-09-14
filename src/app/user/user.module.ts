@@ -1,19 +1,18 @@
 import {NgModule} from '@angular/core';
 
-import {ProfileComponent} from './components/profile/profile.component';
-
 import {SharedModule} from '../shared/shared.module';
+import { DietOptionsComponent } from './components/diet-options/diet-options.component';
 
 @NgModule({
   declarations: [
-    ProfileComponent
+  DietOptionsComponent
   ],
   imports: [
     SharedModule
   ],
   exports: [
-    ProfileComponent
+    DietOptionsComponent
   ],
 })
 
-export class ProfileModule {}
+export class UserModule {}
