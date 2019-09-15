@@ -4,22 +4,34 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-4">
-          <p class="number proteins">B: {{proteins | number: '1.0-0'}}</p>
-          <mat-progress-bar value="80"></mat-progress-bar>
+          <p class="number proteins">
+            B: {{proteins | number: '1.0-0'}} /
+            {{appUser$.maxNutrients.proteins | number: '1.0-0'}}
+          </p>
+          <mat-progress-bar value="{{proteinsPercentage}}"></mat-progress-bar>
         </div>
         <div class="col-xs-4">
-          <p class="number carbs">W: {{carbs | number: '1.0-0'}}</p>
-          <mat-progress-bar value="60"></mat-progress-bar>
+          <p class="number carbs">
+            W: {{carbs | number: '1.0-0'}} /
+            {{appUser$.maxNutrients.carbs | number: '1.0-0'}}
+          </p>
+          <mat-progress-bar value="{{carbsPercentage}}"></mat-progress-bar>
         </div>
         <div class="col-xs-4">
-          <p class="number fats">T: {{fats | number: '1.0-0'}}</p>
-          <mat-progress-bar value="40"></mat-progress-bar>
+          <p class="number fats">
+            T: {{fats | number: '1.0-0'}} /
+            {{appUser$.maxNutrients.fats | number: '1.0-0'}}
+          </p>
+          <mat-progress-bar value="{{fatsPercentage}}"></mat-progress-bar>
         </div>
       </div>
     </div>
     <div class="container">
-      <p class="number calories">KCAL: {{calories | number: '1.0-0'}}</p>
-      <mat-progress-bar value="20"></mat-progress-bar>
+      <p class="number calories">
+        KCAL: {{calories | number: '1.0-0'}} /
+        {{appUser$.maxNutrients.maxCalories | number: '1.0-0'}}
+      </p>
+      <mat-progress-bar value="{{caloriesPercentage}}"></mat-progress-bar>
     </div>
   </div>
 </mat-toolbar>

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {AppUser} from '../../../shared/models/app-user';
 import {AuthService} from '../../../shared/services/auth.service';
 import {Subscription} from 'rxjs';
@@ -10,9 +10,15 @@ import {ToastrService} from 'ngx-toastr';
   templateUrl: './diet-options.component.html',
   styleUrls: ['./diet-options.component.scss']
 })
-export class DietOptionsComponent implements OnInit, OnDestroy {
+export class DietOptionsComponent implements OnInit, OnDestroy, OnChanges {
 
-  appUser$ = {nutrientsPercentage: {}} as AppUser;
+  appUser$ = {
+    nutrientsPercentage: {},
+    maxNutrients: {},
+    somatotype: {},
+    trainings: {},
+  } as AppUser;
+
   userId: string;
 
   private userAuthSubscription: Subscription = new Subscription();
@@ -34,6 +40,10 @@ export class DietOptionsComponent implements OnInit, OnDestroy {
     this.userAuthSubscription.unsubscribe();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
+
   onAccept() {
     this._userService.update(this.appUser$)
       .then(() => this._toastrService.success('Zaktualizowano'));
@@ -50,15 +60,15 @@ export class DietOptionsComponent implements OnInit, OnDestroy {
   }
 
   get proteinsIntake(): number {
-    return this.calculateIntake(this.appUser$.nutrientsPercentage.proteins, false);
+    return Number(this.calculateIntake(this.appUser$.nutrientsPercentage.proteins, false).toFixed(0));
   }
 
   get carbsIntake(): number {
-    return this.calculateIntake(this.appUser$.nutrientsPercentage.carbs, false);
+    return Number(this.calculateIntake(this.appUser$.nutrientsPercentage.carbs, false).toFixed(0));
   }
 
   get fatsIntake(): number {
-    return this.calculateIntake(this.appUser$.nutrientsPercentage.fats, true);
+    return Number(this.calculateIntake(this.appUser$.nutrientsPercentage.fats, true).toFixed(0));
   }
 
   private calculateIntake(nutrient: number, isFat: boolean): number {
@@ -66,5 +76,4 @@ export class DietOptionsComponent implements OnInit, OnDestroy {
       return (((nutrient / 100) * this.appUser$.maxNutrients.maxCalories) / 9);
     else return (((nutrient / 100) * this.appUser$.maxNutrients.maxCalories) / 4);
   }
-
 }
