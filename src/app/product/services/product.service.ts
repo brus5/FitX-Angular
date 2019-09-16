@@ -33,8 +33,8 @@ export class ProductService {
     return this._db.list('/products').push(product);
   }
 
-  public remove(product: string) {
-    return this._db.list<Product>('/products/' + product).remove();
+  public remove(productId: string) {
+    return this._db.list<Product>('/products/' + productId).remove();
   }
 
   public getProductByName(productPhrase: string): Observable<Product[]> {

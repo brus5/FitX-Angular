@@ -91,10 +91,17 @@
                 class="btn btn-primary">
           Zapisz
         </button>
-        <button (click)="resetForm()"
+        <button *ngIf="!productId; else deleteButton" (click)="resetForm()"
                 class="btn btn-secondary pull-right">
           Resetuj
         </button>
+
+        <ng-template #deleteButton>
+          <button (click)="deleteProduct()"
+                  class="btn btn-danger pull-right">
+            Usuń
+          </button>
+        </ng-template>
       </div>
 
     </div>

@@ -88,6 +88,11 @@ export class ProductFormComponent implements OnInit {
     this.nutrition.kcal = (this.nutrition.proteins * 4) + (this.nutrition.fats * 9) + (this.nutrition.carbs * 4);
   }
 
+  deleteProduct() {
+    if (!confirm('Chcesz usunąć produkt?')) return;
+    this._productService.remove(this.productId);
+  }
+
   private onFileSelected(event) {
     this.selectedFile = event.target.files[0];
     this._uploadImageService.selectFile(event.target.files[0]);
