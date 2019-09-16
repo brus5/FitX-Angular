@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     somatotype: {},
     trainings: {},
   } as AppUser;
-  products: Product[];
+  products: Product[] = [];
 
   private productsSubscription: Subscription;
   private userAuthSubscription: Subscription = new Subscription();

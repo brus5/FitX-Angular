@@ -1,15 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ProductService} from '../../services/product.service';
+import {Subscription} from 'rxjs';
+import {Product} from '../../../shared/models/product';
 
 @Component({
   selector: 'app-products-waiting-room',
   templateUrl: './products-waiting-room.component.html',
   styleUrls: ['./products-waiting-room.component.scss']
 })
-export class ProductsWaitingRoomComponent implements OnInit {
+export class ProductsWaitingRoomComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  products: Product[] = [];
+
+  private productsSubscription: Subscription;
+
+  constructor(private _productService: ProductService) { }
 
   ngOnInit() {
+    this.productsSubscription = this._productService.getAllWaitingRoom()
+      .subscribe(products => this.products = products);
   }
 
-}
+  ngOnDestroy() {
+    this.productsSubscription.unsubscribe();
+  }
+
+  }

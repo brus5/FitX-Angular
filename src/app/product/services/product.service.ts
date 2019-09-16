@@ -21,6 +21,16 @@ export class ProductService {
       );
   }
 
+  public getAllWaitingRoom(): Observable<Product[]> {
+    return this._db.list('/products-waiting-room')
+      .snapshotChanges().pipe(
+        map(actions =>
+          actions.map(action => (
+            {key: action.payload.key, ...action.payload.val() as Product}))
+        )
+      );
+  }
+
   public getProduct(productId: string): Observable<Product> {
     return this._db.object<Product>('/products/' + productId).valueChanges();
   }
