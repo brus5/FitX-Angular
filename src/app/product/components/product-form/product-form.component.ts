@@ -53,7 +53,10 @@ export class ProductFormComponent implements OnInit {
 
     if (this.productId)
       this._productService.getProduct(this.productId)
-      .subscribe(product => this.fetchProduct(product));
+      .subscribe(product => {
+        if (product) this.fetchProduct(product)
+        else this.noProduct();
+      });
   }
 
   public resetForm() {
@@ -67,7 +70,7 @@ export class ProductFormComponent implements OnInit {
     this.product.nutrition = this.nutrition;
     if (this.productId) {
       this._productService.update(this.productId, this.product);
-      this._router.navigate(['/products']);
+      this.navigateProducts();
     } else this._productService.create(this.product);
   }
 
@@ -90,7 +93,8 @@ export class ProductFormComponent implements OnInit {
 
   deleteProduct() {
     if (!confirm('Chcesz usunąć produkt?')) return;
-    this._productService.remove(this.productId);
+    this._productService.remove(this.productId)
+      .then(() => this.navigateProducts());
   }
 
   private onFileSelected(event) {
@@ -122,5 +126,13 @@ export class ProductFormComponent implements OnInit {
     this.tempImageUrl$ = product.imageUrl;
     this.dropdownListComponent.select(product.category);
     this.photoUploaded = true;
+  }
+
+  private navigateProducts() {
+    this._router.navigate(['/products']);
+  }
+
+  private noProduct() {
+    this.product = null;
   }
 }
