@@ -2,7 +2,7 @@ export const NAV_LINKS = [
   {name: 'Strona główna', destination: ''},
   {name: 'Kalkulator', destination: '/kalkulator-kalorii'},
   {name: 'Dieta', destination: '/diet'},
-  {name: 'Produkty', destination: '/products'},
+  {name: 'Produkty', destination: '/produkty'},
 ];
 export const TITLE = 'FiTX';
 
@@ -15,6 +15,5 @@ export const PROFILE_LINKS = [
 ];
 
 export const ADMIN_LINKS = [
-  {name: 'Zarządzanie produktami', destination: '/products'},
-  {name: 'Zarządzanie produktami', destination: '/products'},
+  {name: 'Poczekalnia produktów', destination: '/poczekalnia-produktow'}
 ];

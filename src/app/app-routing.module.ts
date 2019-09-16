@@ -10,16 +10,18 @@ import {LogoffComponent} from './core/components/logoff/logoff.component';
 import {AuthGuardService} from './shared/services/auth-guard.service';
 import {ProductsComponent} from './product/components/products/products.component';
 import {DietOptionsComponent} from './user/components/diet-options/diet-options.component';
+import {ProductsWaitingRoomComponent} from './product/components/products-waiting-room/products-waiting-room.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'products', component: ProductsComponent},
+  {path: 'produkty', component: ProductsComponent},
   {path: 'logoff', component: LogoffComponent},
   {path: 'diet', component: DietComponent, canActivate: [AuthGuardService]},
   {path: 'diet-hours', component: DietHoursComponent, canActivate: [AuthGuardService]},
   {path: 'kalkulator-kalorii', component: CaloriesCalculatorComponent},
   {path: 'opcje-diety', component: DietOptionsComponent, canActivate: [AuthGuardService]},
+  {path: 'poczekalnia-produktow', component: ProductsWaitingRoomComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({
