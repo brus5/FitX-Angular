@@ -1,14 +1,16 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../../shared/models/product';
 import {ProductNutrition} from '../../../shared/models/product-nutrition';
 import {CategoryService} from '../../../shared/services/category.service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {ImageUploadService} from '../../../shared/services/image-upload.service';
 import {HttpEventType} from '@angular/common/http';
 import {NgForm} from '@angular/forms';
 import {DropdownListComponent} from '../../../shared/components/dropdown-list/dropdown-list.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AppUser} from '../../../shared/models/app-user';
+import {AuthService} from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'product-form',
@@ -16,7 +18,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./product-form.component.scss']
 })
 
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy {
 
   @ViewChild('form', {static: false}) private formElement: NgForm;
   @ViewChild('inputElement', {static: false}) private inputElement: ElementRef;
@@ -25,6 +27,7 @@ export class ProductFormComponent implements OnInit {
 
   @Input() productId: string;
 
+  appUser$ = {} as AppUser;
   product = {} as Product;
   nutrition = {} as ProductNutrition;
   categories: Array<string> = [];
@@ -35,28 +38,43 @@ export class ProductFormComponent implements OnInit {
   photoUploaded = false;
   selectedFile: File;
 
+  private categoriesSubscription: Subscription = new Subscription();
+  private appUserSubscription: Subscription = new Subscription();
+  private productSubscription: Subscription = new Subscription();
+
   constructor(private _productService: ProductService,
               private _categoriesService: CategoryService,
               private _uploadImageService: ImageUploadService,
               private _activatedRoute: ActivatedRoute,
-              private _router: Router) {}
+              private _router: Router,
+              private _auth: AuthService) {}
 
   ngOnInit() {
-    this._categoriesService.getAll().subscribe(categories => {
-      this.categories$ = categories;
-      this.categories$.map((category) => {
-        this.categories.push(category.name);
+    this.categoriesSubscription = this._categoriesService
+      .getAll().subscribe(categories => {
+        this.categories$ = categories;
+        this.categories$.map((category) => {
+          this.categories.push(category.name);
       });
     });
 
     this.productId = this._activatedRoute.snapshot.paramMap.get('id');
 
     if (this.productId)
-      this._productService.getProduct(this.productId)
+      this.productSubscription = this._productService.getProduct(this.productId)
       .subscribe(product => {
         if (product) this.fetchProduct(product)
         else this.noProduct();
       });
+
+    this.appUserSubscription = this._auth.appUser$$
+      .subscribe(appUser => this.appUser$ = appUser);
+  }
+
+  ngOnDestroy() {
+    this.categoriesSubscription.unsubscribe();
+    this.appUserSubscription.unsubscribe();
+    this.productSubscription.unsubscribe();
   }
 
   public resetForm() {
@@ -66,7 +84,7 @@ export class ProductFormComponent implements OnInit {
     this.dropdownListComponent.onClear();
   }
 
-  save() {
+  onAccept() {
     this.product.nutrition = this.nutrition;
     if (this.productId) {
       this._productService.update(this.productId, this.product);
