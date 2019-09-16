@@ -1,0 +1,9 @@
+<responsive-switcher>
+  <div class="row" *ngIf="products">
+    <ng-container *ngFor="let p of products; let i = index">
+      <div class="col-md-6">
+        <product-card-waiting [product]="p"></product-card-waiting>
+      </div>
+    </ng-container>
+  </div>
+</responsive-switcher>

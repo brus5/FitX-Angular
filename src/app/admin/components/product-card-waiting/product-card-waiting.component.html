@@ -1,0 +1,7 @@
+<div *ngIf="product.name" class="card">
+  <img *ngIf="product.imageUrl" [src]="product.imageUrl" class="rounded-top" alt="{{product.name}}" style="width: 100%;">
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <p class="card-text">Kcal: {{product.nutrition.kcal}}</p>
+  </div>
+</div>

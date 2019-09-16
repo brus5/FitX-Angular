@@ -10,7 +10,7 @@ import {LogoffComponent} from './core/components/logoff/logoff.component';
 import {AuthGuardService} from './shared/services/auth-guard.service';
 import {ProductsComponent} from './product/components/products/products.component';
 import {DietOptionsComponent} from './user/components/diet-options/diet-options.component';
-import {ProductsWaitingRoomComponent} from './product/components/products-waiting-room/products-waiting-room.component';
+import {ProductsWaitingRoomComponent} from './admin/components/products-waiting-room/products-waiting-room.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
