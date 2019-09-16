@@ -105,7 +105,6 @@
       </div>
 
       <div class="col-md-6">
-
         <div *ngIf="product.name" class="card">
           <img *ngIf="tempImageUrl$" [src]="tempImageUrl$" class="rounded-top" style="width: 100%;"
                alt="{{product.name}}">
@@ -119,7 +118,6 @@
             <p *ngIf="getCalories()" class="card-text">{{getCalories()}} kcal</p>
           </div>
         </div>
-
       </div>
     </div>
   </form>
@@ -129,6 +127,5 @@
       <h3 class="text-center">Nie znaleziono produktu ;(</h3>
     </div>
   </ng-template>
-
 
 </responsive-switcher>
