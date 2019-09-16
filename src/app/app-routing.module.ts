@@ -14,11 +14,11 @@ import {DietOptionsComponent} from './user/components/diet-options/diet-options.
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'diet', component: DietComponent},
-  {path: 'diet-hours', component: DietHoursComponent},
   {path: 'products', component: ProductsComponent},
-  {path: 'kalkulator-kalorii', component: CaloriesCalculatorComponent},
   {path: 'logoff', component: LogoffComponent},
+  {path: 'diet', component: DietComponent, canActivate: [AuthGuardService]},
+  {path: 'diet-hours', component: DietHoursComponent, canActivate: [AuthGuardService]},
+  {path: 'kalkulator-kalorii', component: CaloriesCalculatorComponent},
   {path: 'opcje-diety', component: DietOptionsComponent, canActivate: [AuthGuardService]},
 ];
 
