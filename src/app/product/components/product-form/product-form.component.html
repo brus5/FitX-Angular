@@ -24,16 +24,16 @@
           <label for="proteins">Białko</label>
           <div class="input-group">
             <span class="input-group-addon">g</span>
-            <input #proteins="ngModel" [(ngModel)]="nutrition.proteins" (ngModelChange)="countCalories()"
+            <input #proteins="ngModel" [(ngModel)]="product.nutrition.proteins"
                    class="form-control"
-                   minValue="0.1" maxValue="1000"
+                   min="0" minValue="0" maxValue="1000"
                    name="proteins" id="proteins"
-                   type="number" required placeholder="Proteiny" min="0" max="100">
+                   type="number" required placeholder="Proteiny" minlength="0">
             <span class="input-group-addon">.00</span>
           </div>
           <div class="alert alert-danger" *ngIf="proteins.touched && proteins.invalid">
             <div *ngIf="proteins.errors.required">Podaj ilość białka.</div>
-            <div *ngIf="proteins.errors?.minValue">Ilość nie może być mniejsza od 0.1.</div>
+            <div *ngIf="proteins.errors?.minValue">Ilość nie może być mniejsza od 0.</div>
             <div *ngIf="proteins.errors?.maxValue">Ilość nie może być większa od 1000.</div>
           </div>
         </div>
@@ -42,15 +42,15 @@
           <label for="carbs">Węglowodany</label>
           <div class="input-group">
             <span class="input-group-addon">g</span>
-            <input #carbs="ngModel" [(ngModel)]="nutrition.carbs" (ngModelChange)="countCalories()" class="form-control"
-                   minValue="0.1" maxValue="1000"
+            <input #carbs="ngModel" [(ngModel)]="product.nutrition.carbs" class="form-control"
+                   min="0" minValue="0" maxValue="1000"
                    name="carbs" id="carbs"
-                   type="number" required placeholder="Węglowodany">
+                   type="number" required placeholder="Węglowodany" minlength="0">
             <span class="input-group-addon">.00</span>
           </div>
           <div class="alert alert-danger" *ngIf="carbs.touched && carbs.invalid">
             <div *ngIf="carbs.errors.required">Podaj ilość węglowodanów.</div>
-            <div *ngIf="carbs.errors?.minValue">Ilość nie może być mniejsza od 0.1.</div>
+            <div *ngIf="carbs.errors?.minValue">Ilość nie może być mniejsza od 0.</div>
             <div *ngIf="carbs.errors?.maxValue">Ilość nie może być większa od 1000.</div>
           </div>
         </div>
@@ -59,15 +59,15 @@
           <label for="fats">Tłuszcze</label>
           <div class="input-group">
             <span class="input-group-addon">g</span>
-            <input #fats="ngModel" [(ngModel)]="nutrition.fats" (ngModelChange)="countCalories()" class="form-control"
-                   minValue="0.1" maxValue="1000"
+            <input #fats="ngModel" [(ngModel)]="product.nutrition.fats" class="form-control"
+                   min="0" minValue="0" maxValue="1000"
                    name="fats" id="fats"
-                   type="number" required placeholder="Tłuszcze" maxlength="3">
+                   type="number" required placeholder="Tłuszcze" minlength="0">
             <span class="input-group-addon">.00</span>
           </div>
           <div class="alert alert-danger" *ngIf="fats.touched && fats.invalid">
             <div *ngIf="fats.errors.required">Podaj ilość tłuszczy.</div>
-            <div *ngIf="fats.errors?.minValue">Ilość nie może być mniejsza od 0.1.</div>
+            <div *ngIf="fats.errors?.minValue">Ilość nie może być mniejsza od 0.</div>
             <div *ngIf="fats.errors?.maxValue">Ilość nie może być większa od 1000.</div>
           </div>
         </div>
@@ -113,9 +113,9 @@
             value="{{uploadProgress$}}"
             mode="determinate">
           </mat-progress-bar>
-          <h4 class="card-title">{{product.name}}</h4>
+          <h4 class="card-title">{{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}</h4>
           <div class="card-body">
-            <p *ngIf="getCalories()" class="card-text">{{getCalories()}} kcal</p>
+            <p class="card-text">{{countCalories()}} kcal</p>
           </div>
         </div>
       </div>

@@ -58,9 +58,9 @@
           <input #calories="ngModel" [(ngModel)]="appUser$.maxNutrients.maxCalories"
                  class="form-control"
                  [disabled]="autoCountingCheckbox.checked"
-                 minValue="500" maxValue="10000"
+                 min="0" minValue="500" maxValue="10000"
                  name="calories" id="calories"
-                 type="number" required placeholder="Kalorie" minlength="3">
+                 type="number" required placeholder="Kalorie" minlength="0">
           <span class="input-group-addon">kcal</span>
         </div>
         <div class="alert alert-danger" *ngIf="calories.touched && calories.invalid">

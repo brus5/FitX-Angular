@@ -1,7 +1,6 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../../shared/models/product';
-import {ProductNutrition} from '../../../shared/models/product-nutrition';
 import {CategoryService} from '../../../shared/services/category.service';
 import {Observable, Subscription} from 'rxjs';
 import {ImageUploadService} from '../../../shared/services/image-upload.service';
@@ -28,8 +27,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   @Input() productId: string;
 
   appUser$ = {} as AppUser;
-  product = {} as Product;
-  nutrition = {} as ProductNutrition;
+  product = { nutrition:{} } as Product;
   categories: Array<string> = [];
   categories$;
 
@@ -63,7 +61,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     if (this.productId)
       this.productSubscription = this._productService.getProduct(this.productId)
       .subscribe(product => {
-        if (product) this.fetchProduct(product)
+        if (product) this.fetchProduct(product);
         else this.noProduct();
       });
 
@@ -85,11 +83,11 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   onAccept() {
-    this.product.nutrition = this.nutrition;
+    this.productToLowerCase();
     if (this.productId) {
       this._productService.update(this.productId, this.product);
-      this.navigateProducts();
-    } else this._productService.create(this.product);
+      this.navigateToProductsPage();
+    } else this._productService.create(this.product, this.appUser$.isAdmin);
   }
 
   onCategoryChoosed($event: string) {
@@ -105,14 +103,17 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.onUpload();
   }
 
-  countCalories() {
-    this.nutrition.kcal = (this.nutrition.proteins * 4) + (this.nutrition.fats * 9) + (this.nutrition.carbs * 4);
+  countCalories(): number {
+    return this.product.nutrition.kcal =
+        ((this.product.nutrition.proteins * 4) | 0)
+      + ((this.product.nutrition.fats * 9) | 0)
+      + ((this.product.nutrition.carbs * 4) | 0);
   }
 
   deleteProduct() {
     if (!confirm('Chcesz usunąć produkt?')) return;
     this._productService.remove(this.productId)
-      .then(() => this.navigateProducts());
+      .then(() => this.navigateToProductsPage());
   }
 
   private onFileSelected(event) {
@@ -134,23 +135,22 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       });
   }
 
-  private getCalories(): number {
-    return this.nutrition.kcal;
-  }
-
   private fetchProduct(product: Product) {
     this.product = product;
-    this.nutrition = product.nutrition;
     this.tempImageUrl$ = product.imageUrl;
     this.dropdownListComponent.select(product.category);
     this.photoUploaded = true;
   }
 
-  private navigateProducts() {
+  private navigateToProductsPage() {
     this._router.navigate(['/products']);
   }
 
   private noProduct() {
     this.product = null;
+  }
+
+  private productToLowerCase() {
+    this.product.name = this.product.name.charAt(0).toLowerCase() + this.product.name.substring(1)
   }
 }

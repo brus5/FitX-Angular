@@ -1,7 +1,9 @@
 <div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
 
   <a
+    type="button"
     class="btn btn-primary"
+    *ngIf="appUser$"
     routerLink="/products/new">
     Nowy Produkt
   </a>

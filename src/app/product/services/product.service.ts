@@ -29,8 +29,9 @@ export class ProductService {
     return this._db.object<Product>('/products/' + productId).update(product);
   }
 
-  public create(product: Product) {
-    return this._db.list('/products').push(product);
+  public create(product: Product, isAdmin: boolean) {
+    if (isAdmin) return this._db.list('/products').push(product);
+    else return this._db.list('/products-waiting-room').push(product);
   }
 
   public remove(productId: string) {
