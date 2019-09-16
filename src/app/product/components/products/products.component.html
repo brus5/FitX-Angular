@@ -28,7 +28,7 @@
       <th style="width: 100px;">
         <div [style.backgroundImage]="'url(' + product.imageUrl + ')'" class="thumbnail"></div>
       </th>
-      <th class="text-left">{{product.name}}</th>
+      <th class="text-left">{{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}</th>
       <th class="text-center">{{product}}</th>
       <th class="text-right">{{product.nutrition.kcal}}</th>
       <th class="text-right">
