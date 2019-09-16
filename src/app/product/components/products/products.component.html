@@ -31,8 +31,13 @@
       <th class="text-left">{{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}</th>
       <th class="text-center">{{product}}</th>
       <th class="text-right">{{product.nutrition.kcal}}</th>
-      <th class="text-right">
-        <button [routerLink]="['/products/edit', product.key]" >Edit</button>
+      <th *ngIf="appUser$" class="text-right">
+        <button
+          type="button" class="btn btn-default btn-sm"
+          *ngIf="appUser$.isAdmin"
+          [routerLink]="['/products/edit', product.key]">
+          Edit
+        </button>
       </th>
     </tr>
     </tbody>
