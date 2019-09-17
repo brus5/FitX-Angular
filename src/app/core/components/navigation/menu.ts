@@ -9,8 +9,6 @@ export const TITLE = 'FiTX';
 export const PROFILE_LINKS = [
   {name: 'Opcje diety', destination: '/opcje-diety'},
   {name: 'Godziny posiłków', destination: '/diet-hours'},
-  {name: 'Link3', destination: '#'},
-  {name: 'Link3', destination: '#'},
   {name: 'Wyloguj', destination: '/logoff'},
 ];
 
