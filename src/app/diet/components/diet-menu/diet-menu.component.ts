@@ -33,7 +33,6 @@ export class DietMenuComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(user => {
 
         this.appUser$ = user;
-        console.log(this.appUser$);
       });
   }
 

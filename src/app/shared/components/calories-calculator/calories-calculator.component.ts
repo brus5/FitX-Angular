@@ -24,6 +24,7 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
   @ViewChild('areobicCheckbox', {static: false}) private areobicCheckbox: MatCheckbox;
 
   appUser$ = {
+    uid: '',
     nutrientsPercentage: {},
     maxNutrients: {},
     somatotype: {},
@@ -45,7 +46,7 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
               private _toastrService: ToastrService) {}
 
   ngOnInit() {
-    this._auth.appUser$$.subscribe(user => console.log(user));
+    // this._auth.appUser$$.subscribe(user => this.appUser$.uid = );
 
     this.userAuthSubscription = this._auth.appUser$
       .subscribe(user => {

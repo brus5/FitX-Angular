@@ -22,7 +22,6 @@ export class ProfileNavComponent implements OnInit {
   ngOnInit() {
     this._auth.appUser$$.subscribe(appUser => {
       this.appUser$ = appUser;
-      console.log(appUser);
     });
     this.isHandset$ = this._navService.isHandset$;
   }
