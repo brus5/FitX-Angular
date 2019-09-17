@@ -1,5 +1,4 @@
 <responsive-switcher>
-
   <form #form="ngForm">
 
     <div class="col-md-6">
@@ -110,29 +109,52 @@
         </mat-checkbox>
       </div>
 
-      <div class="row mt-10">
-        <button [disabled]="(form.invalid) || selectError"
-                (click)="onAccept()"
-                class="btn btn-primary">Zapisz
+      <div *ngIf="userId" class="row mt-10">
+        <button
+          class="btn btn-primary"
+          [disabled]="(form.invalid) || selectError"
+          (click)="onAccept()">
+          Zapisz
         </button>
       </div>
-
     </div>
 
     <div class="col-md-6">
       <div class="card">
-        <h4 class="card-title">TITLE MAN</h4>
+        <h4 class="card-title">Podsumowanie</h4>
         <div class="card-body">
-          <p>strenghtTea: {{strenghtTea}}</p>
-          <p>areobicTea: {{areobicTea}}</p>
-          <p>epoc: {{epoc}}</p>
-          <p>strTea + areTea + epoc: {{totalTea}}</p>
-          <p>total: {{total}}</p>
+          <p>TDEE<sup>1</sup> = BMR<sup>2</sup> + EAT<sup>3</sup> + TEF<sup>4</sup> + NEAT<sup>5</sup></p>
+          <p>{{appUser$.maxNutrients.maxCalories}} = {{bmr}} + {{totalEat}} + {{tef}} + {{somatotype}}</p>
+          <br/>
+          <p>Wartość by utrzymać wagę: {{appUser$.maxNutrients.maxCalories}}</p>
+          <div class="card-detials">
+            <br/>
+            <p><sup>1</sup><i>Total Daily Energy Expenditure</i> - Całkowite dzienne zapotrzebowanie na energię. Tyle
+              musimy dostarczyć energii aby utrzymać wagę.</p>
+            <p><sup>2</sup><i>Basal Metabolic Rate</i> - Podstawowa przemiana materii. Tyle nasze potrzebuje energii aby
+              podtrzymać podstawowe funkcje życiowe.</p>
+            <p><sup>3</sup><i>Excercise Activity Thermogenesis</i> - Spalanie przy aktywności fizycznej.</p>
+            <p><sup>4</sup><i>Thermic Effect of Food</i> - Efekt termiczny pożywienia.</p>
+            <p><sup>5</sup><i>Non-Exercise Activity Thermogenesis</i> - Termogeneza aktywności niezwiązanej z
+              ćwiczeniami.</p>
+          </div>
+
         </div>
       </div>
     </div>
 
   </form>
+
+  <div class="col-md-12">
+    <div class="row">
+      <p class="component-info-content">Kalkulator kalorii oblicza zapotrzebowanie na kalorie Twojego organizmu. Po
+        wypełnieniu wszystkich pól program
+        obliczy za Ciebie TDEE, czyli całkowite dzienne zapotrzebowanie na energię. Wystarczy, że raz na tydzień
+        będziesz aktualizować kalkulator a program dostosuje ponownie zapotrzebowanie Twojego organizmu. Dzięki temu
+        będziesz w stanie utrzymywać wagę ciała na stałym poziomie. Jeżeli jesteś zaawansowanym użytkownikiem to masz
+        możliwość manualnego uzupełnienia "Maksymalnej liczby kalorii".</p>
+    </div>
+  </div>
 
 </responsive-switcher>
 

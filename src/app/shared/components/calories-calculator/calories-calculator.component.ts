@@ -24,7 +24,7 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
   @ViewChild('areobicCheckbox', {static: false}) private areobicCheckbox: MatCheckbox;
 
   appUser$ = {
-    uid: '',
+    uid: null,
     nutrientsPercentage: {},
     maxNutrients: {},
     somatotype: {},
@@ -46,11 +46,9 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
               private _toastrService: ToastrService) {}
 
   ngOnInit() {
-    // this._auth.appUser$$.subscribe(user => this.appUser$.uid = );
-
     this.userAuthSubscription = this._auth.appUser$
       .subscribe(user => {
-        if (this.appUser$.uid == null)
+        if (user)
           this.userId = user.uid
       });
 
@@ -100,7 +98,7 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
 
   onAutoCounting() {
     let total = this.total;
-    this.appUser$.maxNutrients.maxCalories = Number(total.toFixed(0));
+    this.appUser$.maxNutrients.maxCalories = this.number(total);
   }
 
   private fetchAppUser(appUser: AppUser) {
@@ -123,34 +121,47 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
   }
 
   get total(): number {
-    return this.bmr + this.totalTea + this.appUser$.somatotype.value;
+    let total = this.bmr + this.totalEat + (this.appUser$.maxNutrients.maxCalories * this.tef) + this.appUser$.somatotype.value;
+    return this.number(total);
   }
 
   get bmr(): number {
     let bmr = (9.99 * this.appUser$.weight) + (6.25 * this.appUser$.height);
     if (this.appUser$.isGender) // for women
-      return bmr - 161;
+      return this.number(bmr - 161);
     else
-      return bmr + 5;
+      return this.number(bmr + 5);
   }
 
   get epoc(): number {
     return 0.07 *  this.appUser$.maxNutrients.maxCalories;
   }
 
-  get strenghtTea(): number {
+  get strenghtEat(): number {
     if (this.appUser$.trainings.strenghtIntensity)
       return this.appUser$.trainings.strenghtTime * 9;
     else return this.appUser$.trainings.strenghtTime * 7;
   }
 
-  get areobicTea(): number {
+  get areobicEat(): number {
     if (this.appUser$.trainings.areobicIntensity)
       return this.appUser$.trainings.areobicTime * 10;
     else return this.appUser$.trainings.areobicTime * 5;
   }
 
-  get totalTea(): number {
-    return ((this.strenghtTea + this.areobicTea + this.epoc) / 7) | 0;
+  get totalEat(): number {
+    return ((this.strenghtEat + this.areobicEat + this.epoc) / 7) | 0;
+  }
+
+  get somatotype(): number {
+    return this.appUser$.somatotype.value;
+  }
+
+  get tef(): number {
+    return 0.1;
+  }
+
+  private number(num: number): number {
+    return Number(num.toFixed(0));
   }
 }
