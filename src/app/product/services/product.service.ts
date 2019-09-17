@@ -48,6 +48,10 @@ export class ProductService {
     return this._db.list<Product>('/products/' + productId).remove();
   }
 
+  public removeFromWaitingRoom(productId: string) {
+    return this._db.list<Product>('/products-waiting-room/' + productId).remove();
+  }
+
   public getProductByName(productPhrase: string): Observable<Product[]> {
     return this._db.list('/products',
       ref => ref.orderByChild('/name')
