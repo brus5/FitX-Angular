@@ -11,6 +11,8 @@ import {UserService} from '../../services/user.service';
 import {ToastrService} from 'ngx-toastr';
 import {MatCheckbox} from '@angular/material';
 import {User} from '../../models/user';
+import {CALORIES_CALCULATOR_DESCRIPTION} from '../descriptions';
+import {CALORIES_CALCULATOR_TITLE} from '../titles';
 
 @Component({
   selector: 'calories-calculator',
@@ -30,16 +32,16 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
     somatotype: {},
     trainings: {},
   } as AppUser;
-  userId: string;
 
+  userId: string;
   somatotypes: Array<Somatotype> = [];
+
   somatotypes$;
   selectError: boolean;
-
   private somatotypeSubscription: Subscription = new Subscription();
+
   private userAuthSubscription: Subscription = new Subscription();
   private appUserSubscription: Subscription = new Subscription();
-
   constructor(private _auth: AuthService,
               private _somatotypeService: SomatotypesService,
               private _userService: UserService,
@@ -159,6 +161,14 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
 
   get tef(): number {
     return 0.1;
+  }
+
+  get componentDescription() {
+    return CALORIES_CALCULATOR_DESCRIPTION;
+  }
+
+  get componentTitle() {
+    return CALORIES_CALCULATOR_TITLE;
   }
 
   private number(num: number): number {

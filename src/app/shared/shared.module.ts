@@ -17,6 +17,7 @@ import {CalendarComponent} from './components/calendar/calendar.component';
 import {ProgressSpinnerComponent} from './components/progress-spinner/progress-spinner.component';
 import {CaloriesCalculatorComponent} from './components/calories-calculator/calories-calculator.component';
 import {TitleComponent} from './components/title/title.component';
+import {DescriptionComponent} from './components/description/description.component';
 
 import {FilterProductPipe} from './pipes/filterProduct.pipe';
 
@@ -37,6 +38,7 @@ import {MealHoursService} from './services/meals-hours.service';
     ProgressSpinnerComponent,
     CaloriesCalculatorComponent,
     TitleComponent,
+    DescriptionComponent,
 
     FilterProductPipe,
 
@@ -75,6 +77,7 @@ import {MealHoursService} from './services/meals-hours.service';
     ProgressSpinnerComponent,
     CaloriesCalculatorComponent,
     TitleComponent,
+    DescriptionComponent,
 
     FilterProductPipe,
 

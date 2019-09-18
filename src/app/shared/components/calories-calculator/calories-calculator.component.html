@@ -1,4 +1,5 @@
 <responsive-switcher>
+  <component-title [title]="componentTitle"></component-title>
   <form #form="ngForm">
 
     <div class="col-md-6">
@@ -147,12 +148,7 @@
 
   <div class="col-md-12">
     <div class="row">
-      <p class="component-info-content">Kalkulator kalorii oblicza zapotrzebowanie na kalorie Twojego organizmu. Po
-        wypełnieniu wszystkich pól program
-        obliczy za Ciebie TDEE, czyli całkowite dzienne zapotrzebowanie na energię. Wystarczy, że raz na tydzień
-        będziesz aktualizować kalkulator a program dostosuje ponownie zapotrzebowanie Twojego organizmu. Dzięki temu
-        będziesz w stanie utrzymywać wagę ciała na stałym poziomie. Jeżeli jesteś zaawansowanym użytkownikiem to masz
-        możliwość manualnego uzupełnienia "Maksymalnej liczby kalorii".</p>
+      <component-description [description]="componentDescription"></component-description>
     </div>
   </div>
 

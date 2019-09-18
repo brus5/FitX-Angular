@@ -7,6 +7,7 @@ import {Product} from '../../../shared/models/product';
 import {Meal} from '../../../shared/models/meal';
 import {MealHoursService} from '../../../shared/services/meals-hours.service';
 import {MealTime} from '../../../shared/models/meal-time';
+import {DIET_TITLE} from '../../../shared/components/titles';
 
 @Component({
   selector: 'diet',
@@ -47,5 +48,9 @@ export class DietComponent implements OnInit {
       .subscribe(meals => {
         this.meals = meals;
       });
+  }
+
+  get componentTitle() {
+    return DIET_TITLE;
   }
 }
