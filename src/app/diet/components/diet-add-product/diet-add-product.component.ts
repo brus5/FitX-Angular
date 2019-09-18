@@ -28,8 +28,8 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   productWeight: number;
   isSearching: boolean;
   wasSearching: boolean;
+  productsLimit: number = 10;
 
-  private searchSubscription: Subscription = new Subscription();
   private productsSubscription: Subscription = new Subscription();
 
   constructor(private _productService: ProductService,
@@ -38,10 +38,8 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
               private _mealsHoursService: MealHoursService) {}
 
   ngOnInit() {
-    this.searchSubscription = this.keyUp.pipe(
-      debounceTime(1000),
-      distinctUntilChanged()
-    ).subscribe(product => this.filterProducts(product));
+    this.productsSubscription = this._productService.getAll()
+      .subscribe(products => this.filteredProducts$ = products);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -52,7 +50,6 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy() {
     this.productsSubscription.unsubscribe();
-    this.searchSubscription.unsubscribe();
   }
 
   setProductWeight(value: number) {
@@ -62,7 +59,7 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   addProductToList(product: Product, weight: number) {
     let meal = this._dietService.createMeal(this.date, this.time, product, weight);
     this._dietService.addMeal(meal);
-    this.clearFilteredProducts();
+    // this.clearFilteredProducts();
     this.clearQueryElement();
     this.productWeight = null;
   }
@@ -77,24 +74,11 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
       this.confirmProductElement.nativeElement.click();
   }
 
-  onInputChanged() {
-    this.isSearching = true;
-    this.wasSearching = true;
-    this.filteredProducts$ = [];
-  }
-
-  onAddClicked(product) {
-    this.clearFilteredProducts();
-    this.filteredProducts$.push(product);
-  }
-
-  private filterProducts(productName: string) {
-    if (productName) productName = productName.toLocaleLowerCase();
-    this.productsSubscription = this._productService.getProductByName(productName)
-      .subscribe(products => {
-        this.filteredProducts$ = products;
-        this.isSearching = false;
-      });
+  filter(query: string) {
+    const filtered = (query) ?
+      this.filteredProducts$.filter(p => p.name.toLowerCase().includes(query.toLowerCase())) :
+      this.filteredProducts$;
+    this.isSearching = false;
   }
 
   private fillMeals(meals: Meal[]) {
@@ -139,4 +123,31 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
     this.dailyProducts$.forEach(product => totalFats += product.nutrition.fats);
     return totalFats;
   }
-}
+
+  // private filterProducts(productName: string) {
+  //   if (productName) productName = productName.toLocaleLowerCase();
+  //   this.productsSubscription = this._productService.getProductByName(productName)
+  //     .subscribe(products => {
+  //       if (products) this._productService.getProductByName1(productName).subscribe(products => console.log(products));
+  //       this.filteredProducts$ = products;
+  //       this.isSearching = false;
+  //     });
+  // }
+  // onInputChanged() {
+  //   this.isSearching = true;
+  //   this.wasSearching = true;
+  //   this.filteredProducts$ = [];
+  // }
+  //
+  // onAddClicked(product) {
+  //   this.clearFilteredProducts();
+  //   this.filteredProducts$.push(product);
+  // }
+  //
+  // ngOnInit() {
+  //   this.searchSubscription = this.keyUp.pipe(
+  //     debounceTime(1000),
+  //     distinctUntilChanged()
+  //   ).subscribe(product => this.filter(product));
+  // }
+  }
