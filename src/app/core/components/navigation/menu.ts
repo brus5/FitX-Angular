@@ -4,7 +4,7 @@ export const NAV_LINKS = [
   {name: 'Dieta', destination: '/dieta'},
   {name: 'Produkty', destination: '/produkty'},
 ];
-export const TITLE = 'FiTX';
+export const TITLE = 'eKcal';
 
 export const PROFILE_LINKS = [
   {name: 'Opcje diety', destination: '/opcje-diety'},
