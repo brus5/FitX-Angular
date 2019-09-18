@@ -1,5 +1,5 @@
 <responsive-switcher>
-  <component-title [title]="componentTitle"></component-title>
+  <component-title [title]="dietTitle"></component-title>
   <div id="content" [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
 
     <calendar (date)="onSelectedDate($event)"></calendar>

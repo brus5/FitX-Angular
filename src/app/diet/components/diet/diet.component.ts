@@ -50,7 +50,7 @@ export class DietComponent implements OnInit {
       });
   }
 
-  get componentTitle() {
+  get dietTitle() {
     return DIET_TITLE;
   }
 }

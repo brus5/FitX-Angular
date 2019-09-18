@@ -163,7 +163,7 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
     return 0.1;
   }
 
-  get componentDescription() {
+  get caloriesDescription() {
     return CALORIES_CALCULATOR_DESCRIPTION;
   }
 
