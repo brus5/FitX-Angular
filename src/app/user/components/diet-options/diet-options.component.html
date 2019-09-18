@@ -1,5 +1,6 @@
 <responsive-switcher>
-  <form #form="ngForm">
+  <component-title [title]="dietOptionsTitle"></component-title>
+  <form id="content" #form="ngForm">
     <div class="col-md-6">
       <div [ngClass]="(areNutrientsValid) ? 'has-error' : ''">
 

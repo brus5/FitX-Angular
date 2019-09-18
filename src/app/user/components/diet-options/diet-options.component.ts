@@ -4,6 +4,7 @@ import {AuthService} from '../../../shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {UserService} from '../../../shared/services/user.service';
 import {ToastrService} from 'ngx-toastr';
+import {DIET_OPTIONS_TITLE} from '../../../shared/components/titles';
 
 @Component({
   selector: 'diet-options',
@@ -23,7 +24,6 @@ export class DietOptionsComponent implements OnInit, OnDestroy, OnChanges {
 
   private userAuthSubscription: Subscription = new Subscription();
   private appUserSubscription: Subscription = new Subscription();
-
   constructor(private _auth: AuthService,
               private _userService: UserService,
               private _toastrService: ToastrService) { }
@@ -69,6 +69,10 @@ export class DietOptionsComponent implements OnInit, OnDestroy, OnChanges {
 
   get fatsIntake(): number {
     return Number(this.calculateIntake(this.appUser$.nutrientsPercentage.fats, true).toFixed(0));
+  }
+
+  get dietOptionsTitle() {
+    return DIET_OPTIONS_TITLE;
   }
 
   private calculateIntake(nutrient: number, isFat: boolean): number {

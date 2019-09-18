@@ -7,6 +7,7 @@ import {ToastrService} from 'ngx-toastr';
 import {MealTime} from '../../../shared/models/meal-time';
 import {NgForm} from '@angular/forms';
 import {DropdownListComponent} from '../../../shared/components/dropdown-list/dropdown-list.component';
+import {DIET_HOURS_TITLE} from '../../../shared/components/titles';
 
 @Component({
   selector: 'diet-hours',
@@ -81,6 +82,10 @@ export class DietHoursComponent implements OnInit {
     this.resetMealValues();
     this.formElement.reset();
     this.dropdownListComponent.onClear();
+  }
+
+  get dietHoursTitle() {
+    return DIET_HOURS_TITLE;
   }
 
   private mealExists(): boolean {
