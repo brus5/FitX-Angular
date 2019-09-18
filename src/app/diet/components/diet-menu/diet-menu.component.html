@@ -1,24 +1,24 @@
 <mat-toolbar [ngClass]="(isHandset$ | async) ? 'mobile-menu': 'desktop-menu'"
              color="primary" class="position-fixed">
-  <div id="content">
+  <div>
     <div class="container">
       <div class="row">
         <div class="col-xs-4">
-          <p class="number proteins">
+          <p class="number proteins text-center">
             B: {{proteins | number: '1.0-0'}} /
             {{appUser$.maxNutrients.proteins | number: '1.0-0'}}
           </p>
           <mat-progress-bar value="{{proteinsPercentage}}"></mat-progress-bar>
         </div>
         <div class="col-xs-4">
-          <p class="number carbs">
+          <p class="number carbs text-center">
             W: {{carbs | number: '1.0-0'}} /
             {{appUser$.maxNutrients.carbs | number: '1.0-0'}}
           </p>
           <mat-progress-bar value="{{carbsPercentage}}"></mat-progress-bar>
         </div>
         <div class="col-xs-4">
-          <p class="number fats">
+          <p class="number fats text-center">
             T: {{fats | number: '1.0-0'}} /
             {{appUser$.maxNutrients.fats | number: '1.0-0'}}
           </p>
