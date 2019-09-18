@@ -143,7 +143,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   private navigateToProductsPage() {
-    this._router.navigate(['/products']);
+    this._router.navigate(['/produkty']);
   }
 
   private noProduct() {

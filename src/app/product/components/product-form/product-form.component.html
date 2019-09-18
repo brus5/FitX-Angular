@@ -86,7 +86,7 @@
 
         <div class="row mt-10">
           <button (click)="onAccept(); resetForm()"
-                  [disabled]="!form.valid || !photoUploaded || !product.category"
+                  [disabled]="!form.valid || !product.imageUrl || !product.category"
                   class="btn btn-primary">
             Zapisz
           </button>

@@ -20,11 +20,11 @@ import {ProductService} from './services/product.service';
     SharedModule,
     RouterModule.forChild([
       {
-        path: 'products/new',
+        path: 'producty/nowy',
         component: ProductFormComponent
       },
       {
-        path: 'products/edit/:id',
+        path: 'producty/edycja/:id',
         component: ProductFormComponent
       }
     ])
