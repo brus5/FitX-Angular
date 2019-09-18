@@ -1,0 +1,9 @@
+<div id="footer" [ngClass]="(isHandset$ | async) ? 'mobile-menu': 'desktop-menu'">
+  <responsive-switcher>
+    <div class="col-md-12 text-center">
+      <div *ngFor="let link of menuLinks">
+        <a routerLink="{{link.destination}}" style="display: inline">{{link.name}}</a>
+      </div>
+    </div>
+  </responsive-switcher>
+</div>

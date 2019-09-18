@@ -10,6 +10,7 @@ import {UserModule} from './user/user.module';
 import {DietModule} from './diet/diet.module';
 import {ProductModule} from './product/product.module';
 import {AdminModule} from './admin/admin.module';
+import {FooterModule} from './footer/footer.module';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -28,6 +29,7 @@ import {environment} from '../environments/environment';
     DietModule,
     ProductModule,
     AdminModule,
+    FooterModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

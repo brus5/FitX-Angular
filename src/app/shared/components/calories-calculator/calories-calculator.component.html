@@ -17,7 +17,8 @@
       <div class="row">
         <label for="height">Wzrost</label>
         <div class="input-group">
-          <input #height="ngModel" [(ngModel)]="appUser$.height" class="form-control" (ngModelChange)="onAutoCounting()"
+          <input #height="ngModel" [(ngModel)]="appUser$.height" class="form-control"
+                 (ngModelChange)="onAutoCounting()"
                  minValue="50" maxValue="250"
                  name="height" id="height"
                  type="number" required placeholder="Wzrost" minlength="3">
@@ -33,7 +34,8 @@
       <div class="row">
         <label for="weight">Waga</label>
         <div class="input-group">
-          <input #weight="ngModel" [(ngModel)]="appUser$.weight" class="form-control" (ngModelChange)="onAutoCounting()"
+          <input #weight="ngModel" [(ngModel)]="appUser$.weight" class="form-control"
+                 (ngModelChange)="onAutoCounting()"
                  minValue="10" maxValue="250"
                  name="weight" id="weight"
                  type="number" required placeholder="Waga" minlength="3">
@@ -132,7 +134,8 @@
             <br/>
             <p><sup>1</sup><i>Total Daily Energy Expenditure</i> - Całkowite dzienne zapotrzebowanie na energię. Tyle
               musimy dostarczyć energii aby utrzymać wagę.</p>
-            <p><sup>2</sup><i>Basal Metabolic Rate</i> - Podstawowa przemiana materii. Tyle nasze potrzebuje energii aby
+            <p><sup>2</sup><i>Basal Metabolic Rate</i> - Podstawowa przemiana materii. Tyle nasze potrzebuje energii
+              aby
               podtrzymać podstawowe funkcje życiowe.</p>
             <p><sup>3</sup><i>Excercise Activity Thermogenesis</i> - Spalanie przy aktywności fizycznej.</p>
             <p><sup>4</sup><i>Thermic Effect of Food</i> - Efekt termiczny pożywienia.</p>
@@ -143,13 +146,10 @@
         </div>
       </div>
     </div>
-
   </form>
 
   <div class="col-md-12">
-    <div class="row">
-      <component-description [description]="caloriesDescription"></component-description>
-    </div>
+    <component-description [description]="caloriesDescription"></component-description>
   </div>
 
 </responsive-switcher>
