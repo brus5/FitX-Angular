@@ -7,7 +7,6 @@ import {Product} from '../../../shared/models/product';
 import {Meal} from '../../../shared/models/meal';
 import {MealHoursService} from '../../../shared/services/meals-hours.service';
 import {MealTime} from '../../../shared/models/meal-time';
-import {DIET_TITLE} from '../../../shared/components/titles';
 
 @Component({
   selector: 'diet',
@@ -51,6 +50,6 @@ export class DietComponent implements OnInit {
   }
 
   get dietTitle() {
-    return DIET_TITLE;
+    return 'Dieta';
   }
 }

@@ -5,7 +5,6 @@ import {Observable, Subscription} from 'rxjs';
 import {NavService} from '../../../core/components/services/nav.service';
 import {AuthService} from '../../../shared/services/auth.service';
 import {AppUser} from '../../../shared/models/app-user';
-import {PRODUCTS_TITLE} from '../../../shared/components/titles';
 
 @Component({
   selector: 'products',
@@ -70,6 +69,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   get productsTitle() {
-    return PRODUCTS_TITLE;
+    return 'Lista produktów';
   }
 }

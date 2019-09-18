@@ -4,7 +4,6 @@ import {AuthService} from '../../../shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {UserService} from '../../../shared/services/user.service';
 import {ToastrService} from 'ngx-toastr';
-import {DIET_OPTIONS_TITLE} from '../../../shared/components/titles';
 
 @Component({
   selector: 'diet-options',
@@ -72,7 +71,7 @@ export class DietOptionsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   get dietOptionsTitle() {
-    return DIET_OPTIONS_TITLE;
+    return 'Opcje diety';
   }
 
   private calculateIntake(nutrient: number, isFat: boolean): number {

@@ -11,8 +11,6 @@ import {UserService} from '../../services/user.service';
 import {ToastrService} from 'ngx-toastr';
 import {MatCheckbox} from '@angular/material';
 import {User} from '../../models/user';
-import {CALORIES_CALCULATOR_DESCRIPTION} from '../descriptions';
-import {CALORIES_CALCULATOR_TITLE} from '../titles';
 
 @Component({
   selector: 'calories-calculator',
@@ -122,6 +120,10 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
     this.somatotypes$.map((somatotype: Somatotype) => this.somatotypes.push(somatotype));
   }
 
+  private number(num: number): number {
+    return Number(num.toFixed(0));
+  }
+
   get total(): number {
     let total = this.bmr + this.totalEat + (this.appUser$.maxNutrients.maxCalories * this.tef) + this.appUser$.somatotype.value;
     return this.number(total);
@@ -164,14 +166,15 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
   }
 
   get caloriesDescription() {
-    return CALORIES_CALCULATOR_DESCRIPTION;
+    return '\'<b>Kalkulator kalorii</b> oblicza zapotrzebowanie na kalorie Twojego organizmu. Po\\n\' +\n' +
+      '  \'        wypełnieniu wszystkich pól program\\n\' +\n' +
+      '  \'        obliczy za Ciebie <b>TDEE</b>, czyli całkowite dzienne zapotrzebowanie na energię. Wystarczy, że raz na tydzień\\n\' +\n' +
+      '  \'        będziesz aktualizować kalkulator a program dostosuje ponownie zapotrzebowanie Twojego organizmu. Dzięki temu\\n\' +\n' +
+      '  \'        będziesz w stanie utrzymywać wagę ciała na stałym poziomie. Jeżeli jesteś zaawansowanym użytkownikiem to masz\\n\' +\n' +
+      '  \'        możliwość manualnego uzupełnienia "<i>Maksymalnej liczby kalorii</i>".\'';
   }
 
   get componentTitle() {
-    return CALORIES_CALCULATOR_TITLE;
-  }
-
-  private number(num: number): number {
-    return Number(num.toFixed(0));
+    return 'Kalkulator kalorii';
   }
 }
