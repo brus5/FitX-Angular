@@ -74,6 +74,13 @@ export class DietOptionsComponent implements OnInit, OnDestroy, OnChanges {
     return 'Opcje diety';
   }
 
+  get dietDescription() {
+    return 'Białko jako jeden z makroelementów odgrywa kluczową rolę. Zawarte w nim aminokwasy są wykorzystywane głównie w celach\n' +
+      '  anabolicznych, wspierają wzrost, rozwój i regenerację tkanek, pomagają rozwijać masę mięśniową. Ponadto pełnią funkcje\n' +
+      '  regulacyjne – uczestniczą w produkcji hormonów, enzymów i DNA. Wpływają na funkcje układu odpornościowego oraz\n' +
+      '  nerwowego, ułatwiają neutralizację i oczyszczanie organizmu z toksyn.';
+  }
+
   private calculateIntake(nutrient: number, isFat: boolean): number {
     if (isFat)
       return (((nutrient / 100) * this.appUser$.maxNutrients.maxCalories) / 9);

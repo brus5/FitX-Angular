@@ -75,18 +75,25 @@
 
     <div class="col-md-6">
       <div class="card">
-        <h4 class="card-title">TITLE MAN</h4>
+        <h4 class="card-title">Podsumowanie</h4>
         <div class="card-body">
-          <p>diet-options works!</p>
-          <p>{{appUser$.nutrientsPercentage.proteins}}</p>
-          <p>{{appUser$.nutrientsPercentage.carbs}}</p>
-          <p>{{appUser$.nutrientsPercentage.fats}}</p>
-          <p>{{userId}}</p>
-          <p>P: {{appUser$.maxNutrients.proteins}}</p>
-          <p>W: {{appUser$.maxNutrients.carbs}}</p>
-          <p>T: {{appUser$.maxNutrients.fats}}</p>
+          <p>Maksymalna liczba kalorii: {{appUser$.maxNutrients.maxCalories}}</p>
+          <p>z czego: </p>
+          <div class="card-detials">
+            <br/>
+            <p>Białka: {{appUser$.maxNutrients.proteins}}</p>
+            <p>Węglowodany: {{appUser$.maxNutrients.carbs}}</p>
+            <p>Tłuszcze: {{appUser$.maxNutrients.fats}}</p>
+            <p>Białko je</p>
+          </div>
+
         </div>
       </div>
     </div>
   </form>
+
+  <div class="col-md-12">
+    <component-description [description]="dietDescription"></component-description>
+  </div>
+
 </responsive-switcher>
