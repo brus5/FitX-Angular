@@ -1,7 +1,7 @@
 <component-title [title]="dietHoursTitle"></component-title>
-{{topMessage}}
-<div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
 
+<div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
+  <div id="subtitle" class="text-center">{{topMessage}}</div>
   <table class="table table-striped">
     <thead>
     <tr>

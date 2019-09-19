@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {NavService} from '../../../core/components/services/nav.service';
 import {Observable} from 'rxjs';
 import {DietService} from '../../services/diet.service';
@@ -7,6 +7,7 @@ import {ToastrService} from 'ngx-toastr';
 import {MealTime} from '../../../shared/models/meal-time';
 import {NgForm} from '@angular/forms';
 import {DropdownListComponent} from '../../../shared/components/dropdown-list/dropdown-list.component';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'diet-hours',
@@ -15,6 +16,7 @@ import {DropdownListComponent} from '../../../shared/components/dropdown-list/dr
 })
 export class DietHoursComponent implements OnInit {
 
+  @Input('topMessage') topMessage: string;
   @ViewChild('form', {static: false}) private formElement: NgForm;
   @ViewChild('addMealButtonElement', {static: false}) private addMelaButton: ElementRef;
   @ViewChild('dropdownListComponent', {static: false}) private dropdownListComponent: DropdownListComponent;
@@ -30,12 +32,17 @@ export class DietHoursComponent implements OnInit {
   constructor(private _navService: NavService,
               private _dietService: DietService,
               private _mealsHoursService: MealHoursService,
-              private _toastrService: ToastrService) {
+              private _toastrService: ToastrService,
+              private _activatedRoute: ActivatedRoute) {
   }
 
   async ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
-    await this._mealsHoursService.getUserHours
+
+    this.topMessage = this._activatedRoute.snapshot.paramMap.get('topMessage');
+    this.topMessage = this.topMessage.charAt(0).toUpperCase() + this.topMessage.substring(1);
+
+    this._mealsHoursService.getUserHours
       .subscribe(mealsTime => {
 
         this.meals = mealsTime || [];
@@ -47,7 +54,7 @@ export class DietHoursComponent implements OnInit {
         this._mealsHoursService.update(mealTimes);
       });
 
-    await this._mealsHoursService.getAllHours
+    this._mealsHoursService.getAllHours
       .subscribe(hours => this.hours$ = hours);
 
   }

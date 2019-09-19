@@ -8,6 +8,7 @@ import {DietCustomHoursComponent} from './components/diet-custom-hours/diet-cust
 
 import {SharedModule} from '../shared/shared.module';
 import {DietService} from './services/diet.service';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,13 @@ import {DietService} from './services/diet.service';
     DietCustomHoursComponent,
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    RouterModule.forChild([
+      {
+        path: 'godziny-posilkow/:topMessage',
+        component: DietHoursComponent
+      }
+    ])
   ],
   exports: [],
   providers: [
