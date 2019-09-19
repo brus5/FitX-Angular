@@ -8,7 +8,7 @@ export const TITLE = 'eKcal';
 
 export const PROFILE_LINKS = [
   {name: 'Opcje diety', destination: '/opcje-diety'},
-  {name: 'Godziny posiłków', destination: '/godziny-posilkow/globalne'},
+  {name: 'Godziny posiłków', destination: '/godziny-posilkow'},
   {name: 'Wyloguj', destination: '/logoff'},
 ];
 

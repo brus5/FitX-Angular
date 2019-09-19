@@ -16,17 +16,14 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class DietHoursComponent implements OnInit {
 
-  @Input('topMessage') topMessage: string;
+  @Input('date') date: string;
   @ViewChild('form', {static: false}) private formElement: NgForm;
   @ViewChild('addMealButtonElement', {static: false}) private addMelaButton: ElementRef;
   @ViewChild('dropdownListComponent', {static: false}) private dropdownListComponent: DropdownListComponent;
 
   hours$: Array<string> = [];
-
   public isHandset$: Observable<boolean>;
-
   meal = {} as MealTime;
-
   meals: MealTime[] = [];
 
   constructor(private _navService: NavService,
@@ -39,18 +36,15 @@ export class DietHoursComponent implements OnInit {
   async ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
 
-    this.topMessage = this._activatedRoute.snapshot.paramMap.get('topMessage');
-    this.topMessage = this.topMessage.charAt(0).toUpperCase() + this.topMessage.substring(1);
+    this.date = this._activatedRoute.snapshot.paramMap.get('date');
+    if (this.date)
+      console.log('I can execute some funny command ;)');
 
     this._mealsHoursService.getUserHours
       .subscribe(mealsTime => {
-
         this.meals = mealsTime || [];
-
         const mealTimes: MealTime[] = [];
-
         this.meals.forEach(value => mealTimes.push(value));
-
         this._mealsHoursService.update(mealTimes);
       });
 

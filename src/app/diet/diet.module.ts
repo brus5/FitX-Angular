@@ -22,7 +22,7 @@ import {RouterModule} from '@angular/router';
     SharedModule,
     RouterModule.forChild([
       {
-        path: 'godziny-posilkow/:topMessage',
+        path: 'godziny-posilkow/edycja/:date',
         component: DietHoursComponent
       }
     ])
