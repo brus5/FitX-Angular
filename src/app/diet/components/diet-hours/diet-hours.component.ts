@@ -53,7 +53,7 @@ export class DietHoursComponent implements OnInit {
 
   }
 
-  onSendMealTime(): void {
+  onAccept(): void {
     if (!this.mealExists()) {
       this.addMeal();
       this.sortMealsByTime();
