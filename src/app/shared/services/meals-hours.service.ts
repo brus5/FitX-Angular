@@ -27,6 +27,16 @@ export class MealHoursService {
       });
   }
 
+  public getDailyHours(date: string): Observable<MealTime[]> {
+    return this._auth.appUser$
+      .switchMap(user => {
+        if (user)
+          return this._db.object<MealTime[]>('/meals/' + this.firebaseUser.uid + '/custom/' + date + '/meals-time').valueChanges();
+        else
+          return Observable.of(null);
+      });
+  }
+
   public get getAllHours(): Observable<string[]> {
     return this._auth.appUser$
       .switchMap(user => {

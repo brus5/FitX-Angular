@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {NavService} from '../../../core/components/services/nav.service';
 import {DietService} from '../../services/diet.service';
 import 'rxjs/add/operator/mergeMap';
@@ -13,17 +13,17 @@ import {MealTime} from '../../../shared/models/meal-time';
   templateUrl: './diet.component.html',
   styleUrls: ['./diet.component.scss']
 })
-export class DietComponent implements OnInit {
+export class DietComponent implements OnInit, OnDestroy {
 
   public isHandset$: Observable<boolean>;
-
   mealsTime: MealTime[] = [];
-
   products: Product[] = [];
-
   selectedDate!: string;
-
   meals: Meal[] = [];
+  dailyHours: MealTime[] = [];
+
+  private dailyMealsSubscription: Subscription = new Subscription();
+  private mealsHoursSubscription: Subscription = new Subscription();
 
   constructor(private _navService: NavService,
               private _dietService: DietService,
@@ -33,19 +33,28 @@ export class DietComponent implements OnInit {
   ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
 
-    this._mealsHoursService.getUserHours
-      .subscribe(mealsTime => this.mealsTime = mealsTime || []);
-
     this.products.push();
 
   }
 
-  onSelectedDate(date: string) {
-    this.selectedDate = date;
+  ngOnDestroy() {
+    this.mealsHoursSubscription.unsubscribe();
+    this.dailyMealsSubscription.unsubscribe();
+  }
 
-    this._dietService.getAll(date)
-      .subscribe(meals => {
-        this.meals = meals;
+  async onSelectedDate(date: string) {
+    this.selectedDate = date;
+    this.dailyHours = null;
+
+    await this._mealsHoursService.getDailyHours(date)
+      .subscribe(dailyHours => this.dailyHours = dailyHours);
+
+    this.mealsHoursSubscription = await this._mealsHoursService.getUserHours
+      .subscribe(hours => {
+        if (this.dailyHours)
+          this.mealsTime = this.dailyHours || [];
+        else
+          this.mealsTime = hours || [];
       });
   }
 

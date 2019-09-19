@@ -57,7 +57,9 @@ export class DietHoursComponent implements OnInit {
     if (!this.mealExists()) {
       this.addMeal();
       this.sortMealsByTime();
-      this.setMeals();
+
+      this._mealsHoursService.update(this.meals)
+        .finally(() => this.toastSuccessful());
 
       this.resetMealValues();
       this.hideForm();
@@ -99,11 +101,6 @@ export class DietHoursComponent implements OnInit {
 
   private sortMealsByTime() {
     this.meals.sort((a, b) => (a.time > b.time) ? 1 : -1);
-  }
-
-  private setMeals() {
-    this._mealsHoursService.update(this.meals)
-      .finally(() => this.toastSuccessful());
   }
 
   private resetMealValues() {
