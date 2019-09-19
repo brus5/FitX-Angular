@@ -166,12 +166,12 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
   }
 
   get caloriesDescription() {
-    return '\'<b>Kalkulator kalorii</b> oblicza zapotrzebowanie na kalorie Twojego organizmu. Po\\n\' +\n' +
-      '  \'        wypełnieniu wszystkich pól program\\n\' +\n' +
-      '  \'        obliczy za Ciebie <b>TDEE</b>, czyli całkowite dzienne zapotrzebowanie na energię. Wystarczy, że raz na tydzień\\n\' +\n' +
-      '  \'        będziesz aktualizować kalkulator a program dostosuje ponownie zapotrzebowanie Twojego organizmu. Dzięki temu\\n\' +\n' +
-      '  \'        będziesz w stanie utrzymywać wagę ciała na stałym poziomie. Jeżeli jesteś zaawansowanym użytkownikiem to masz\\n\' +\n' +
-      '  \'        możliwość manualnego uzupełnienia "<i>Maksymalnej liczby kalorii</i>".\'';
+    return '<b>Kalkulator kalorii</b> oblicza zapotrzebowanie na kalorie Twojego organizmu. Po' +
+      '          wypełnieniu wszystkich pól program' +
+      '          obliczy za Ciebie <b>TDEE</b>, czyli całkowite dzienne zapotrzebowanie na energię. Wystarczy, że raz na tydzień' +
+      '          będziesz aktualizować kalkulator a program dostosuje ponownie zapotrzebowanie Twojego organizmu. Dzięki temu' +
+      '          będziesz w stanie utrzymywać wagę ciała na stałym poziomie. Jeżeli jesteś zaawansowanym użytkownikiem to masz' +
+      '          możliwość manualnego uzupełnienia "<i>Maksymalnej liczby kalorii</i>"';
   }
 
   get componentTitle() {

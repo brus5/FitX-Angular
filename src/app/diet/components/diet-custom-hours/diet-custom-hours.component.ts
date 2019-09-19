@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'diet-custom-hours',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./diet-custom-hours.component.scss']
 })
 export class DietCustomHoursComponent implements OnInit {
+
+  @Input('date') date: string;
 
   constructor() { }
 
