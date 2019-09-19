@@ -5,7 +5,7 @@
     type="button"
     class="btn btn-primary"
     *ngIf="appUser$"
-    routerLink="/producty/nowy">
+    routerLink="/produkty/nowy">
     Nowy Produkt
   </a>
   <input
@@ -38,7 +38,7 @@
         <button
           type="button" class="btn btn-default btn-sm"
           *ngIf="appUser$.isAdmin"
-          [routerLink]="['/producty/edycja', product.key]">
+          [routerLink]="['/produkty/edycja', product.key]">
           Edit
         </button>
       </th>
