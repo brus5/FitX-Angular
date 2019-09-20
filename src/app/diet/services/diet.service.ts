@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 import {Meal} from '../../shared/models/meal';
 import {map} from 'rxjs/operators';
 import {Product} from '../../shared/models/product';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,23 @@ export class DietService {
       + date + '/'
       + time + '/'
       + mealKey).remove();
+  }
+
+  public removeByDate(date: string) {
+    return this._db.list('/diets/' + this.firebaseUser.uid + '/' + date).remove();
+  }
+
+  public removeByTime(date: string, time: string) {
+    return this._db.list('/diets/' + this.firebaseUser.uid + '/' + date + '/' + time).remove();
+  }
+
+  public isMeal(date: string) {
+    return this.getAll(date)
+      .switchMap(meal => {
+        if (meal.length > 0)
+          return Observable.of(true);
+        else return Observable.of(false);
+      })
   }
 
   public createMeal(date: string, time: string, product: Product, weight: number): Meal {

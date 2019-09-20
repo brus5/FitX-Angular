@@ -2,6 +2,7 @@
 
 <div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
   <div id="subtitle" class="text-center">{{date}}</div>
+  <div *ngIf="date" class="alert alert-warning">Każda operacja spowoduje usunięcie </div>
   <table class="table table-striped">
     <thead>
     <tr>
@@ -16,10 +17,7 @@
       <th class="text-center">{{meal.time}}</th>
       <th class="text-right">
         <a type="button" class="close" aria-label="Close" >
-          <span
-            (click)="delete(i)"
-            aria-hidden="true"
-          >
+          <span (click)="delete(i)" aria-hidden="true">
             &times;
           </span>
         </a>
@@ -33,10 +31,16 @@
       #addMealButtonElement
       class="btn btn-primary"
       [ngClass]="(addMealButtonElement.hidden) ? 'hidden' : 'visible'"
-      (click)="addMealButtonElement.hidden = true"
-    >
+      (click)="addMealButtonElement.hidden = true;">
       Dodaj posiłek
     </a>
+
+    <a *ngIf="date"
+       class="btn btn-success pull-right"
+       (click)="deleteDailyHours()">
+      Przywróć ogólne
+    </a>
+
   </div>
 
   <div class="row mt-10">

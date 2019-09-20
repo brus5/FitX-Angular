@@ -36,10 +36,11 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
 
   somatotypes$;
   selectError: boolean;
-  private somatotypeSubscription: Subscription = new Subscription();
 
   private userAuthSubscription: Subscription = new Subscription();
+  private somatotypeSubscription: Subscription = new Subscription();
   private appUserSubscription: Subscription = new Subscription();
+
   constructor(private _auth: AuthService,
               private _somatotypeService: SomatotypesService,
               private _userService: UserService,
@@ -52,16 +53,16 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
           this.userId = user.uid
       });
 
-    this._somatotypeService.getAll()
+    this.somatotypeSubscription = this._somatotypeService.getAll()
       .first()
       .finally(() => this.subscribeAppUser())
       .subscribe(somatotypes => this.subscribeSomatotype(somatotypes));
   }
 
   ngOnDestroy() {
-    this.appUserSubscription.unsubscribe();
-    this.somatotypeSubscription.unsubscribe();
     this.userAuthSubscription.unsubscribe();
+    this.somatotypeSubscription.unsubscribe();
+    this.appUserSubscription.unsubscribe();
   }
 
   onAccept() {

@@ -27,16 +27,6 @@ export class MealHoursService {
       });
   }
 
-  public getDailyHours(date: string): Observable<MealTime[]> {
-    return this._auth.appUser$
-      .switchMap(user => {
-        if (user)
-          return this._db.object<MealTime[]>('/meals/' + this.firebaseUser.uid + '/custom/' + date + '/meals-time').valueChanges();
-        else
-          return Observable.of(null);
-      });
-  }
-
   public get getAllHours(): Observable<string[]> {
     return this._auth.appUser$
       .switchMap(user => {
@@ -53,6 +43,42 @@ export class MealHoursService {
 
   public remove(id: number) {
     return this._db.object('/meals/' + this.firebaseUser.uid + '/meals-time/' + id).remove();
+  }
+
+  public getCustomHours(date: string): Observable<MealTime[]> {
+    return this._auth.appUser$
+      .switchMap(user => {
+        if (user)
+          return this._db.object<MealTime[]>('/meals/' + this.firebaseUser.uid + '/custom/' + date + '/meals-time').valueChanges();
+        else
+          return Observable.of(null);
+      });
+  }
+
+  public removeCustomHour(date: string, id: number) {
+    return this._db.object('/meals/' + this.firebaseUser.uid + '/custom/' + date + '/meals-time/' + id).remove();
+  }
+
+  public updateCustom(date: string, meals: Array<MealTime>) {
+    return this._db.list('/meals/' + this.firebaseUser.uid + '/custom/' + date).set('/meals-time', meals);
+  }
+
+  public removeCustomHours(date: string) {
+    return this._db.list('/meals/' + this.firebaseUser.uid + '/custom/' + date).remove();
+  }
+
+  public isCustom(date: string) {
+    return this.custom(date)
+      .switchMap(hours => {
+        if (hours.length > 0)
+          return Observable.of(true);
+        else
+          return Observable.of(false);
+      })
+  }
+
+  private custom(date: string) {
+    return this._db.list('/meals/' + this.firebaseUser.uid + '/custom/' + date).valueChanges();
   }
 
   private initialize() {

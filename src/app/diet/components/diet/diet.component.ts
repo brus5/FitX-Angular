@@ -46,7 +46,7 @@ export class DietComponent implements OnInit, OnDestroy {
     this.selectedDate = date;
     this.dailyHours = null;
 
-    await this._mealsHoursService.getDailyHours(date)
+    await this._mealsHoursService.getCustomHours(date)
       .subscribe(dailyHours => this.dailyHours = dailyHours);
 
     this.mealsHoursSubscription = await this._mealsHoursService.getUserHours

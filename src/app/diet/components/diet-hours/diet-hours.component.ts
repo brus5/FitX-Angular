@@ -1,6 +1,6 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NavService} from '../../../core/components/services/nav.service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {DietService} from '../../services/diet.service';
 import {MealHoursService} from '../../../shared/services/meals-hours.service';
 import {ToastrService} from 'ngx-toastr';
@@ -14,7 +14,7 @@ import {ActivatedRoute} from '@angular/router';
   templateUrl: './diet-hours.component.html',
   styleUrls: ['./diet-hours.component.scss']
 })
-export class DietHoursComponent implements OnInit {
+export class DietHoursComponent implements OnInit, OnDestroy {
 
   @Input('date') date: string;
   @ViewChild('form', {static: false}) private formElement: NgForm;
@@ -25,32 +25,52 @@ export class DietHoursComponent implements OnInit {
   public isHandset$: Observable<boolean>;
   meal = {} as MealTime;
   meals: MealTime[] = [];
+  areProductsExists: boolean;
+
+  private customHoursSubscription: Subscription = new Subscription();
+  private userHoursSubscription: Subscription = new Subscription();
+  private hoursSubscription: Subscription = new Subscription();
+  private existsSubscription: Subscription = new Subscription();
 
   constructor(private _navService: NavService,
               private _dietService: DietService,
               private _mealsHoursService: MealHoursService,
               private _toastrService: ToastrService,
-              private _activatedRoute: ActivatedRoute) {
-  }
+              private _activatedRoute: ActivatedRoute) {}
 
   async ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
 
     this.date = this._activatedRoute.snapshot.paramMap.get('date');
     if (this.date)
-      console.log('I can execute some funny command ;)');
+      this.customHoursSubscription = this._mealsHoursService.getCustomHours(this.date)
+        .subscribe(mealsTime => this.fetchMeals(mealsTime));
+    else
+      this.userHoursSubscription = this._mealsHoursService.getUserHours
+        .subscribe(mealsTime => this.fetchMeals(mealsTime));
 
-    this._mealsHoursService.getUserHours
-      .subscribe(mealsTime => {
-        this.meals = mealsTime || [];
-        const mealTimes: MealTime[] = [];
-        this.meals.forEach(value => mealTimes.push(value));
-        this._mealsHoursService.update(mealTimes);
-      });
-
-    this._mealsHoursService.getAllHours
+    this.hoursSubscription = this._mealsHoursService.getAllHours
       .subscribe(hours => this.hours$ = hours);
 
+    this.existsSubscription = this._dietService.isMeal(this.date)
+      .subscribe(exists => this.areProductsExists = exists);
+  }
+
+  ngOnDestroy() {
+    this.customHoursSubscription.unsubscribe();
+    this.userHoursSubscription.unsubscribe();
+    this.hoursSubscription.unsubscribe();
+    this.existsSubscription.unsubscribe();
+  }
+
+  private async fetchMeals(mealsTime: MealTime[]) {
+    this.meals = mealsTime || [];
+    const mealTimes: MealTime[] = [];
+    this.meals.forEach(value => mealTimes.push(value));
+    if (this.date)
+      await this._mealsHoursService.updateCustom(this.date, mealTimes);
+    else
+      await this._mealsHoursService.update(mealTimes);
   }
 
   onAccept(): void {
@@ -58,17 +78,21 @@ export class DietHoursComponent implements OnInit {
       this.addMeal();
       this.sortMealsByTime();
 
-      this._mealsHoursService.update(this.meals)
-        .finally(() => this.toastSuccessful());
+      this.saveMeals();
 
       this.resetMealValues();
       this.hideForm();
     } else this.toastWarning();
   }
 
-  delete(id: number): void {
-    if (!confirm('Chcesz usunąć posiłek?')) return;
-    this._mealsHoursService.remove(id)
+  async delete(id: number) {
+    if (!confirm('Chcesz usunąć godzinę posiłku? Spowoduje to usunięcie dotychczasowych produktów o tej godzinie.')) return;
+    if (this.date) {
+      this._dietService.removeByTime(this.date, this.meals[id].time)
+        .then(() => this.removedSuccessful());
+      await this._mealsHoursService.removeCustomHour(this.date, id);
+    }
+    else this._mealsHoursService.remove(id)
       .then(() => this.removedSuccessful());
   }
 
@@ -84,6 +108,15 @@ export class DietHoursComponent implements OnInit {
     this.resetMealValues();
     this.formElement.reset();
     this.dropdownListComponent.onClear();
+  }
+
+  async deleteDailyHours() {
+    if (this.areProductsExists) {
+      if (!confirm('Wygląda na to, że są już dodane produkty w tym dniu. przywrócenie globalnych godzin spowoduje usunięcie wszystkich produktów z tego dnia.')) return;
+      this._mealsHoursService.removeCustomHours(this.date)
+        .then(() => this.removedSuccessful());
+      await this._dietService.removeByDate(this.date);
+    }
   }
 
   get dietHoursTitle() {
@@ -123,4 +156,12 @@ export class DietHoursComponent implements OnInit {
     this.addMelaButton.nativeElement.hidden = false;
   }
 
+  private saveMeals() {
+    if (this.date)
+      this._mealsHoursService.updateCustom(this.date, this.meals)
+        .finally(() => this.toastSuccessful());
+    else
+      this._mealsHoursService.update(this.meals)
+        .finally(() => this.toastSuccessful());
+  }
 }
