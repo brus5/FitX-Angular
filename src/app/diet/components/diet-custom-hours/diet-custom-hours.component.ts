@@ -9,27 +9,35 @@ import {Subscription} from 'rxjs';
   templateUrl: './diet-custom-hours.component.html',
   styleUrls: ['./diet-custom-hours.component.scss']
 })
-export class DietCustomHoursComponent implements OnDestroy {
+export class DietCustomHoursComponent implements OnInit, OnDestroy {
 
   @Input('date') date: string;
 
-  private subscription: Subscription = new Subscription();
+  private customSuscription: Subscription = new Subscription();
+  private containsMealsSubscription: Subscription = new Subscription();
+
+  private customHoursExists: boolean;
+  private dayContainsMeals: boolean;
 
   constructor(private _router: Router,
               private _dietService: DietService,
               private _mealHoursService: MealHoursService) { }
 
+  ngOnInit() {
+    this.customSuscription = this._mealHoursService.isCustom(this.date)
+      .subscribe(exists => this.customHoursExists = exists);
+
+    this.containsMealsSubscription = this._dietService.checkDayContainMeals(this.date)
+      .subscribe(contains => this.dayContainsMeals = contains);
+  }
+
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.customSuscription.unsubscribe();
+    this.containsMealsSubscription.unsubscribe();
   }
 
   confirm() {
-    this.subscription = this._mealHoursService.isCustom(this.date)
-      .subscribe(exists => this.customHours(exists));
-  }
-
-  private customHours(exists: boolean) {
-    if (!exists) {
+    if (this.dayContainsMeals && !this.customHoursExists) {
       if (!confirm('Czy na pewno chcesz modyfikować godziny posiłków w tym dniu? Spowoduje to usunięcie dotychczasowych pozycji.')) return;
       this._dietService.removeByDate(this.date);
       this.nextPage();

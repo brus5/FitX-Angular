@@ -59,15 +59,6 @@ export class DietService {
     return this._db.list('/diets/' + this.firebaseUser.uid + '/' + date + '/' + time).remove();
   }
 
-  public isMeal(date: string) {
-    return this.getAll(date)
-      .switchMap(meal => {
-        if (meal.length > 0)
-          return Observable.of(true);
-        else return Observable.of(false);
-      })
-  }
-
   public createMeal(date: string, time: string, product: Product, weight: number): Meal {
     product.weight = weight;
     product.nutrition = {
@@ -81,4 +72,14 @@ export class DietService {
     return {date: date, hour: time, product: product};
   }
 
+  public checkDayContainMeals(date: string): Observable<boolean> {
+    return this.getAll(date).switchMap(
+      products => {
+        if (products.length)
+          return Observable.of(true);
+        else
+          return Observable.of(false);
+      }
+    )
+  }
 }

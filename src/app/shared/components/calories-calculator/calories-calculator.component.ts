@@ -102,18 +102,16 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
     this.appUser$.maxNutrients.maxCalories = this.number(total);
   }
 
-  private fetchAppUser(appUser: AppUser) {
-    if (appUser) {
-      this.appUser$ = appUser;
-      this.appUser$.uid = this.userId;
-      this.dropdownListComponent.select(this.appUser$.somatotype.name);
-    } else
-      this.appUser$ = new User(null,'Gość',null).mockStats();
-  }
-
   private subscribeAppUser(): Subscription {
     return this.appUserSubscription = this._auth.appUser$$
-      .subscribe(appUser => this.fetchAppUser(appUser));
+      .subscribe(appUser => {
+        if (appUser) {
+          this.appUser$ = appUser;
+          this.appUser$.uid = this.userId;
+          this.dropdownListComponent.select(this.appUser$.somatotype.name);
+        } else
+          this.appUser$ = new User(null,'Gość',null).mockStats();
+      });
   }
 
   private subscribeSomatotype(somatotypes) {

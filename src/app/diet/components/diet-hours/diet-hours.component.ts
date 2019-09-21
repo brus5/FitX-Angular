@@ -52,7 +52,7 @@ export class DietHoursComponent implements OnInit, OnDestroy {
     this.hoursSubscription = this._mealsHoursService.getAllHours
       .subscribe(hours => this.hours$ = hours);
 
-    this.existsSubscription = this._dietService.isMeal(this.date)
+    this.existsSubscription = this._dietService.checkDayContainMeals(this.date)
       .subscribe(exists => this.areProductsExists = exists);
   }
 
@@ -86,7 +86,7 @@ export class DietHoursComponent implements OnInit, OnDestroy {
   }
 
   async delete(id: number) {
-    if (!confirm('Chcesz usunąć godzinę posiłku? Spowoduje to usunięcie dotychczasowych produktów o tej godzinie.')) return;
+    if (!confirm('Chcesz usunąć godzinę posiłku?')) return;
     if (this.date) {
       this._dietService.removeByTime(this.date, this.meals[id].time)
         .then(() => this.removedSuccessful());
@@ -113,10 +113,10 @@ export class DietHoursComponent implements OnInit, OnDestroy {
   async deleteDailyHours() {
     if (this.areProductsExists) {
       if (!confirm('Wygląda na to, że są już dodane produkty w tym dniu. przywrócenie globalnych godzin spowoduje usunięcie wszystkich produktów z tego dnia.')) return;
-      this._mealsHoursService.removeCustomHours(this.date)
-        .then(() => this.removedSuccessful());
+      this.removeCustomHours();
       await this._dietService.removeByDate(this.date);
-    }
+    } else
+      this.removeCustomHours();
   }
 
   get dietHoursTitle() {
@@ -164,4 +164,10 @@ export class DietHoursComponent implements OnInit, OnDestroy {
       this._mealsHoursService.update(this.meals)
         .finally(() => this.toastSuccessful());
   }
+
+  private removeCustomHours() {
+    this._mealsHoursService.removeCustomHours(this.date)
+      .then(() => this.removedSuccessful());
+  }
+
 }

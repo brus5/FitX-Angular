@@ -4,6 +4,7 @@ import {AuthService} from './auth.service';
 import * as firebase from 'firebase/app';
 import {MealTime} from '../models/meal-time';
 import {Observable} from 'rxjs';
+import {DietService} from '../../diet/services/diet.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class MealHoursService {
   private firebaseUser = {} as firebase.User;
 
   constructor(private _db: AngularFireDatabase,
-              private _auth: AuthService) {
+              private _auth: AuthService,
+              private _dietService: DietService) {
     this.initialize();
   }
 
@@ -75,6 +77,24 @@ export class MealHoursService {
         else
           return Observable.of(false);
       })
+  }
+
+  public getSelectedHours(date: string): Observable<MealTime[]> {
+    return this._auth.appUser$
+      .switchMap(user => {
+        if (user)
+          return this._db.object<MealTime[]>('/meals/' + this.firebaseUser.uid + '/selected/' + date + '/meals-time').valueChanges();
+        else
+          return Observable.of(null);
+      });
+  }
+
+  public removeSelectedHours(date: string) {
+    return this._db.list('/meals/' + this.firebaseUser.uid + '/selected/' + date).remove();
+  }
+
+  public updateSelected(date: string, meals: Array<MealTime>) {
+    return this._db.list('/meals/' + this.firebaseUser.uid + '/selected/' + date).set('/meals-time', meals);
   }
 
   private custom(date: string) {
