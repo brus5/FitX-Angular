@@ -19,8 +19,7 @@ export class DietComponent implements OnInit, OnDestroy {
   mealsTime: MealTime[] = [];
   products: Product[] = [];
   selectedDate!: string;
-  meals: Meal[] = [];
-  dailyHours: MealTime[] = [];
+  customHours: MealTime[] = [];
 
   private dailyMealsSubscription: Subscription = new Subscription();
   private mealsHoursSubscription: Subscription = new Subscription();
@@ -44,15 +43,15 @@ export class DietComponent implements OnInit, OnDestroy {
 
   async onSelectedDate(date: string) {
     this.selectedDate = date;
-    this.dailyHours = null;
+    this.customHours = null;
 
     await this._mealsHoursService.getCustomHours(date)
-      .subscribe(dailyHours => this.dailyHours = dailyHours);
+      .subscribe(customHours => this.customHours = customHours);
 
     this.mealsHoursSubscription = await this._mealsHoursService.getUserHours
       .subscribe(hours => {
-        if (this.dailyHours)
-          this.mealsTime = this.dailyHours || [];
+        if (this.customHours)
+          this.mealsTime = this.customHours || [];
         else
           this.mealsTime = hours || [];
       });
