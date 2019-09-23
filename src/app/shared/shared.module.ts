@@ -27,7 +27,7 @@ import {MaxValueDirectiveDirective} from './directives/max-value-directive.direc
 import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
-import {MealHoursService} from './services/meals-hours.service';
+import {HoursService} from './services/hours.service';
 
 @NgModule({
   declarations: [
@@ -103,7 +103,7 @@ import {MealHoursService} from './services/meals-hours.service';
     UserService,
     AuthService,
     ImageUploadService,
-    MealHoursService
+    HoursService
   ]
 })
 

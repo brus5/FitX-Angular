@@ -1,3 +1,9 @@
 table > tbody > tr > th {
   margin-top: -200px;
 }
+
+progress-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

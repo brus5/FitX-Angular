@@ -44,6 +44,10 @@ export class ProductService {
     else return this._db.list('/products-waiting-room').push(product);
   }
 
+  public copy(product: Product) {
+    return this._db.object('/products/' + product.key).set(product);
+  }
+
   public remove(productId: string) {
     return this._db.list<Product>('/products/' + productId).remove();
   }

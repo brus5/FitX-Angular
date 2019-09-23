@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DietService} from '../../services/diet.service';
-import {MealHoursService} from '../../../shared/services/meals-hours.service';
+import {HoursService} from '../../../shared/services/hours.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -21,10 +21,10 @@ export class DietCustomHoursComponent implements OnInit, OnDestroy {
 
   constructor(private _router: Router,
               private _dietService: DietService,
-              private _mealHoursService: MealHoursService) { }
+              private _hoursService: HoursService) { }
 
   ngOnInit() {
-    this.customSuscription = this._mealHoursService.isCustom(this.date)
+    this.customSuscription = this._hoursService.isCustom(this.date)
       .subscribe(exists => this.customHoursExists = exists);
 
     this.containsMealsSubscription = this._dietService.checkDayContainMeals(this.date)
@@ -38,7 +38,7 @@ export class DietCustomHoursComponent implements OnInit, OnDestroy {
 
   confirm() {
     if (this.dayContainsMeals && !this.customHoursExists) {
-      if (!confirm('Czy na pewno chcesz modyfikować godziny posiłków w tym dniu? Spowoduje to usunięcie dotychczasowych pozycji.')) return;
+      if (!confirm(this.validationMessages.removeMeals)) return;
       this._dietService.removeByDate(this.date);
       this.nextPage();
     }
@@ -47,5 +47,9 @@ export class DietCustomHoursComponent implements OnInit, OnDestroy {
 
   private nextPage() {
     this._router.navigate(['/godziny-posilkow/edycja', this.date]);
+  }
+
+  validationMessages = {
+    removeMeals: 'Czy na pewno chcesz modyfikować godziny posiłków w tym dniu? Spowoduje to usunięcie dotychczasowych pozycji.'
   }
 }

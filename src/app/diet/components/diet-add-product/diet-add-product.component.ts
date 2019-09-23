@@ -6,7 +6,7 @@ import {Meal} from '../../../shared/models/meal';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
-import {MealHoursService} from '../../../shared/services/meals-hours.service';
+import {HoursService} from '../../../shared/services/hours.service';
 
 @Component({
   selector: 'diet-add-product',
@@ -29,22 +29,29 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   isSearching: boolean;
   wasSearching: boolean;
   productsLimit: number = 10;
+  isDirtyHours: boolean;
 
   private productsSubscription: Subscription = new Subscription();
   private selectedHoursSubscription: Subscription = new Subscription();
   private containsMealsSubscription: Subscription = new Subscription();
+  private updateDirtyHoursSubscription: Subscription = new Subscription();
+  private isCustomHoursSubscription: Subscription = new Subscription();
+  private isDirtyHoursSubscription: Subscription = new Subscription();
 
   constructor(private _productService: ProductService,
               private _dietService: DietService,
               private _toastrService: ToastrService,
-              private _mealsHoursService: MealHoursService) {}
+              private _hoursService: HoursService) {}
 
   ngOnInit() {
     this.productsSubscription = this._productService.getAll()
       .subscribe(products => this.filteredProducts$ = products);
 
-    this._mealsHoursService.isCustom(this.date)
+   this.isCustomHoursSubscription = this._hoursService.isCustom(this.date)
       .subscribe(isCustom => isCustom ? null : this.checkDayContainsMealSubscription());
+
+   this.isDirtyHoursSubscription = this._hoursService.isDirty(this.date)
+      .subscribe(isDirty => this.isDirtyHours = isDirty);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -57,6 +64,7 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
     this.productsSubscription.unsubscribe();
     this.selectedHoursSubscription.unsubscribe();
     this.containsMealsSubscription.unsubscribe();
+    this.updateDirtyHoursSubscription.unsubscribe();
   }
 
   setProductWeight(value: number) {
@@ -70,12 +78,9 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
     this.clearQueryElement();
     this.productWeight = null;
 
-    this.selectedHoursSubscription = this._mealsHoursService.isCustom(this.date)
-      .subscribe(isCustom => {
-        if (isCustom) this._mealsHoursService.removeSelectedHours(this.date);
-        else this._mealsHoursService.getUserHours
-          .subscribe(mealTimes => this._mealsHoursService.updateSelected(this.date, mealTimes));
-      });
+    return this.selectedHoursSubscription = this._hoursService.isCustom(this.date)
+      .subscribe(isCustom =>
+        isCustom ? this._hoursService.removeDirtydHours(this.date) : this.updateDirtyHours());
   }
 
   removeMeal(index: number) {
@@ -99,8 +104,8 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
     return this.containsMealsSubscription = this._dietService.checkDayContainMeals(this.date)
       .subscribe(contains => {
         if (!contains) {
-          this._mealsHoursService.removeSelectedHours(this.date);
-          this._mealsHoursService.removeCustomHours(this.date);
+          this._hoursService.removeDirtydHours(this.date);
+          this._hoursService.removeCustomHours(this.date);
         }
       })
   }
@@ -110,6 +115,12 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
     this.clearDailyProducts();
     meals.forEach(value => this.dailyProducts$.push(value.product));
     this.isSearching = false;
+  }
+
+  private updateDirtyHours() {
+    this.updateDirtyHoursSubscription = this._hoursService.getUserHours
+      .subscribe(mealTimes =>
+        this.isDirtyHours ? null : this._hoursService.updateDirty(this.date, mealTimes));
   }
 
   private clearDailyProducts() {
@@ -174,4 +185,5 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   //     distinctUntilChanged()
   //   ).subscribe(product => this.filter(product));
   // }
+
 }

@@ -19,7 +19,7 @@ export class ProductCardWaitingComponent implements OnInit {
   }
 
   onAccept() {
-    this._productService.create(this.product, true)
+    this._productService.copy(this.product)
       .then(() => this._productService.removeFromWaitingRoom(this.product.key))
       .finally(() => this._toastrService.success('Dodano'));
   }

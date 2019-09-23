@@ -4,7 +4,7 @@ import {NavService} from '../../../core/components/services/nav.service';
 import {DietService} from '../../services/diet.service';
 import 'rxjs/add/operator/mergeMap';
 import {Product} from '../../../shared/models/product';
-import {MealHoursService} from '../../../shared/services/meals-hours.service';
+import {HoursService} from '../../../shared/services/hours.service';
 import {MealTime} from '../../../shared/models/meal-time';
 
 @Component({
@@ -16,66 +16,61 @@ export class DietComponent implements OnInit, OnDestroy {
 
   public isHandset$: Observable<boolean>;
   mealsTime: MealTime[] = [];
-  products: Product[] = [];
   selectedDate!: string;
-  customHours: MealTime[] = [];
-  selectedHours: MealTime[] = [];
+  isDirty: boolean;
+  isLoading: boolean;
 
-  private dailyMealsSubscription: Subscription = new Subscription();
-  private mealsHoursSubscription: Subscription = new Subscription();
+  private customHoursSubscription: Subscription = new Subscription();
+  private isDirtySubscription: Subscription = new Subscription();
+  private usersHoursSubscription: Subscription = new Subscription();
+  private dirtyHoursSubscription: Subscription = new Subscription();
 
   constructor(private _navService: NavService,
               private _dietService: DietService,
-              private _mealsHoursService: MealHoursService) {
-  }
+              private _mealsHoursService: HoursService) {}
 
   ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
-
-    this.products.push();
-
   }
 
   ngOnDestroy() {
-    this.mealsHoursSubscription.unsubscribe();
-    this.dailyMealsSubscription.unsubscribe();
+    this.customHoursSubscription.unsubscribe();
+    this.isDirtySubscription.unsubscribe();
+    this.usersHoursSubscription.unsubscribe();
+    this.dirtyHoursSubscription.unsubscribe();
   }
 
   async onSelectedDate(date: string) {
     this.selectedDate = date;
-    this.customHours = null;
-    this.selectedHours = null;
+    this.isLoading = true;
 
-    await this._mealsHoursService.getCustomHours(date)
-      .subscribe(customHours => this.customHours = customHours);
+    this.isDirtySubscription = await this._mealsHoursService.isDirty(date)
+      .subscribe(dirty => this.isDirty = dirty);
 
-    this.mealsHoursSubscription = await this._mealsHoursService.getUserHours
+    this.usersHoursSubscription = await this._mealsHoursService.getUserHours
       .first()
-      .finally(() => {
-        this.subscribeCustomHours();
-      })
-      .subscribe(hours => this.mealsTime = hours || []);
+      .finally(() => this.subscribeCustomHours())
+      .subscribe(userHours => this.mealsTime = userHours);
   }
-// TODO po dodaniu ogolnych godin posilkow aktualizuje sie tez w meals / id / selected / ..
-//  a nie może się aktualizować. To musi pozostać statyczne. problem jest gdzies tutaj
 
   private async subscribeCustomHours(): Promise<Subscription> {
     return this._mealsHoursService.getCustomHours(this.selectedDate)
       .first()
-      .finally(() => this.subscribeSelectedHours())
+      .finally(() => this.subscribeDirtyHours())
       .subscribe(customHours => {
         if (customHours) {
           this.mealsTime = customHours;
-          this._mealsHoursService.removeSelectedHours(this.selectedDate);
+          this._mealsHoursService.removeDirtydHours(this.selectedDate);
         }
       });
   }
 
-  private subscribeSelectedHours(): Subscription {
-    return this._mealsHoursService.getSelectedHours(this.selectedDate)
-      .subscribe(selectedHours => {
-        if (selectedHours)
-          this.mealsTime = selectedHours;
+  private subscribeDirtyHours(): Subscription {
+    return this.dirtyHoursSubscription = this._mealsHoursService.getDirtydHours(this.selectedDate)
+      .subscribe(dirtyHours => {
+        if (dirtyHours)
+          this.mealsTime = dirtyHours;
+        this.isLoading = false; // finished loading in process
       });
   }
 

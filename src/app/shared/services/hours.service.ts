@@ -9,7 +9,7 @@ import {DietService} from '../../diet/services/diet.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MealHoursService {
+export class HoursService {
 
   private firebaseUser = {} as firebase.User;
 
@@ -79,26 +79,40 @@ export class MealHoursService {
       })
   }
 
-  public getSelectedHours(date: string): Observable<MealTime[]> {
+  public getDirtydHours(date: string): Observable<MealTime[]> {
     return this._auth.appUser$
       .switchMap(user => {
         if (user)
-          return this._db.object<MealTime[]>('/meals/' + this.firebaseUser.uid + '/selected/' + date + '/meals-time').valueChanges();
+          return this._db.object<MealTime[]>('/meals/' + this.firebaseUser.uid + '/dirty/' + date + '/meals-time').valueChanges();
         else
           return Observable.of(null);
       });
   }
 
-  public removeSelectedHours(date: string) {
-    return this._db.list('/meals/' + this.firebaseUser.uid + '/selected/' + date).remove();
+  public isDirty(date: string) {
+    return this.dirty(date)
+      .switchMap(hours => {
+        if (hours.length > 0)
+          return Observable.of(true);
+        else
+          return Observable.of(false);
+      })
   }
 
-  public updateSelected(date: string, meals: Array<MealTime>) {
-    return this._db.list('/meals/' + this.firebaseUser.uid + '/selected/' + date).set('/meals-time', meals);
+  public removeDirtydHours(date: string) {
+    return this._db.list('/meals/' + this.firebaseUser.uid + '/dirty/' + date).remove();
+  }
+
+  public updateDirty(date: string, meals: Array<MealTime>) {
+    return this._db.list('/meals/' + this.firebaseUser.uid + '/dirty/' + date).set('/meals-time', meals);
   }
 
   private custom(date: string) {
     return this._db.list('/meals/' + this.firebaseUser.uid + '/custom/' + date).valueChanges();
+  }
+
+  private dirty(date: string) {
+    return this._db.list('/meals/' + this.firebaseUser.uid + '/dirty/' + date).valueChanges();
   }
 
   private initialize() {

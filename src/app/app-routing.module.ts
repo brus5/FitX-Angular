@@ -11,6 +11,7 @@ import {AuthGuardService} from './shared/services/auth-guard.service';
 import {ProductsComponent} from './product/components/products/products.component';
 import {DietOptionsComponent} from './user/components/diet-options/diet-options.component';
 import {ProductsWaitingRoomComponent} from './admin/components/products-waiting-room/products-waiting-room.component';
+import {AdminGuardService} from './shared/services/admin-guard.service';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,7 +22,7 @@ const routes: Routes = [
   {path: 'godziny-posilkow', component: DietHoursComponent, canActivate: [AuthGuardService]},
   {path: 'kalkulator-kalorii', component: CaloriesCalculatorComponent},
   {path: 'opcje-diety', component: DietOptionsComponent, canActivate: [AuthGuardService]},
-  {path: 'poczekalnia-produktow', component: ProductsWaitingRoomComponent, canActivate: [AuthGuardService]},
+  {path: 'poczekalnia-produktow', component: ProductsWaitingRoomComponent, canActivate: [AuthGuardService, AdminGuardService]},
 ];
 
 @NgModule({
