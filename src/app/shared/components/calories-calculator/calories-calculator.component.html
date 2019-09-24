@@ -127,9 +127,9 @@
         <h4 class="card-title">Podsumowanie</h4>
         <div class="card-body">
           <p>TDEE<sup>1</sup> = BMR<sup>2</sup> + EAT<sup>3</sup> + TEF<sup>4</sup> + NEAT<sup>5</sup></p>
-          <p>{{appUser$.maxNutrients.maxCalories}} = {{bmr}} + {{totalEat}} + {{tef}} + {{somatotype}}</p>
+          <p>{{userMaxCalories}} = {{bmr}} + {{totalEat}} + ({{bmr + totalEat + somatotype}} * {{tef}}) + {{somatotype}}</p>
           <br/>
-          <p>Wartość by utrzymać wagę: {{appUser$.maxNutrients.maxCalories}}</p>
+          <p>Wartość by utrzymać wagę: {{userMaxCalories}}</p>
           <div class="card-detials">
             <br/>
             <p><sup>1</sup><i>Total Daily Energy Expenditure</i> - Całkowite dzienne zapotrzebowanie na energię. Tyle

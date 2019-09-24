@@ -29,6 +29,7 @@
             "scripts": [],
             "es5BrowserSupport": true,
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
@@ -91,6 +92,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"

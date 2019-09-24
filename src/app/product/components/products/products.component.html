@@ -9,29 +9,36 @@
     Nowy Produkt
   </a>
   <input
-    #query
-    (keyup)="filter(query.value)"
-    type="text"
-    class="form-control"
-    placeholder="Nazwa produktu..."
-  >
-
+      #query
+      (keyup)="filter(query.value)"
+      type="text"
+      class="form-control"
+      placeholder="Nazwa produktu...">
   <table class="table table-striped">
     <thead>
     <tr>
       <th></th>
       <th class="text-left">Nazwa produktu</th>
       <th class="text-center">Ilość</th>
-      <th class="text-right" style="width: 200px">Kalorie</th>
+      <th class="text-right" style="width: 200px">Kalorie/100 g</th>
       <th class="text-right"></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let product of products | filterProduct: query.value">
+    <tr
+      class="product-row"
+      *ngFor="let product of initializedItems | filterProduct: query.value; let i = index">
       <th style="width: 100px;">
         <div [style.backgroundImage]="'url(' + product.imageUrl + ')'" class="thumbnail"></div>
       </th>
-      <th class="text-left">{{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}</th>
+      <th class="text-left">
+        {{toUpperCase(product.name)}}
+        <br/>
+        <product-nutrition
+          [nutrition]="product.nutrition"
+          [isHandset]="isHandset$">
+        </product-nutrition>
+      </th>
       <th class="text-center">{{product}}</th>
       <th class="text-right">{{product.nutrition.kcal}}</th>
       <th *ngIf="appUser$" class="text-right">
@@ -45,5 +52,13 @@
     </tr>
     </tbody>
   </table>
-
+  <div class="row text-center">
+    <div class="col-xs-12 col-12">
+      <pagination
+        [itemsPerPage]="config.itemsPerPage"
+        [totalItems]="fileredProductsCount"
+        (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+  </div>
 </div>

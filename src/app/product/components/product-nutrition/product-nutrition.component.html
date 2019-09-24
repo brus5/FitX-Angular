@@ -1,0 +1,5 @@
+<div *ngIf="!(isHandset | async)" class="text-muted" style="font-size: smaller">
+  <span matTooltip="Białko {{proteinsCalories}} kcal">B: {{nutrition.proteins}}</span>
+  <span matTooltip="Węglowodany {{carbsCalories}} kcal">W: {{nutrition.carbs}}</span>
+  <span matTooltip="Tłuszcze {{fatsCalories}} kcal">T: {{nutrition.fats}}</span>
+</div>

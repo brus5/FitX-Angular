@@ -9,6 +9,8 @@ import {MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatToolbarMod
 import {SelectModule} from 'ng2-select';
 import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
+import {DataTableModule} from "angular5-data-table";
+import {PaginationModule} from 'ngx-bootstrap/pagination';
 
 import {AdsenseTopComponent} from './components/adsense-top/adsense-top.component';
 import {ResponsiveComponent} from './components/responsive/responsive.component';
@@ -61,6 +63,8 @@ import {HoursService} from './services/hours.service';
     MatCheckboxModule,
     MatRadioModule,
     SelectModule,
+    DataTableModule,
+    PaginationModule,
     RouterModule,
 
     ToastrModule.forRoot({
@@ -98,6 +102,8 @@ import {HoursService} from './services/hours.service';
     MatCheckboxModule,
     MatRadioModule,
     SelectModule,
+    DataTableModule,
+    PaginationModule
   ],
   providers: [
     UserService,

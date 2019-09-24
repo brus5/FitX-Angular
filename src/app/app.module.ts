@@ -16,6 +16,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AngularFireModule} from '@angular/fire';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {environment} from '../environments/environment';
 
 @NgModule({
@@ -34,7 +35,9 @@ import {environment} from '../environments/environment';
     AppRoutingModule,
     BrowserAnimationsModule,
 
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+
+    PaginationModule.forRoot()
   ],
   bootstrap: [AppComponent]
 })

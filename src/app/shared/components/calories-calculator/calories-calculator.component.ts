@@ -40,7 +40,6 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
   private userAuthSubscription: Subscription = new Subscription();
   private somatotypeSubscription: Subscription = new Subscription();
   private appUserSubscription: Subscription = new Subscription();
-
   constructor(private _auth: AuthService,
               private _somatotypeService: SomatotypesService,
               private _userService: UserService,
@@ -162,6 +161,10 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
 
   get tef(): number {
     return 0.1;
+  }
+
+  get userMaxCalories(): number {
+   return this.appUser$.maxNutrients.maxCalories;
   }
 
   get caloriesDescription() {
