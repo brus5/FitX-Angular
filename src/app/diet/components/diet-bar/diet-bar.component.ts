@@ -9,10 +9,10 @@ import {AuthService} from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'diet-menu',
-  templateUrl: './diet-menu.component.html',
-  styleUrls: ['./diet-menu.component.scss']
+  templateUrl: './diet-bar.component.html',
+  styleUrls: ['./diet-bar.component.scss']
 })
-export class DietMenuComponent implements OnInit, OnChanges, OnDestroy {
+export class DietBarComponent implements OnInit, OnChanges, OnDestroy {
 
   public isHandset$: Observable<boolean>;
   @Input() public date: string;
