@@ -29,8 +29,14 @@ export class MainNavComponent implements OnInit {
   }
 
   ngOnInit() {
+    let breakpoints = [
+      Breakpoints.Handset,
+      Breakpoints.Tablet,
+      Breakpoints.TabletLandscape,
+      Breakpoints.TabletPortrait];
+
     this.isHandset$ = this._breakpointObserver
-      .observe(Breakpoints.Handset)
+      .observe(breakpoints)
       .pipe(map(result => result.matches));
     this._auth.appUser$$.subscribe(appUser => this.appUser$ = appUser);
     this._navService.isHandset$ = this.isHandset$;

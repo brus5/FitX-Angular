@@ -4,8 +4,8 @@ $bg-color: #282828;
 
 #footer {
   height: 150px;
-  width: 100%;
   background-color: #282828;
+  overflow: hidden;
 }
 
 .desktop-menu {
@@ -21,4 +21,5 @@ $bg-color: #282828;
 h3 {
   font-family: 'Patrick Hand', cursive;
   color: #fff;
+  margin-top: -50px;
 }
