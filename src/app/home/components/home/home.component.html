@@ -1,6 +1,10 @@
 <responsive-switcher>
-  <component-title [title]="'Strona główna'"></component-title>
+  <banner-main></banner-main>
+  <div class="component-title">
+    <component-title [title]="'Strona główna'"></component-title>
+  </div>
   <div id="content" style="margin-top: 70px">
+    <p>{{news | async | json}}</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin commodo nibh ac purus blandit feugiat. Nunc
       ultricies
       tellus vel ante ullamcorper tristique. Vivamus sodales nibh ac mi sollicitudin volutpat. Vestibulum ac elementum

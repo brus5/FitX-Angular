@@ -14,6 +14,7 @@ import {FooterModule} from './footer/footer.module';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
 
 import {AngularFireModule} from '@angular/fire';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
@@ -34,6 +35,7 @@ import {environment} from '../environments/environment';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AngularFirestoreModule,
 
     AngularFireModule.initializeApp(environment.firebase),
 

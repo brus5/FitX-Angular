@@ -1,0 +1,7 @@
+<div *ngIf="isHandset$ | async" id="mobile">
+  <p>Here will be slide show for mobile!</p>
+</div>
+
+<div *ngIf="!(isHandset$ | async)" id="desktop">
+  <p>And here will be slide show for desktop!</p>
+</div>
