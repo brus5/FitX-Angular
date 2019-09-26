@@ -1,3 +1,11 @@
-<div *ngFor="let item of news">
-  <news-tile [news]="item"></news-tile>
-</div>
+<ng-container *ngFor="let item of news">
+  <div *ngIf="item.bigHeader">
+    <news-big-tile [news]="item"></news-big-tile>
+  </div>
+</ng-container>
+
+<ng-container *ngFor="let item of news">
+  <div *ngIf="!item.bigHeader">
+    <news-tile [news]="item"></news-tile>
+  </div>
+</ng-container>
