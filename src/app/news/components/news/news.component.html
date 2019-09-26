@@ -1,10 +1,10 @@
-<ng-container *ngFor="let item of news">
+<ng-container *ngFor="let item of newses">
   <div *ngIf="item.bigHeader">
     <news-big-tile [news]="item"></news-big-tile>
   </div>
 </ng-container>
 
-<ng-container *ngFor="let item of news">
+<ng-container *ngFor="let item of newses">
   <div *ngIf="!item.bigHeader">
     <news-tile [news]="item"></news-tile>
   </div>
