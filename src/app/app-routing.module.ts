@@ -14,7 +14,15 @@ import {ProductsWaitingRoomComponent} from './admin/components/products-waiting-
 import {AdminGuardService} from './shared/services/admin-guard.service';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {
+    path: '',
+    component: HomeComponent,
+    data: {
+      title: 'Nowości',
+      description: 'Aplikacja internetowa śledząca dietę oraz obliczająca tygodniowe zapotrzebowanie kaloryczne.',
+      ogUrl: 'your og url'
+    }
+  },
   {path: 'login', component: LoginComponent},
   {path: 'produkty', component: ProductsComponent},
   {path: 'logoff', component: LogoffComponent},
