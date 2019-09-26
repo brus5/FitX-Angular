@@ -6,12 +6,14 @@ import {NewsComponent} from './components/news/news.component';
 
 import {SharedModule} from '../shared/shared.module';
 import {FooterModule} from '../footer/footer.module';
+import { NewsTileComponent } from './components/news-tile/news-tile.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     BannerMainComponent,
-    NewsComponent
+    NewsComponent,
+    NewsTileComponent
   ],
   imports: [
     SharedModule,

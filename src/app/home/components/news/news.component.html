@@ -1,1 +1,3 @@
-<p>news works!</p>
+<div *ngFor="let item of news">
+  <news-tile [news]="item"></news-tile>
+</div>
