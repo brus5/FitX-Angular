@@ -9,6 +9,7 @@ import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from '@angular/router';
 
 import {ProductService} from './services/product.service';
+import {AuthGuardService} from '../shared/services/auth-guard.service';
 
 
 @NgModule({
@@ -23,11 +24,23 @@ import {ProductService} from './services/product.service';
     RouterModule.forChild([
       {
         path: 'produkty/nowy',
-        component: ProductFormComponent
+        component: ProductFormComponent,
+        canActivate: [AuthGuardService],
+        data: {
+          title: 'Nowy produkt',
+          description: 'Dodaj produkt do bazy danych.',
+          ogUrl: 'your og url'
+        }
       },
       {
         path: 'produkty/edycja/:id',
-        component: ProductFormComponent
+        component: ProductFormComponent,
+        canActivate: [AuthGuardService],
+        data: {
+          title: 'Edytuj produkt',
+          description: 'Edytuj produkt.',
+          ogUrl: 'your og url'
+        }
       }
     ])
   ],
