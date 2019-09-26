@@ -5,6 +5,7 @@ import {NewsComponent} from './components/news/news.component';
 import {NewsTileComponent} from './components/news-tile/news-tile.component';
 import {NewsBigTileComponent} from './components/news-big-tile/news-big-tile.component';
 import {NewsService} from './services/news.service';
+import { NewsFormComponent } from './components/news-form/news-form.component';
 
 
 
@@ -13,6 +14,7 @@ import {NewsService} from './services/news.service';
     NewsComponent,
     NewsTileComponent,
     NewsBigTileComponent,
+    NewsFormComponent,
   ],
   imports: [
     SharedModule,
