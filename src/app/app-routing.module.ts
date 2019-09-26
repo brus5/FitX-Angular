@@ -18,17 +18,62 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     data: {
-      title: 'Nowości',
+      title: 'Nowości w eKcal',
       description: 'Aplikacja internetowa śledząca dietę oraz obliczająca tygodniowe zapotrzebowanie kaloryczne.',
       ogUrl: 'your og url'
     }
   },
-  {path: 'login', component: LoginComponent},
-  {path: 'produkty', component: ProductsComponent},
-  {path: 'logoff', component: LogoffComponent},
-  {path: 'godziny-posilkow', component: DietHoursComponent, canActivate: [AuthGuardService]},
-  {path: 'opcje-diety', component: DietOptionsComponent, canActivate: [AuthGuardService]},
-  {path: 'poczekalnia-produktow', component: ProductsWaitingRoomComponent, canActivate: [AuthGuardService, AdminGuardService]},
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'Logowanie',
+      description: 'Zostań użytkownikiem eKcal.',
+      ogUrl: 'your og url'
+    }
+  },
+  {
+    path: 'produkty',
+    component: ProductsComponent,
+    data: {
+      title: 'Produkty żywnościowe',
+      description: 'Wyszukaj produkt i dowiedz się to czego potrzebujesz.',
+      ogUrl: 'your og url'
+    }
+  },
+  {
+    path: 'logoff',
+    component: LogoffComponent
+  },
+  {
+    path: 'godziny-posilkow',
+    component: DietHoursComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      title: 'Godziny posiłków',
+      description: 'Ustal godziny swoich ulubionych posiłków.',
+      ogUrl: 'your og url'
+    }
+  },
+  {
+    path: 'opcje-diety',
+    component: DietOptionsComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      title: 'Opcje diety',
+      description: 'Ustal opcje dotatkowe swojej diety.',
+      ogUrl: 'your og url'
+    }
+  },
+  {
+    path: 'poczekalnia-produktow',
+    component: ProductsWaitingRoomComponent,
+    canActivate: [AuthGuardService, AdminGuardService],
+    data: {
+      title: 'Poczekalnia produktów',
+      description: 'Produkty czekające na akceptacje administratora.',
+      ogUrl: 'your og url'
+    }},
   {
     path: 'kalkulator-kalorii',
     component: CaloriesCalculatorComponent,
