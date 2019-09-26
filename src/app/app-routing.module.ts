@@ -18,11 +18,28 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'produkty', component: ProductsComponent},
   {path: 'logoff', component: LogoffComponent},
-  {path: 'dieta', component: DietComponent, canActivate: [AuthGuardService]},
   {path: 'godziny-posilkow', component: DietHoursComponent, canActivate: [AuthGuardService]},
-  {path: 'kalkulator-kalorii', component: CaloriesCalculatorComponent},
   {path: 'opcje-diety', component: DietOptionsComponent, canActivate: [AuthGuardService]},
   {path: 'poczekalnia-produktow', component: ProductsWaitingRoomComponent, canActivate: [AuthGuardService, AdminGuardService]},
+  {
+    path: 'kalkulator-kalorii',
+    component: CaloriesCalculatorComponent,
+    data: {
+      title: 'Kalkulator kalorii - Oblicz zapotrzebowanie kalorii',
+      description: 'Kalkulator kalorii oblicza zapotrzebowanie na kalorie Twojego organizmu.',
+      ogUrl: 'your og url'
+    }
+  },
+  {
+    path: 'dieta',
+    component: DietComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      title: 'Dieta - Elektroniczny Przewodnik',
+      description: 'Pozwala prowadzić dietę zgodnie z założeniami.',
+      ogUrl: 'your og url'
+    }
+  },
 ];
 
 @NgModule({
