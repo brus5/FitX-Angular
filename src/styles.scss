@@ -3,6 +3,13 @@
 
 $font-color-accent: #777;
 
+#content { margin-top: 55px }
+.mt-10 { margin-top: 10px }
+.alert { margin-bottom: 4px }
+.text-accent { color: $font-color-accent }
+.material-icons.hover { cursor: pointer }
+.material-icons.md-18 { font-size: 18px }
+
 html, body {
   height: 100%;
   margin: 0;
@@ -13,14 +20,6 @@ html, body {
 label {
   margin: 10px 15px 0 5px;
   display: block;
-}
-
-.mt-10 {
-  margin-top: 10px;
-}
-
-.alert {
-  margin-bottom: 4px;
 }
 
 .card {
@@ -49,14 +48,6 @@ label {
       margin: 6px auto 18px 6px;
     }
   }
-}
-
-#content {
-  margin-top: 55px;
-}
-
-.text-accent {
-  color: $font-color-accent;
 }
 
 //input[type="file"] {

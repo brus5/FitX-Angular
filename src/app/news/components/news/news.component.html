@@ -1,11 +1,11 @@
 <ng-container *ngFor="let item of newses">
   <div *ngIf="item.bigHeader">
-    <news-big-tile [news]="item"></news-big-tile>
+    <news-big-tile [news]="item" [isAdmin]="admin"></news-big-tile>
   </div>
 </ng-container>
 
 <ng-container *ngFor="let item of newses">
   <div *ngIf="!item.bigHeader">
-    <news-tile [news]="item"></news-tile>
+    <news-tile [news]="item" [isAdmin]="admin"></news-tile>
   </div>
 </ng-container>

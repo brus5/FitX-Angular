@@ -8,4 +8,5 @@ import {News} from '../../../shared/models/news';
 })
 export class NewsTileComponent {
   @Input('news') news: News;
+  @Input('isAdmin') isAdmin: boolean;
 }
