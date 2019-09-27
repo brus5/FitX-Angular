@@ -1,8 +1,20 @@
 <div class="col-md-12">
+
   <div class="card">
-    <h4 class="card-title">{{news.title}}</h4>
+
+    <h4 class="card-title">
+      {{news.title}}
+      <i
+        class="material-icons hover md-18"
+        *ngIf="isAdmin"
+        [routerLink]="['/aktualnosci/edycja/', news.id]">
+        edit
+      </i>
+    </h4>
+
     <div class="card-body">
       {{news.content}}
     </div>
+
   </div>
 </div>

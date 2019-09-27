@@ -13,5 +13,6 @@ export const PROFILE_LINKS = [
 ];
 
 export const ADMIN_LINKS = [
-  {name: 'Poczekalnia produktów', destination: '/poczekalnia-produktow'}
+  {name: 'Poczekalnia produktów', destination: '/poczekalnia-produktow'},
+  {name: 'Dodaj newsa', destination: '/aktualnosci-dodaj'}
 ];

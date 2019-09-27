@@ -33,9 +33,27 @@ export class NewsService {
           let id = action.payload.id;
           return {id, ...data};
         })
-      )
+      );
   }
 
+  public exists(news: News) {
+    return this.titleExists(news)
+      .switchMap(news => {
+        if (news == undefined)
+          return Observable.of(false);
+        else return Observable.of(true);
+      })
+  }
 
+  public update(news: News) {
+    return this._aFire.doc('news/' + news.id).update(news);
+  }
 
+  public create(news: News) {
+    return this._aFire.doc('news/' + news.id).set(news);
+  }
+
+  private titleExists(news: News) {
+    return this._aFire.doc('news/' + news.id).valueChanges()
+  }
 }

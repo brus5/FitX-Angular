@@ -1,1 +1,77 @@
-<p>news-form works!</p>
+<responsive-switcher>
+
+  <component-title [title]="Component.TITLE"></component-title>
+
+  <form id="content" #form="ngForm">
+
+    <div class="col-md-6">
+
+      <div class="row">
+        <label for="bigHeader">Duży news</label>
+        <mat-radio-group
+          id="bigHeader"
+          [(ngModel)]="news.bigHeader"
+          [ngModelOptions]="{standalone: true}">
+          <mat-radio-button [value]="true">Tak</mat-radio-button>
+          <mat-radio-button [value]="false">Nie</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="row">
+
+      </div>
+      <div class="row">
+        <label for="title">Tytuł</label>
+        <input
+          class="form-control"
+          name="title" id="title" type="text"
+          placeholder="Tytuł"
+          required
+          #title="ngModel"
+          [(ngModel)]="news.title">
+        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+          <div *ngIf="title.errors.required">{{Validation.TITLE}}</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="newsContent">Treść</label>
+        <input
+          class="form-control"
+          name="newsContent" id="newsContent" type="text"
+          placeholder="Treść"
+          required
+          #newsContent="ngModel"
+          [(ngModel)]="news.content">
+        <div class="alert alert-danger" *ngIf="newsContent.touched && newsContent.invalid">
+          <div *ngIf="newsContent.errors.required">{{Validation.TITLE}}</div>
+        </div>
+      </div>
+
+      <div class="row mt-10">
+        <p>{{news.title}}</p>
+      </div>
+
+      <div class="row mt-10">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="!form.valid"
+          (click)="onSave()">
+          Zapisz
+        </button>
+
+        <button
+          class="btn btn-danger pull-right"
+          *ngIf="newsId"
+          (click)="deleteNews()">
+          Usuń
+        </button>
+
+      </div>
+    </div>
+
+  </form>
+
+</responsive-switcher>

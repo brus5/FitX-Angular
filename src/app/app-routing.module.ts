@@ -12,6 +12,7 @@ import {ProductsComponent} from './product/components/products/products.componen
 import {DietOptionsComponent} from './user/components/diet-options/diet-options.component';
 import {ProductsWaitingRoomComponent} from './admin/components/products-waiting-room/products-waiting-room.component';
 import {AdminGuardService} from './shared/services/admin-guard.service';
+import {NewsFormComponent} from './news/components/news-form/news-form.component';
 
 const routes: Routes = [
   {
@@ -90,6 +91,16 @@ const routes: Routes = [
     data: {
       title: 'Dieta - Elektroniczny Przewodnik',
       description: 'Pozwala prowadzić dietę zgodnie z założeniami.',
+      ogUrl: 'your og url'
+    }
+  },
+  {
+    path: 'aktualnosci-dodaj',
+    component: NewsFormComponent,
+    canActivate: [AuthGuardService, AdminGuardService],
+    data: {
+      title: 'Napisz aktualność',
+      description: 'Napisz nową aktualność.',
       ogUrl: 'your og url'
     }
   },

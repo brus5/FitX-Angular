@@ -8,9 +8,11 @@
         <label for="gender">Płeć</label>
         <mat-radio-group
           id="gender"
-          [(ngModel)]="appUser$.isGender" [ngModelOptions]="{standalone: true}" (ngModelChange)="onAutoCounting()">
-          <mat-radio-button class="example-radio-button" [value]="true">Kobieta</mat-radio-button>
-          <mat-radio-button class="example-radio-button" [value]="false">Mężczyzna</mat-radio-button>
+          [(ngModel)]="appUser$.isGender"
+          [ngModelOptions]="{standalone: true}"
+          (ngModelChange)="onAutoCounting()">
+          <mat-radio-button [value]="true">Kobieta</mat-radio-button>
+          <mat-radio-button [value]="false">Mężczyzna</mat-radio-button>
         </mat-radio-group>
       </div>
 

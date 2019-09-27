@@ -7,6 +7,7 @@ import {NewsBigTileComponent} from './components/news-big-tile/news-big-tile.com
 import {NewsService} from './services/news.service';
 import {NewsFormComponent} from './components/news-form/news-form.component';
 import {AuthGuardService} from '../shared/services/auth-guard.service';
+import {AdminGuardService} from '../shared/services/admin-guard.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {AuthGuardService} from '../shared/services/auth-guard.service';
       {
         path: 'aktualnosci/nowy',
         component: NewsFormComponent,
-        canActivate: [AuthGuardService],
+        canActivate: [AuthGuardService, AdminGuardService],
         data: {
           title: 'Nowa aktualność',
           description: 'Napisz nowego newsa do portalu.',
@@ -32,7 +33,7 @@ import {AuthGuardService} from '../shared/services/auth-guard.service';
       {
         path: 'aktualnosci/edycja/:id',
         component: NewsFormComponent,
-        canActivate: [AuthGuardService],
+        canActivate: [AuthGuardService, AdminGuardService],
         data: {
           title: 'Edytuj aktualność',
           description: 'Edytuj newsa.',
@@ -42,7 +43,8 @@ import {AuthGuardService} from '../shared/services/auth-guard.service';
     ])
   ],
   exports: [
-    NewsComponent
+    NewsComponent,
+    NewsFormComponent
   ],
   providers: [
     NewsService
