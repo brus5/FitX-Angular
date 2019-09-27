@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {NewsService} from '../../services/news.service';
 import {News} from '../../../shared/models/news';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -20,6 +20,7 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   private existsSubscription: Subscription = new Subscription();
 
   constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
               private _newsService: NewsService,
               private _toastrService: ToastrService) { }
 
@@ -38,37 +39,37 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   onSave() {
     if (this.newsId)
       this._newsService.update(this.news)
-        .then(() => this._toastrService.success(this.Component.SAVE));
+        .then(() => this._toastrService.success(this.Component.UPDATED));
     else
       this.createNews();
   }
 
   deleteNews() {
-
+    if (!confirm(this.Component.CONFIRM)) return;
+    this._newsService.remove(this.news)
+      .then(() => {
+        this.router.navigate(['/'])
+          .then(() => this._toastrService.info(this.Component.DELETED));
+      });
   }
 
   private createNews() {
-
-    this.news.id = this.news.title
-      .replace(/\s/g, '-')
-      .toLocaleLowerCase();
-
-    this._newsService.exists(this.news)
-      .subscribe(value => console.log(value));
-
-    // this._newsService.create(this.news)
-    //   .then(() => this._toastrService.success(this.Component.SAVE));
+    this._newsService.create(this.news)
+      .then(() => this._toastrService.success(this.Component.SAVED));
   }
 
   Component = {
     TITLE: 'Edycja newsa',
-    SAVE: 'Zapisano'
+    UPDATED: 'Zaktualizowano',
+    EXISTS: 'Istnieje, nie zapisano',
+    CONFIRM: 'Czy chcesz usunąć aktualność?',
+    DELETED: 'Usunięto',
+    SAVED: 'Zapisano'
   };
 
   Validation = {
     TITLE: 'Podaj tytuł',
 
   };
-
 }
 

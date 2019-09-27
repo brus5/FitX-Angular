@@ -29,8 +29,8 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSubscription.unsubscribe()
-    this.newsesSubscription.unsubscribe()
+    this.userSubscription.unsubscribe();
+    this.newsesSubscription.unsubscribe();
   }
 
   get admin() {

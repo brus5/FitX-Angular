@@ -36,24 +36,18 @@ export class NewsService {
       );
   }
 
-  public exists(news: News) {
-    return this.titleExists(news)
-      .switchMap(news => {
-        if (news == undefined)
-          return Observable.of(false);
-        else return Observable.of(true);
-      })
-  }
-
   public update(news: News) {
     return this._aFire.doc('news/' + news.id).update(news);
   }
 
   public create(news: News) {
-    return this._aFire.doc('news/' + news.id).set(news);
+    const randomId = this._aFire.createId();
+    news.id = randomId;
+    return this._aFire.collection('news').doc(randomId).set(news);
   }
 
-  private titleExists(news: News) {
-    return this._aFire.doc('news/' + news.id).valueChanges()
+  public remove(news: News) {
+    return this._aFire.doc('news/' + news.id).delete();
   }
+
 }
