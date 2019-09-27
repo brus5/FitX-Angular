@@ -8,8 +8,6 @@ import {NewsService} from './services/news.service';
 import {NewsFormComponent} from './components/news-form/news-form.component';
 import {AuthGuardService} from '../shared/services/auth-guard.service';
 
-
-
 @NgModule({
   declarations: [
     NewsComponent,
