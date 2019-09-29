@@ -26,7 +26,7 @@ export class NewsComponent implements OnInit, OnDestroy {
     this.userSubscription = this._authService.appUser$$
       .subscribe(user => user ? this.appUser$ = user : this.appUser$);
     this.newsesSubscription = this._newsService.getAll()
-      .subscribe(newses => this.newses = newses);
+      .subscribe(newses => newses ? this.newses = newses : this.newses);
   }
 
   ngOnDestroy() {
