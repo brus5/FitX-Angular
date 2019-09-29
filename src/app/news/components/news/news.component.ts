@@ -4,6 +4,7 @@ import {NewsService} from '../../services/news.service';
 import {AuthService} from '../../../shared/services/auth.service';
 import {AppUser} from '../../../shared/models/app-user';
 import {Subscription} from 'rxjs';
+import {User} from '../../../shared/models/user';
 
 @Component({
   selector: 'news',
@@ -23,7 +24,7 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userSubscription = this._authService.appUser$$
-      .subscribe(user => this.appUser$ = user);
+      .subscribe(user => user ? this.appUser$ = user : this.appUser$);
     this.newsesSubscription = this._newsService.getAll()
       .subscribe(newses => this.newses = newses);
   }

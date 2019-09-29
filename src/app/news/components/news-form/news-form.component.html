@@ -35,14 +35,20 @@
       </div>
 
       <div class="row">
+        <div class="alert alert-danger" *ngIf="newsContent.touched && newsContent.invalid">
+          <div *ngIf="newsContent.errors.required">{{Validation.TITLE}}</div>
+        </div>
         <label for="newsContent">Treść</label>
-        <input
+        <textarea
+          id="form107"
           class="form-control"
           name="newsContent" id="newsContent" type="text"
           placeholder="Treść"
           required
+          rows="20"
           #newsContent="ngModel"
           [(ngModel)]="news.content">
+        </textarea>
         <div class="alert alert-danger" *ngIf="newsContent.touched && newsContent.invalid">
           <div *ngIf="newsContent.errors.required">{{Validation.TITLE}}</div>
         </div>
