@@ -7,8 +7,6 @@ import {Observable} from 'rxjs';
 })
 export class ImageUploadService {
 
-  private UPLOAD_FILE = 'https://us-central1-fitx-beba9.cloudfunctions.net/uploadFile';
-
   private selectedFile: File = null;
 
   constructor(private http: HttpClient) {}
@@ -17,8 +15,8 @@ export class ImageUploadService {
     this.selectedFile = file;
   }
 
-  public uploadImage$(): Observable<any> {
-    return this.http.post(this.UPLOAD_FILE, this.formData, {
+  public uploadImage$(link: string): Observable<any> {
+    return this.http.post(link, this.formData, {
       reportProgress: true,
       observe: 'events'
     });

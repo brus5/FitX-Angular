@@ -4,6 +4,7 @@ import {NewsService} from '../../services/news.service';
 import {News} from '../../../shared/models/news';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {ImageUploadService} from '../../../shared/services/image-upload.service';
 
 @Component({
   selector: 'app-news-form',
@@ -21,7 +22,8 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private _newsService: NewsService,
-              private _toastrService: ToastrService) { }
+              private _toastrService: ToastrService,
+              private _uploadImageService: ImageUploadService) { }
 
   ngOnInit() {
     this.newsId = this.activatedRoute.snapshot.paramMap.get('id');

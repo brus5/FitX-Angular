@@ -39,6 +39,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   private categoriesSubscription: Subscription = new Subscription();
   private appUserSubscription: Subscription = new Subscription();
   private productSubscription: Subscription = new Subscription();
+  private UPLOAD_LINK = 'https://us-central1-fitx-beba9.cloudfunctions.net/uploadFile';
 
   constructor(private _productService: ProductService,
               private _categoriesService: CategoryService,
@@ -122,7 +123,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   private async onUpload() {
-    await this._uploadImageService.uploadImage$()
+    await this._uploadImageService.uploadImage$(this.UPLOAD_LINK)
       .subscribe(value => {
         if (value.type === HttpEventType.UploadProgress) {
           this.photoUploaded = false;
