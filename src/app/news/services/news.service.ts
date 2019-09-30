@@ -9,6 +9,10 @@ import {map} from 'rxjs/operators';
 })
 export class NewsService {
 
+  Config = {
+    MAX_WORDS: 5
+  };
+
   constructor(private _aFire: AngularFirestore) {
   }
 
@@ -49,8 +53,25 @@ export class NewsService {
   public remove(news: News) {
     return this._aFire.doc('news/' + news.id).delete();
   }
-// TODO 2
-  public removeAccents(strAccents): string {
+
+  public cutLink(str: string): string {
+    return this.removeAccents(
+      str
+        .split(' ')
+        .splice(0, this.Config.MAX_WORDS)
+        .join(' ')
+        .replace(/\s/g, '-')
+    ).toLowerCase();
+  }
+
+  public cutContent(content: string, maxWords: number): string {
+    return content
+      .split(' ')
+      .splice(0, maxWords)
+      .join(' ');
+  }
+
+  private removeAccents(strAccents): string {
     var strAccents = strAccents.split('');
     var strAccentsOut = [];
     const strAccentsLen = strAccents.length;
@@ -62,7 +83,7 @@ export class NewsService {
       } else
         strAccentsOut[y] = strAccents[y];
     }
-    strAccentsOut = strAccentsOut.join('');
+    strAccentsOut = <any>strAccentsOut.join('');
     return strAccentsOut.toString();
   }
 
