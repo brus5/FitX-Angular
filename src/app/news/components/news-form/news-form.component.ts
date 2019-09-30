@@ -17,7 +17,7 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   news = {bigHeader: false} as News;
 
   private newsSubscription: Subscription = new Subscription();
-// TODO 4
+
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private _newsService: NewsService,

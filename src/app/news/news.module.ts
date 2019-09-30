@@ -42,9 +42,8 @@ import {AdminGuardService} from '../shared/services/admin-guard.service';
           ogUrl: 'your og url'
         }
       },
-      // TODO 3
       {
-        path: 'aktualnosci/:id/:title',
+        path: 'aktualnosci/:title/:id',
         component: NewsReadMoreComponent,
         data: {
           title: 'Aktualność',
