@@ -13,7 +13,12 @@
     </h4>
 
     <div class="card-body">
-      {{news.content}}
+      {{cuttedContent}}
+    </div>
+    <div
+      class="card-body"
+      *ngIf="readMore">
+      Czytaj więcej
     </div>
 
   </div>
