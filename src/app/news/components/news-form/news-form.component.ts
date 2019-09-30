@@ -5,6 +5,7 @@ import {News} from '../../../shared/models/news';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ImageUploadService} from '../../../shared/services/image-upload.service';
+import {HttpEventType} from '@angular/common/http';
 
 @Component({
   selector: 'app-news-form',
@@ -15,9 +16,14 @@ export class NewsFormComponent implements OnInit, OnDestroy {
 
   @Input('newsId') newsId: string;
 
-  news = {bigHeader: false} as News;
+  news = {
+    bigHeader: false,
+    images: []
+  } as News;
+  uploadProgress$;
 
   private newsSubscription: Subscription = new Subscription();
+  private UPLOAD_LINK = 'https://us-central1-fitx-beba9.cloudfunctions.net/newsImage';
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -56,6 +62,27 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   private createNews() {
     this._newsService.create(this.news)
       .then(() => this._toastrService.success(this.Component.SAVED));
+  }
+
+  selectFileAndUpload($event: Event) {
+    this.onFileSelected($event);
+    this.onUpload();
+  }
+
+  private onFileSelected($event) {
+    this._uploadImageService.selectFile($event.target.files[0]);
+  }
+
+  private async onUpload() {
+    await this._uploadImageService.uploadImage$(this.UPLOAD_LINK)
+      .subscribe(value => {
+        if (value.type === HttpEventType.UploadProgress)
+          this.uploadProgress$ = Math.round(value.loaded / value.total * 100);
+        else if (value.type === HttpEventType.Response) {
+          (this.news.images) ? this.news.images.push(value.body.imageUrl) : this.news.images = [];
+          this.news.images.push(value.body.imageUrl);
+        }
+      });
   }
 
   Component = {

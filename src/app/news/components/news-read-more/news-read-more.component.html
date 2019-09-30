@@ -1,4 +1,9 @@
 <responsive-switcher>
-  <p>Title: {{news.title}}</p>
-  <p>Content: {{news.content}}</p>
+  <component-title [title]="news.title"></component-title>
+  <div
+    id="content"
+    class="col-md-12"
+    [innerHTML]="news.content">
+  </div>
 </responsive-switcher>
+1

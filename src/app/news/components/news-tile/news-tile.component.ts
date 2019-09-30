@@ -17,14 +17,6 @@ export class NewsTileComponent {
 
   constructor(private _newsService: NewsService) {}
 
-  get readMore(): boolean {
-    return (this.wordCount > this.Config.MAX_WORDS);
-  }
-
-  get wordCount() {
-    return this.news.content.split(' ').length;
-  }
-
   get cuttedContent(): string {
     return this._newsService.cutContent(this.news.content, this.Config.MAX_WORDS);
   }

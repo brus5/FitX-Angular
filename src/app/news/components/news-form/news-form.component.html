@@ -35,9 +35,6 @@
       </div>
 
       <div class="row">
-        <div class="alert alert-danger" *ngIf="newsContent.touched && newsContent.invalid">
-          <div *ngIf="newsContent.errors.required">{{Validation.TITLE}}</div>
-        </div>
         <label for="newsContent">Treść</label>
         <textarea
           id="form107"
@@ -55,11 +52,16 @@
       </div>
 
       <div class="row mt-10">
-        <p>{{news.title}}</p>
+        <input
+            (change)="selectFileAndUpload($event)"
+            id="photo" type="file" required
+            accept="image/x-png,image/gif,image/jpeg,image/jpg">
+        <div>
+          Test img: {{news.images | json}}
+        </div>
       </div>
 
       <div class="row mt-10">
-
         <button
           type="button"
           class="btn btn-primary"
