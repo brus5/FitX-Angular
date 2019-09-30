@@ -17,8 +17,7 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   news = {bigHeader: false} as News;
 
   private newsSubscription: Subscription = new Subscription();
-  private existsSubscription: Subscription = new Subscription();
-
+// TODO 4
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private _newsService: NewsService,
@@ -33,7 +32,6 @@ export class NewsFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.newsSubscription.unsubscribe();
-    this.existsSubscription.unsubscribe();
   }
 
   onSave() {

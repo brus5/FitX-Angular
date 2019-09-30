@@ -6,6 +6,7 @@ import {NewsTileComponent} from './components/news-tile/news-tile.component';
 import {NewsBigTileComponent} from './components/news-big-tile/news-big-tile.component';
 import {NewsService} from './services/news.service';
 import {NewsFormComponent} from './components/news-form/news-form.component';
+import {NewsReadMoreComponent} from './components/news-read-more/news-read-more.component';
 import {AuthGuardService} from '../shared/services/auth-guard.service';
 import {AdminGuardService} from '../shared/services/admin-guard.service';
 
@@ -15,6 +16,7 @@ import {AdminGuardService} from '../shared/services/admin-guard.service';
     NewsTileComponent,
     NewsBigTileComponent,
     NewsFormComponent,
+    NewsReadMoreComponent,
   ],
   imports: [
     SharedModule,
@@ -37,6 +39,16 @@ import {AdminGuardService} from '../shared/services/admin-guard.service';
         data: {
           title: 'Edytuj aktualność',
           description: 'Edytuj newsa.',
+          ogUrl: 'your og url'
+        }
+      },
+      // TODO 3
+      {
+        path: 'aktualnosci/:id/:title',
+        component: NewsReadMoreComponent,
+        data: {
+          title: 'Aktualność',
+          description: 'Nnewsa.',
           ogUrl: 'your og url'
         }
       },
