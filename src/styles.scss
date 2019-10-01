@@ -13,19 +13,21 @@ $font-color-accent: #777;
 html, body {
   height: 100%;
   margin: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
 }
 
 label {
   margin: 10px 15px 0 5px;
   display: block;
+  font-weight: 500;
 }
 
 .card {
   border: 1px solid #dfdfdf;
   border-radius: 5px;
   margin-top: 20px;
+  background-color: #ffffff
 }
 
 .card-title {
@@ -43,11 +45,31 @@ label {
 .card-detials {
   color: $font-color-accent;
   p {
-    margin: 6px auto auto 6px;
+    margin: 12px;
+    font-size: 10px;
     &:last-child {
-      margin: 6px auto 18px 6px;
+      margin: 12px 12px 18px 12px;
     }
   }
+  sup { margin-right: 6px }
+}
+
+// overwrite the checkbox background
+.mat-checkbox-checked .mat-checkbox-background, .mat-checkbox-indeterminate .mat-checkbox-background {
+  background-color: $font-color-accent !important;
+}
+
+// overwrite the ripple overlay on hover and click
+.mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
+  background-color: black !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: $font-color-accent !important;   /* inner circle color change */
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: $font-color-accent !important; /* outer ring color change */
 }
 
 //input[type="file"] {

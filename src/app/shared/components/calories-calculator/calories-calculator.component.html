@@ -116,7 +116,7 @@
 
       <div *ngIf="userId" class="row mt-10">
         <button
-          class="btn btn-primary"
+          class="btn btn-success"
           [disabled]="(form.invalid) || selectError"
           (click)="onAccept()">
           Zapisz
@@ -129,19 +129,20 @@
         <h4 class="card-title">Podsumowanie</h4>
         <div class="card-body">
           <p>TDEE<sup>1</sup> = BMR<sup>2</sup> + EAT<sup>3</sup> + TEF<sup>4</sup> + NEAT<sup>5</sup></p>
-          <p>{{userMaxCalories}} = {{bmr}} + {{totalEat}} + ({{bmr + totalEat + somatotype}} * {{tef}}) + {{somatotype}}</p>
+          <p>{{userMaxCalories}} = {{bmr}} + {{totalEat}} + ({{bmr + totalEat + somatotype}} * {{tef}})
+            + {{somatotype}}</p>
           <br/>
           <p>Wartość by utrzymać wagę: {{userMaxCalories}}</p>
           <div class="card-detials">
             <br/>
-            <p><sup>1</sup><i>Total Daily Energy Expenditure</i> - Całkowite dzienne zapotrzebowanie na energię. Tyle
+            <p><sup>1</sup>Total Daily Energy Expenditure - Całkowite dzienne zapotrzebowanie na energię. Tyle
               musimy dostarczyć energii aby utrzymać wagę.</p>
-            <p><sup>2</sup><i>Basal Metabolic Rate</i> - Podstawowa przemiana materii. Tyle nasze potrzebuje energii
+            <p><sup>2</sup>Basal Metabolic Rate - Podstawowa przemiana materii. Tyle nasze potrzebuje energii
               aby
               podtrzymać podstawowe funkcje życiowe.</p>
-            <p><sup>3</sup><i>Excercise Activity Thermogenesis</i> - Spalanie przy aktywności fizycznej.</p>
-            <p><sup>4</sup><i>Thermic Effect of Food</i> - Efekt termiczny pożywienia.</p>
-            <p><sup>5</sup><i>Non-Exercise Activity Thermogenesis</i> - Termogeneza aktywności niezwiązanej z
+            <p><sup>3</sup>Excercise Activity Thermogenesis - Spalanie przy aktywności fizycznej.</p>
+            <p><sup>4</sup>Thermic Effect of Food - Efekt termiczny pożywienia.</p>
+            <p><sup>5</sup>Non-Exercise Activity Thermogenesis - Termogeneza aktywności niezwiązanej z
               ćwiczeniami.</p>
           </div>
 
@@ -150,9 +151,7 @@
     </div>
   </form>
 
-  <div class="col-md-12">
-    <component-description [description]="caloriesDescription"></component-description>
-  </div>
+  <component-description [description]="caloriesDescription"></component-description>
 
 </responsive-switcher>
 

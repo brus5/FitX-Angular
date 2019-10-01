@@ -2,7 +2,7 @@ $content-margin-desktop: 15%;
 $content-margin-mobile: 3%;
 $text-color: white;
 $text-color-menu: #313131;
-$font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+$font-family: 'Poppins', sans-serif;
 $background-color: #FFF;
 $menu-background-color: #313131;
 
@@ -64,6 +64,7 @@ mat-toolbar div, a {
 }
 
 .desktop-nav a {
+  font-size: medium;
   color: $text-color;
   font-family: $font-family;
   font-weight: lighter;
