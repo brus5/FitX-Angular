@@ -72,6 +72,10 @@ label {
   border-color: $font-color-accent !important; /* outer ring color change */
 }
 
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $font-color-accent !important;
+}
+
 //input[type="file"] {
 //  display: none;
 //}
