@@ -15,6 +15,7 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   newses: News[] = [];
   appUser$ = {} as AppUser;
+  isLoading: boolean = true;
 
   private userSubscription: Subscription = new Subscription();
   private newsesSubscription: Subscription = new Subscription();
@@ -26,7 +27,10 @@ export class NewsComponent implements OnInit, OnDestroy {
     this.userSubscription = this._authService.appUser$$
       .subscribe(user => user ? this.appUser$ = user : this.appUser$);
     this.newsesSubscription = this._newsService.getAll()
-      .subscribe(newses => newses ? this.newses = newses : this.newses);
+      .subscribe(newses => {
+        newses ? this.newses = newses : this.newses;
+        this.isLoading = false;
+      });
   }
 
   ngOnDestroy() {

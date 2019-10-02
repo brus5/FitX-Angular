@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from '@angular/router';
+import {FooterModule} from '../footer/footer.module';
 import {NewsComponent} from './components/news/news.component';
 import {NewsTileComponent} from './components/news-tile/news-tile.component';
 import {NewsBigTileComponent} from './components/news-big-tile/news-big-tile.component';
@@ -20,7 +21,7 @@ import {AdminGuardService} from '../shared/services/admin-guard.service';
   ],
   imports: [
     SharedModule,
-
+    FooterModule,
     RouterModule.forChild([
       {
         path: 'aktualnosci/nowy',

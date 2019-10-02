@@ -2,20 +2,14 @@ $content-margin-desktop: -15%;
 $content-margin-mobile: -3%;
 $bg-color: #282828;
 
+.desktop-menu {}
+.mobile-menu {}
+.col-xs-4 { background-color: #1c76ba }
+
 #footer {
-  height: 150px;
+  height: 300px;
   background-color: #282828;
   overflow: hidden;
-}
-
-.desktop-menu {
-}
-
-.mobile-menu {
-}
-
-.col-xs-4 {
-  background-color: #1c76ba;
 }
 
 h3 {

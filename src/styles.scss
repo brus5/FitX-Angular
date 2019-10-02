@@ -46,7 +46,6 @@ label {
   color: $font-color-accent;
   p {
     margin: 12px;
-    font-size: 10px;
     &:last-child {
       margin: 12px 12px 18px 12px;
     }
@@ -75,6 +74,13 @@ label {
 .mat-progress-spinner circle, .mat-spinner circle {
   stroke: $font-color-accent !important;
 }
+
+progress-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 //input[type="file"] {
 //  display: none;

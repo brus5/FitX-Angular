@@ -1,11 +1,16 @@
-<ng-container *ngFor="let item of newses">
-  <div *ngIf="item.bigHeader">
-    <news-big-tile [news]="item" [isAdmin]="admin"></news-big-tile>
-  </div>
-</ng-container>
+<div *ngIf="!isLoading; else loadingProducts">
+  <ng-container *ngFor="let item of newses">
+    <div *ngIf="item.bigHeader">
+      <news-big-tile [news]="item" [isAdmin]="admin"></news-big-tile>
+    </div>
+  </ng-container>
 
-<ng-container *ngFor="let item of newses">
-  <div *ngIf="!item.bigHeader">
-    <news-tile [news]="item" [isAdmin]="admin"></news-tile>
-  </div>
-</ng-container>
+  <ng-container *ngFor="let item of newses">
+    <div *ngIf="!item.bigHeader">
+      <news-tile [news]="item" [isAdmin]="admin"></news-tile>
+    </div>
+  </ng-container>
+</div>
+<ng-template #loadingProducts>
+  <progress-spinner></progress-spinner>
+</ng-template>
