@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ImageUploadService} from '../../../shared/services/image-upload.service';
 import {HttpEventType} from '@angular/common/http';
+import {ClipboardService} from 'ngx-clipboard';
 
 @Component({
   selector: 'app-news-form',
@@ -30,7 +31,8 @@ export class NewsFormComponent implements OnInit, OnDestroy {
               private router: Router,
               private _newsService: NewsService,
               private _toastrService: ToastrService,
-              private _uploadImageService: ImageUploadService) { }
+              private _uploadImageService: ImageUploadService,
+              private _clipboardService: ClipboardService) { }
 
   ngOnInit() {
     this.newsId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -66,8 +68,9 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   }
 
   onCopy(item): void {
-    // TODO zrobić kopiowanie :)
-    console.log(item);
+    let img = '<img src="' + item + '" width="100%">';
+    this._clipboardService.copyFromContent(img);
+    this._toastrService.info(this.Component.COPIED);
   }
   onDelete(imageUrl: string) {
     // TODO scalić z google functions
@@ -105,7 +108,8 @@ export class NewsFormComponent implements OnInit, OnDestroy {
     EXISTS: 'Istnieje, nie zapisano',
     CONFIRM: 'Czy chcesz usunąć aktualność?',
     DELETED: 'Usunięto',
-    SAVED: 'Zapisano'
+    SAVED: 'Zapisano',
+    COPIED: 'Skopiowano',
   };
 
   Validation = {

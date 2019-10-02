@@ -1,6 +1,26 @@
+img { margin: 6px auto 6px auto }
 .table-bordered { border-radius: 5px }
+a {
+  color: #777;
+  font-weight: 700;
+  letter-spacing: 1px;
+  &:hover {
+    text-decoration: none;
+  }
+}
 
 .card-body {
   margin: 6px;
   text-align: justify;
+}
+
+img {
+  opacity: .9;
+}
+
+.card:hover {
+  background-color: #f0f0f0;
+  img {
+    opacity: 1;
+  }
 }

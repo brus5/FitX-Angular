@@ -9,6 +9,7 @@ import {MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatToolbarMod
 import {SelectModule} from 'ng2-select';
 import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
+import {ClipboardModule} from 'ngx-clipboard';
 import {DataTableModule} from "angular5-data-table";
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 
@@ -70,6 +71,7 @@ import {MatCardModule} from '@angular/material/card';
     DataTableModule,
     PaginationModule,
     RouterModule,
+    ClipboardModule,
 
     ToastrModule.forRoot({
       timeOut: 3000,
@@ -109,7 +111,8 @@ import {MatCardModule} from '@angular/material/card';
     MatCardModule,
     SelectModule,
     DataTableModule,
-    PaginationModule
+    PaginationModule,
+    ClipboardModule
   ],
   providers: [
     UserService,
