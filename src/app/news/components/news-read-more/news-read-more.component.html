@@ -1,5 +1,8 @@
 <responsive-switcher>
   <component-title [title]="news.title"></component-title>
+  <div class="image-top">
+    <img *ngIf="news.imageHeader" [src]="news.imageHeader" width="100%">
+  </div>
   <div
     id="content"
     class="col-md-12"

@@ -4,5 +4,6 @@ export interface News {
   urlTitle: string;
   content: string;
   bigHeader: boolean;
+  imageHeader: string;
   images: string[];
 }

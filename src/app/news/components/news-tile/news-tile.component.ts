@@ -12,7 +12,7 @@ export class NewsTileComponent {
   @Input('news') news: News;
   @Input('isAdmin') isAdmin: boolean;
   Config = {
-    MAX_WORDS: 50
+    MAX_WORDS: 35
   };
 
   constructor(private _newsService: NewsService) {}

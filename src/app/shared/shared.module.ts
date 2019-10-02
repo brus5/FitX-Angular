@@ -30,6 +30,8 @@ import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
 import {HoursService} from './services/hours.service';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import {HoursService} from './services/hours.service';
     MatTooltipModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatIconModule,
+    MatCardModule,
     SelectModule,
     DataTableModule,
     PaginationModule,
@@ -101,6 +105,8 @@ import {HoursService} from './services/hours.service';
     MatTooltipModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatIconModule,
+    MatCardModule,
     SelectModule,
     DataTableModule,
     PaginationModule

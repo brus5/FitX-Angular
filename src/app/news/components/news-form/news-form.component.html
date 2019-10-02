@@ -53,12 +53,26 @@
 
       <div class="row mt-10">
         <input
-            (change)="selectFileAndUpload($event)"
-            id="photo" type="file" required
-            accept="image/x-png,image/gif,image/jpeg,image/jpg">
+          (change)="selectFileAndUpload($event)"
+          id="photo" type="file" required
+          accept="image/x-png,image/gif,image/jpeg,image/jpg">
         <div>
           Test img: {{news.images | json}}
         </div>
+        <ng-container *ngFor="let image of news.images; let i = index">
+          <mat-card class="result">
+            <mat-card-content>
+              <section class="example-section">
+                <mat-checkbox [checked]="imgHeaderUrl === i" (change)="imgHeaderUrl = i; onHeaderImageChecked(image)"></mat-checkbox>
+                <img src="{{image}}" width="25%">
+                <span></span>
+                <mat-icon (click)="onCopy(image)">file_copy</mat-icon>
+                <span></span>
+                <mat-icon (click)="onDelete(image)">delete_forever</mat-icon>
+              </section>
+            </mat-card-content>
+          </mat-card>
+        </ng-container>
       </div>
 
       <div class="row mt-10">

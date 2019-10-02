@@ -21,6 +21,7 @@ export class NewsFormComponent implements OnInit, OnDestroy {
     images: []
   } as News;
   uploadProgress$;
+  imgHeaderUrl: number;
 
   private newsSubscription: Subscription = new Subscription();
   private UPLOAD_LINK = 'https://us-central1-fitx-beba9.cloudfunctions.net/newsImage';
@@ -59,14 +60,27 @@ export class NewsFormComponent implements OnInit, OnDestroy {
       });
   }
 
-  private createNews() {
-    this._newsService.create(this.news)
-      .then(() => this._toastrService.success(this.Component.SAVED));
-  }
-
   selectFileAndUpload($event: Event) {
     this.onFileSelected($event);
     this.onUpload();
+  }
+
+  onCopy(item): void {
+    // TODO zrobić kopiowanie :)
+    console.log(item);
+  }
+  onDelete(imageUrl: string) {
+    // TODO scalić z google functions
+  }
+
+  onHeaderImageChecked(imageUrl: string) {
+    this.news.imageHeader = imageUrl;
+
+  }
+
+  private createNews() {
+    this._newsService.create(this.news)
+      .then(() => this._toastrService.success(this.Component.SAVED));
   }
 
   private onFileSelected($event) {
