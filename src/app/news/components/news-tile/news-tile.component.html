@@ -1,6 +1,6 @@
 <div class="col-md-6">
   <div class="card">
-    <h4 class="card-title">
+    <h5 class="card-title">
       <a
         class="btn-link"
         [routerLink]="['/aktualnosci/' + cuttedLink + '/', news.id]">
@@ -12,13 +12,14 @@
         [routerLink]="['/aktualnosci/edycja/', news.id]">
         edit
       </i>
-    </h4>
-    <img [src]="news.imageHeader" width="100%">
+    </h5>
+    <img [src]="news.imageHeader">
     <div class="card-body" [innerHTML]="cuttedContent"></div>
     <a
       class="btn-link card-body"
       [routerLink]="['/aktualnosci/' + cuttedLink + '/', news.id]">
       Czytaj więcej
     </a>
+    <div class="card-body"></div>
   </div>
 </div>

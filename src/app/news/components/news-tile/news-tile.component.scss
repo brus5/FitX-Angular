@@ -1,26 +1,37 @@
-img { margin: 6px auto 6px auto }
+$hover-color: #666;
+
+img { margin: 14px auto 20px auto }
 .table-bordered { border-radius: 5px }
+.card-title { margin: 12px auto auto 12px }
+a.btn-link { font-weight: normal }
+span { margin: 12px }
+
 a {
   color: #777;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-weight: 500;
   &:hover {
     text-decoration: none;
   }
 }
 
 .card-body {
-  margin: 6px;
+  margin: auto 12px 12px 12px;
+  color: #777;
   text-align: justify;
+  font-weight: lighter;
 }
 
 img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
   opacity: .9;
 }
 
 .card:hover {
   background-color: #f0f0f0;
-  img {
-    opacity: 1;
-  }
+  img { opacity: 1 }
+  .card-body { color: $hover-color }
+  .card-title a { color: $hover-color }
 }

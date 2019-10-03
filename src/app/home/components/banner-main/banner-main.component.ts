@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {NavService} from '../../../core/components/services/nav.service';
 
@@ -10,6 +10,11 @@ import {NavService} from '../../../core/components/services/nav.service';
 export class BannerMainComponent implements OnInit {
 
   public isHandset$: Observable<boolean>;
+
+  imageSources = [
+    'assets/slideshow/slide-1.png',
+    'assets/slideshow/slide-2.png',
+  ];
 
   constructor(private _navService: NavService) { }
 

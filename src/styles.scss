@@ -2,13 +2,16 @@
 @import '~ngx-toastr/toastr';
 
 $font-color-accent: #777;
+$hover-link-color: #333;
 
 #content { margin-top: 55px }
 .mt-10 { margin-top: 10px }
+.mb-10 { margin-bottom: 10px }
 .alert { margin-bottom: 4px }
 .text-accent { color: $font-color-accent }
 .material-icons.hover { cursor: pointer }
 .material-icons.md-18 { font-size: 18px }
+span.label { font-weight: normal }
 
 html, body {
   height: 100%;
@@ -53,14 +56,13 @@ label {
   sup { margin-right: 6px }
 }
 
-// overwrite the checkbox background
+
 .mat-checkbox-checked .mat-checkbox-background, .mat-checkbox-indeterminate .mat-checkbox-background {
-  background-color: $font-color-accent !important;
+  background-color: $font-color-accent !important; /* overwrite the checkbox background */
 }
 
-// overwrite the ripple overlay on hover and click
 .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
-  background-color: black !important;
+  background-color: black !important; /* overwrite the ripple overlay on hover and click */
 }
 
 .mat-radio-button.mat-accent .mat-radio-inner-circle {
@@ -73,6 +75,11 @@ label {
 
 .mat-progress-spinner circle, .mat-spinner circle {
   stroke: $font-color-accent !important;
+}
+
+.card:hover { /* news-tiles hover effect */
+  a:hover { color: $hover-link-color !important; }
+  h5 a:hover { color: $hover-link-color !important; }
 }
 
 progress-spinner {
