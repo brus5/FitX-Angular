@@ -8,6 +8,7 @@ import {NewsBigTileComponent} from './components/news-big-tile/news-big-tile.com
 import {NewsService} from './services/news.service';
 import {NewsFormComponent} from './components/news-form/news-form.component';
 import {NewsReadMoreComponent} from './components/news-read-more/news-read-more.component';
+import {NewsArchiveComponent} from './components/news-archive/news-archive.component';
 import {AuthGuardService} from '../shared/services/auth-guard.service';
 import {AdminGuardService} from '../shared/services/admin-guard.service';
 
@@ -18,6 +19,7 @@ import {AdminGuardService} from '../shared/services/admin-guard.service';
     NewsBigTileComponent,
     NewsFormComponent,
     NewsReadMoreComponent,
+    NewsArchiveComponent,
   ],
   imports: [
     SharedModule,
@@ -56,7 +58,8 @@ import {AdminGuardService} from '../shared/services/admin-guard.service';
   ],
   exports: [
     NewsComponent,
-    NewsFormComponent
+    NewsFormComponent,
+    NewsArchiveComponent
   ],
   providers: [
     NewsService
