@@ -17,7 +17,8 @@ export class NewsService {
   }
 
   public getAll(): Observable<News[]> {
-    return this._aFire.collection<News>('news')
+    return this._aFire.collection<News>('news', ref =>
+      ref.orderBy('date','desc').limit(8))
       .snapshotChanges().pipe(
         map(actions => {
           return actions.map(action => {
