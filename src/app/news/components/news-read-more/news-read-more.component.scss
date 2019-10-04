@@ -1,6 +1,21 @@
-.image-top { margin-top: 65px }
+.date {
+  margin-top: -6px;
+  text-align: center;
+}
+
+.image-top { margin-top: 12px }
+
 #content {
   margin-top: 12px;
   text-align: justify;
 }
 
+hr {
+  margin-top: 74px;
+  width: 15%;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px dashed #ccc;
+  padding: 0;
+}

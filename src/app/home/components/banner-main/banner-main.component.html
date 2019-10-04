@@ -1,15 +1,15 @@
-<div *ngIf="isHandset$ | async" id="mobile">
-
+<div *ngIf="isHandset$ | async">
+<!-- mobile slider -->
 </div>
 
 <div *ngIf="!(isHandset$ | async)" id="desktop">
   <slideshow [height]="'200px'"
              [minHeight]="'200px'"
              [autoPlay]="true"
-             [showArrows]="true"
+             [showArrows]="false"
              [imageUrls]="imageSources"
              [lazyLoad]="imageSources?.length > 1"
-             [autoPlayWaitForLazyLoad]="true"
+             [autoPlayWaitForLazyLoad]="false"
              [autoPlayInterval]="10000"
              [showDots]="true">
   </slideshow>

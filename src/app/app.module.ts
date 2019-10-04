@@ -1,5 +1,5 @@
 import {FormsModule} from '@angular/forms';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 
@@ -20,6 +20,10 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireModule} from '@angular/fire';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {environment} from '../environments/environment';
+import {registerLocaleData} from '@angular/common';
+import localePl from '@angular/common/locales/pl';
+
+registerLocaleData(localePl);
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +47,7 @@ import {environment} from '../environments/environment';
 
     PaginationModule.forRoot()
   ],
+  providers: [{provide: LOCALE_ID, useValue: 'pl'}],
   bootstrap: [AppComponent]
 })
 

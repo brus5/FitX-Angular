@@ -16,7 +16,6 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
   news = {} as News;
 
   private newsSubscription: Subscription = new Subscription();
-
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private _newsService: NewsService) { }
@@ -29,6 +28,10 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+  }
+
+  get written(): any {
+    return this.news.date;
   }
 
   }

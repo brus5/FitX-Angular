@@ -47,6 +47,7 @@ export class NewsService {
   public create(news: News) {
     const randomId = this._aFire.createId();
     news.id = randomId;
+    news.date = new Date().toString();
     return this._aFire.collection('news').doc(randomId).set(news);
   }
 

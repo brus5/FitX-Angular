@@ -6,4 +6,5 @@ export interface News {
   bigHeader: boolean;
   imageHeader: string;
   images: string[];
+  date: string; // required by firebase :(
 }
