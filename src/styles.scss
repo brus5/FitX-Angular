@@ -2,6 +2,7 @@
 @import '~ngx-toastr/toastr';
 
 $font-color-accent: #777;
+$color-primary: #555;
 $hover-link-color: #333;
 
 #content { margin-top: 55px }
@@ -9,6 +10,7 @@ $hover-link-color: #333;
 .mb-10 { margin-bottom: 10px }
 .alert { margin-bottom: 4px }
 .text-accent { color: $font-color-accent }
+.text-primary { color: $color-primary }
 .material-icons.hover { cursor: pointer }
 .material-icons.md-18 { font-size: 18px }
 span.label { font-weight: normal }
@@ -56,6 +58,14 @@ label {
   sup { margin-right: 6px }
 }
 
+a {
+  color: #999;
+  cursor: pointer;
+  &:hover {
+    color: $hover-link-color;
+    text-decoration: none
+  }
+}
 
 .mat-checkbox-checked .mat-checkbox-background, .mat-checkbox-indeterminate .mat-checkbox-background {
   background-color: $font-color-accent !important; /* overwrite the checkbox background */

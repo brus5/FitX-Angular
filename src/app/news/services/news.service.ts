@@ -10,15 +10,15 @@ import {map} from 'rxjs/operators';
 export class NewsService {
 
   Config = {
-    MAX_WORDS: 5
+    MAX_WORDS: 5,
+    MAX_LATEST_NEWS: 16,
   };
 
-  constructor(private _aFire: AngularFirestore) {
-  }
+  constructor(private _aFire: AngularFirestore) {}
 
-  public getAll(): Observable<News[]> {
+  public getLatestNews(): Observable<News[]> {
     return this._aFire.collection<News>('news', ref =>
-      ref.orderBy('date','desc').limit(8))
+      ref.orderBy('date','desc').limit(this.Config.MAX_LATEST_NEWS))
       .snapshotChanges().pipe(
         map(actions => {
           return actions.map(action => {
@@ -39,6 +39,20 @@ export class NewsService {
           return {id, ...data};
         })
       );
+  }
+
+  public getAllArchive(): Observable<any> {
+    return this._aFire.collection<News>('news', ref =>
+      ref.orderBy('date', 'desc'))
+      .snapshotChanges().pipe(
+        map(actions => {
+          return actions.map(action => {
+            let title = action.payload.doc.data().title;
+            let id = action.payload.doc.id;
+            return {id, title}
+          })
+        })
+      )
   }
 
   public update(news: News) {
@@ -71,6 +85,10 @@ export class NewsService {
       .split(' ')
       .splice(0, maxWords)
       .join(' ');
+  }
+
+  public cutNews(content: string, maxChars: number): string {
+    return content.substring(0, maxChars) + '...';
   }
 
   private removeAccents(strAccents): string {

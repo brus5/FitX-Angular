@@ -17,6 +17,10 @@ export class NewsComponent implements OnInit, OnDestroy {
   appUser$ = {} as AppUser;
   isLoading: boolean = true;
 
+  Config = {
+    MAX_TILES: 4
+  };
+
   private userSubscription: Subscription = new Subscription();
   private newsesSubscription: Subscription = new Subscription();
 
@@ -26,7 +30,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSubscription = this._authService.appUser$$
       .subscribe(user => user ? this.appUser$ = user : this.appUser$);
-    this.newsesSubscription = this._newsService.getAll()
+    this.newsesSubscription = this._newsService.getLatestNews()
       .subscribe(newses => {
         newses ? this.newses = newses : this.newses;
         this.isLoading = false;
@@ -38,7 +42,12 @@ export class NewsComponent implements OnInit, OnDestroy {
     this.newsesSubscription.unsubscribe();
   }
 
+  cuttedLink(link: string): string {
+    return this._newsService.cutLink(link);
+  }
+
   get admin() {
     return this.appUser$.isAdmin;
   }
+
 }

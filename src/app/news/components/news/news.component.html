@@ -5,12 +5,38 @@
     </div>
   </ng-container>
 
-  <ng-container *ngFor="let item of newses">
-    <div *ngIf="!item.bigHeader">
+  <ng-container *ngFor="let item of newses; let i = index">
+    <div *ngIf="!item.bigHeader && i < Config.MAX_TILES">
       <news-tile [news]="item" [isAdmin]="admin"></news-tile>
+    </div>
+    <div *ngIf="i >= Config.MAX_TILES">
+      <div
+        *ngIf="i == Config.MAX_TILES">
+        <h4 class="text-center text-primary">
+          <!-- I had to do that, it's ugly i I know. ;(-->
+          &nbsp;<br/>
+          Reszta aktualności
+        </h4>
+      </div>
+      <ng-container
+        [ngTemplateOutlet]="i >= Config.MAX_TILES ? archive : null"
+        [ngTemplateOutletContext]="{item: item}">
+      </ng-container>
     </div>
   </ng-container>
 </div>
+
+<ng-template #archive let-item="item">
+  <p class="text-center">
+    <a
+      [routerLink]="['/aktualnosci/' + cuttedLink(item.title) + '/', item.id]">
+      {{item.title}} {{item.date | date : 'd MMM y'}}
+    </a>
+    <span class="date text-primary">
+
+    </span>
+  </p>
+</ng-template>
 <ng-template #loadingProducts>
   <progress-spinner></progress-spinner>
 </ng-template>

@@ -12,13 +12,13 @@ export class NewsTileComponent {
   @Input('news') news: News;
   @Input('isAdmin') isAdmin: boolean;
   Config = {
-    MAX_WORDS: 35
+    MAX_WORDS: 200
   };
 
   constructor(private _newsService: NewsService) {}
 
   get cuttedContent(): string {
-    return this._newsService.cutContent(this.news.content, this.Config.MAX_WORDS);
+    return this._newsService.cutNews(this.news.content, this.Config.MAX_WORDS);
   }
 
   get cuttedLink(): string {
