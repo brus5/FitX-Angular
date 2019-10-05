@@ -6,7 +6,9 @@
   </ng-container>
 
   <ng-container *ngFor="let item of newses; let i = index">
-    <div *ngIf="!item.bigHeader && i < Config.MAX_TILES">
+    <div
+      data-aos="fade-in"
+      *ngIf="!item.bigHeader && i < Config.MAX_TILES">
       <news-tile [news]="item" [isAdmin]="admin"></news-tile>
     </div>
     <div *ngIf="i >= Config.MAX_TILES">

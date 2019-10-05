@@ -2,7 +2,10 @@
 <!-- mobile slider -->
 </div>
 
-<div *ngIf="!(isHandset$ | async)" id="desktop">
+<div
+  id="desktop"
+  data-aos="fade-in"
+  *ngIf="!(isHandset$ | async)">
   <slideshow [height]="'200px'"
              [minHeight]="'200px'"
              [autoPlay]="true"

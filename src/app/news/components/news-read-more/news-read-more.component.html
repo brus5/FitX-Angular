@@ -4,12 +4,15 @@
   <div class="text-accent date">
     {{written | date : 'longDate'}}
   </div>
-  <div class="image-top">
+  <div
+    class="image-top"
+    data-aos="fade-in">
     <img *ngIf="news.imageHeader" [src]="news.imageHeader" width="100%">
   </div>
   <div
     id="content"
     class="col-md-12"
+    data-aos="slide-up"
     [innerHTML]="news.content">
   </div>
 </responsive-switcher>

@@ -15,7 +15,6 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   newses: News[] = [];
   appUser$ = {} as AppUser;
-  isLoading: boolean = true;
 
   Config = {
     MAX_TILES: 4
@@ -33,13 +32,14 @@ export class NewsComponent implements OnInit, OnDestroy {
     this.newsesSubscription = this._newsService.getLatestNews()
       .subscribe(newses => {
         newses ? this.newses = newses : this.newses;
-        this.isLoading = false;
+        this._newsService.loading = false;
       });
   }
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
     this.newsesSubscription.unsubscribe();
+    this._newsService.loading = true;
   }
 
   cuttedLink(link: string): string {
@@ -48,6 +48,10 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   get admin() {
     return this.appUser$.isAdmin;
+  }
+
+  get isLoading() {
+    return this._newsService.loading;
   }
 
 }

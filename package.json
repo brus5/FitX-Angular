@@ -26,6 +26,7 @@
     "@ng-bootstrap/ng-bootstrap": "^5.1.0",
     "@ng-select/ng-select": "^3.0.3",
     "angular5-data-table": "latest",
+    "aos": "^3.0.0-beta.6",
     "bootstrap": "^3.4.1",
     "core-js": "^2.5.4",
     "core-util-is": "^1.0.2",

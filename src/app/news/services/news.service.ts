@@ -14,6 +14,8 @@ export class NewsService {
     MAX_LATEST_NEWS: 16,
   };
 
+  private isLoading: boolean = true;
+
   constructor(private _aFire: AngularFirestore) {}
 
   public getLatestNews(): Observable<News[]> {
@@ -89,6 +91,14 @@ export class NewsService {
 
   public cutNews(content: string, maxChars: number): string {
     return content.substring(0, maxChars) + '...';
+  }
+
+  public set loading(loading: boolean) {
+    this.isLoading = loading;
+  }
+
+  public get loading(): boolean {
+    return this.isLoading;
   }
 
   private removeAccents(strAccents): string {
