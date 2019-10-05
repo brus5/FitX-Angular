@@ -16,4 +16,5 @@ export class HomeComponent implements OnInit {
               private _newsService: NewsService) {}
 
   ngOnInit() { this.isHandset$ = this._navService.isHandset$ }
+  get newsLoading() { return this._newsService.loading }
 }
