@@ -5,6 +5,8 @@ import {AppComponent} from './app.component';
 
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
+import {MaterialModule} from './shared/material.module';
+import {ThirdPartyModule} from './shared/third.party.module';
 import {HomeModule} from './home/home.module';
 import {UserModule} from './user/user.module';
 import {DietModule} from './diet/diet.module';
@@ -19,6 +21,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 
 import {AngularFireModule} from '@angular/fire';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
+
 import {environment} from '../environments/environment';
 import {registerLocaleData} from '@angular/common';
 import localePl from '@angular/common/locales/pl';
@@ -31,6 +34,8 @@ registerLocaleData(localePl);
     FormsModule,
     CoreModule,
     SharedModule,
+    MaterialModule,
+    ThirdPartyModule,
     HomeModule,
     UserModule,
     DietModule,

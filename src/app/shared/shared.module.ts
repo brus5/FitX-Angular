@@ -5,7 +5,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FormsModule} from '@angular/forms';
-import {MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatToolbarModule, MatProgressSpinnerModule, MatTooltipModule, MatCheckboxModule, MatRadioModule} from '@angular/material';
 import {SelectModule} from 'ng2-select';
 import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
@@ -31,8 +30,7 @@ import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
 import {HoursService} from './services/hours.service';
-import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
+import {MaterialModule} from './material.module';
 
 @NgModule({
   declarations: [
@@ -52,21 +50,12 @@ import {MatCardModule} from '@angular/material/card';
   ],
   imports: [
     CommonModule,
+    MaterialModule,
     HttpClientModule,
     NgbModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatProgressBarModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatTooltipModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatIconModule,
-    MatCardModule,
     SelectModule,
     DataTableModule,
     PaginationModule,
@@ -95,20 +84,11 @@ import {MatCardModule} from '@angular/material/card';
     MaxValueDirectiveDirective,
 
     CommonModule,
+    MaterialModule,
     NgbModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatProgressBarModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatTooltipModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatIconModule,
-    MatCardModule,
     SelectModule,
     DataTableModule,
     PaginationModule,
