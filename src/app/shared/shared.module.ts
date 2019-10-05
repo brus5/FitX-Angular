@@ -1,16 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {MaterialModule} from './material.module';
+import {ThirdPartyModule} from './third.party.module';
+
 import {HttpClientModule} from '@angular/common/http';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FormsModule} from '@angular/forms';
-import {SelectModule} from 'ng2-select';
-import {ToastrModule} from 'ngx-toastr';
 import {RouterModule} from '@angular/router';
-import {ClipboardModule} from 'ngx-clipboard';
-import {DataTableModule} from "angular5-data-table";
-import {PaginationModule} from 'ngx-bootstrap/pagination';
 
 import {AdsenseTopComponent} from './components/adsense-top/adsense-top.component';
 import {ResponsiveComponent} from './components/responsive/responsive.component';
@@ -30,7 +27,6 @@ import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
 import {HoursService} from './services/hours.service';
-import {MaterialModule} from './material.module';
 
 @NgModule({
   declarations: [
@@ -51,22 +47,12 @@ import {MaterialModule} from './material.module';
   imports: [
     CommonModule,
     MaterialModule,
+    ThirdPartyModule,
     HttpClientModule,
-    NgbModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
-    SelectModule,
-    DataTableModule,
-    PaginationModule,
     RouterModule,
-    ClipboardModule,
-
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true
-    })
   ],
   exports: [
     AdsenseTopComponent,
@@ -85,14 +71,10 @@ import {MaterialModule} from './material.module';
 
     CommonModule,
     MaterialModule,
-    NgbModule,
+    ThirdPartyModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
-    SelectModule,
-    DataTableModule,
-    PaginationModule,
-    ClipboardModule
   ],
   providers: [
     UserService,
