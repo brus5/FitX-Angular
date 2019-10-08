@@ -4,7 +4,7 @@ import {NewsService} from '../../services/news.service';
 import {AuthService} from '../../../shared/services/auth.service';
 import {AppUser} from '../../../shared/models/app-user';
 import {Subscription} from 'rxjs';
-import {User} from '../../../shared/models/user';
+import AOS from 'aos';
 
 @Component({
   selector: 'news',
@@ -27,6 +27,11 @@ export class NewsComponent implements OnInit, OnDestroy {
               private _newsService: NewsService) { }
 
   ngOnInit() {
+    AOS.init({
+      disable: 'mobile',
+      offset: 0,
+      once: true,
+    });
     this.userSubscription = this._authService.appUser$$
       .subscribe(user => user ? this.appUser$ = user : this.appUser$);
     this.newsesSubscription = this._newsService.getLatestNews()
@@ -55,3 +60,10 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
 }
+
+// will NOT throw violation
+document.addEventListener("wheel", function(e) {
+
+}, {
+  passive: false
+});

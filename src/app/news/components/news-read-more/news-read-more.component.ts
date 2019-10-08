@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NewsService} from '../../services/news.service';
 import {Subscription} from 'rxjs';
 import {News} from '../../../shared/models/news';
+import AOS from 'aos';
 
 @Component({
   selector: 'news-read-more',
@@ -21,6 +22,11 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
               private _newsService: NewsService) { }
 
   ngOnInit() {
+    AOS.init({
+      disable: 'mobile',
+      offset: 0,
+      once: true,
+    });
     this.newsId = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.newsId)
       this.newsSubscription = this._newsService.getNews(this.newsId)

@@ -1,4 +1,4 @@
-@import url('~bootstrap/dist/css/bootstrap.min.css');
+@import url('~bootstrap/dist/css/bootstrap.css');
 @import '~ngx-toastr/toastr';
 @import '~aos/dist/aos.css';
 
@@ -97,6 +97,18 @@ progress-spinner {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+mat-select {
+  border: #cccccc 1px solid;
+  border-radius: 5px;
+  padding: 6px;
+  width: 100%;
+}
+
+.mat-select-value > span {
+  color: $color-primary !important;
+  margin-left: 5px !important;
 }
 
 

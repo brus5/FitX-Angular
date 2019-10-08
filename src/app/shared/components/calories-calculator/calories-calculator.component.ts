@@ -22,6 +22,7 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownListComponent', {static: false}) private dropdownListComponent: DropdownListComponent;
   @ViewChild('trainingCheckbox', {static: false}) private trainingCheckbox: MatCheckbox;
   @ViewChild('areobicCheckbox', {static: false}) private areobicCheckbox: MatCheckbox;
+  @ViewChild('selectSomatotype', {static: false}) private selectSomatotype: HTMLSelectElement;
 
   appUser$ = {
     uid: null,
@@ -69,9 +70,9 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
       .then(() => this._toastrService.success('Zaktualizowano'));
   }
 
-  getSomatotypes(): Observable<string[]> {
+  getSomatotypes() {
     let array = Array.from(this.somatotypes).map(value => value.name);
-    return Observable.of(array);
+    return (array);
   }
 
   onSomatotypeSelected(type: string) {
@@ -107,7 +108,7 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
         if (appUser) {
           this.appUser$ = appUser;
           this.appUser$.uid = this.userId;
-          this.dropdownListComponent.select(this.appUser$.somatotype.name);
+          // this.dropdownListComponent.select(this.appUser$.somatotype.name);
         } else
           this.appUser$ = new User(null,'Gość',null).mockStats();
       });
@@ -178,5 +179,20 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
 
   get componentTitle() {
     return 'Kalkulator kalorii';
+  }
+
+  onChange(value: any) {
+    console.log(value)
+  }
+
+  onSelect($event: Event) {
+    console.log($event)
+  }
+
+  onChanges(value) {
+    // this.appUser$.somatotype.name = $event.source.value.name;
+    // this.appUser$.somatotype.value = $event.source.value.value;
+    console.log(value)
+    console.log(this.appUser$.somatotype)
   }
 }

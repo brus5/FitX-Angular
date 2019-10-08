@@ -51,9 +51,14 @@
       </div>
 
       <div class="row">
-        <label for="somatotype">Typ ciała</label>
-        <dropdown-list #dropdownListComponent id="somatotype" (item)="onSomatotypeSelected($event); onAutoCounting()"
-                       (error)="handleError($event)" [items$]="getSomatotypes()"></dropdown-list>
+        <label for="somatotype">Somatotyp</label>
+        <mat-select id="somatotype" [(value)]="appUser$.somatotype"
+                    [placeholder]="appUser$.somatotype.name"
+                    (valueChange)="onAutoCounting()">
+          <mat-option *ngFor="let item of somatotypes" [value]="item">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
       </div>
 
       <div class="row">

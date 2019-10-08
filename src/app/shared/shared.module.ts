@@ -6,7 +6,7 @@ import {ThirdPartyModule} from './third.party.module';
 import {HttpClientModule} from '@angular/common/http';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
 import {AdsenseTopComponent} from './components/adsense-top/adsense-top.component';
@@ -53,6 +53,7 @@ import {HoursService} from './services/hours.service';
     AngularFireAuthModule,
     FormsModule,
     RouterModule,
+    ReactiveFormsModule,
   ],
   exports: [
     AdsenseTopComponent,
