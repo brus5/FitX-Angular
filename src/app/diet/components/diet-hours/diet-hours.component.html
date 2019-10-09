@@ -3,52 +3,63 @@
 <div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
   <div id="subtitle" class="text-center">{{date}}</div>
   <div *ngIf="date" class="alert alert-warning">Każda operacja spowoduje usunięcie</div>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th class="text-left">Nazwa</th>
-      <th class="text-center">Godzina</th>
-      <th class="text-right">Usuń</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let meal of meals; let i = index">
-      <th class="text-left">{{meal.name}}</th>
-      <th class="text-center">{{meal.time}}</th>
-      <th class="text-right">
-        <a type="button" class="close" aria-label="Close">
+
+  <div class="col-md-6">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="text-left">Nazwa</th>
+        <th class="text-center">Godzina</th>
+        <th class="text-right">Usuń</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let meal of meals; let i = index">
+        <th class="text-left">{{meal.name}}</th>
+        <th class="text-center">{{meal.time}}</th>
+        <th class="text-right">
+          <a type="button" class="close" aria-label="Close">
           <span (click)="delete(i)" aria-hidden="true">
             &times;
           </span>
-        </a>
-      </th>
-    </tr>
-    </tbody>
-  </table>
+          </a>
+        </th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <a
+          #addMealButtonElement
+          class="btn btn-primary"
+          [ngClass]="(addMealButtonElement.hidden) ? 'hidden' : 'visible'"
+          (click)="addMealButtonElement.hidden = true;">
+        Dodaj posiłek
+      </a>
 
-  <div class="row mt-10">
-    <a
-        #addMealButtonElement
-        class="btn btn-primary"
-        [ngClass]="(addMealButtonElement.hidden) ? 'hidden' : 'visible'"
-        (click)="addMealButtonElement.hidden = true;">
-      Dodaj posiłek
-    </a>
+      <a *ngIf="date"
+         class="btn btn-success pull-right"
+         (click)="deleteDailyHours()">
+        Przywróć ogólne
+      </a>
 
-    <a *ngIf="date"
-       class="btn btn-success pull-right"
-       (click)="deleteDailyHours()">
-      Przywróć ogólne
-    </a>
+      <div class="row"
+           *ngIf="!addMealButtonElement.hidden; else newMealTime">
+      </div>
 
+      <div class="row mt-10">
+        <button class="btn btn-secondary pull-right" *ngIf="addMealButtonElement.hidden"
+                (click)="addMealButtonElement.hidden = false">Zamknij
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div class="row mt-10">
-    <button class="btn btn-secondary pull-right" *ngIf="addMealButtonElement.hidden"
-            (click)="addMealButtonElement.hidden = false">Zamknij
-    </button>
+  <div class="col-md-12">
+    <component-description [description]="'asdasd'" ></component-description>
   </div>
-  <div *ngIf="!addMealButtonElement.hidden; else newMealTime"></div>
+
 
   <ng-template #newMealTime>
 
