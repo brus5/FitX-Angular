@@ -83,11 +83,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this._productService.remove(product.key);
   }
 
-  private getProduct(key: string) {
-    this._productService.getProduct(key)
-      .subscribe(product => console.log(product));
-  }
-
   private initializeTable(products: Product[]) {
     this.tableResouce = new DataTableResource<Product>(products);
     this.tableResouce.query({offset: 0, limit: this.config.itemsPerPage})
@@ -111,14 +106,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   private mockUser(): AppUser {
     return new User(null, null, null).mockStats();
-  }
-
-  reloadItems(params) {
-    if (!this.tableResouce) {
-      return;
-    }
-
-    this.tableResouce.query(params)
-      .then(items => this.initializedItems = items);
   }
 }

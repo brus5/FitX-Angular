@@ -5,8 +5,7 @@ import {CategoryService} from '../../../shared/services/category.service';
 import {Observable, Subscription} from 'rxjs';
 import {ImageUploadService} from '../../../shared/services/image-upload.service';
 import {HttpEventType} from '@angular/common/http';
-import {NgForm} from '@angular/forms';
-import {DropdownListComponent} from '../../../shared/components/dropdown-list/dropdown-list.component';
+import {FormControl, NgForm, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AppUser} from '../../../shared/models/app-user';
 import {AuthService} from '../../../shared/services/auth.service';
@@ -22,7 +21,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   @ViewChild('form', {static: false}) private formElement: NgForm;
   @ViewChild('inputElement', {static: false}) private inputElement: ElementRef;
   @ViewChild('imageElement', {static: false}) private imageElement: ElementRef;
-  @ViewChild('dropdownListComponent', {static: false}) private dropdownListComponent: DropdownListComponent;
+
+  categoryControl = new FormControl('', [Validators.required]);
 
   @Input() productId: string;
 
@@ -80,7 +80,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.formElement.reset();
     this.inputElement.nativeElement.value = '';
     this.tempImageUrl$ = '';
-    this.dropdownListComponent.onClear();
+    this.product.category = '';
   }
 
   onAccept() {
@@ -89,14 +89,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       this._productService.update(this.productId, this.product);
       this.navigateToProductsPage();
     } else this._productService.create(this.product, this.appUser$.isAdmin);
-  }
-
-  onCategoryChoosed($event: string) {
-    this.product.category = $event;
-  }
-
-  getCategories(): Observable<string[]> {
-    return Observable.of(this.categories);
   }
 
   selectFileAndUpload(event) {
@@ -139,7 +131,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   private fetchProduct(product: Product) {
     this.product = product;
     this.tempImageUrl$ = product.imageUrl;
-    this.dropdownListComponent.select(product.category);
     this.photoUploaded = true;
   }
 

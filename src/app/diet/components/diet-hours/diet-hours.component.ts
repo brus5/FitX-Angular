@@ -96,14 +96,10 @@ export class DietHoursComponent implements OnInit, OnDestroy {
       .then(() => this.removedSuccessful());
   }
 
-  getCategories(): Observable<string[]> {
-    return Observable.of(this.hours$);
+  get hours(): string[] {
+    return this.hours$;
   }
-
-  onTimeSelected($event: string) {
-    this.meal.time = $event;
-  }
-
+  
   resetForm() {
     this.resetMealValues();
     this.formElement.reset();
@@ -112,7 +108,8 @@ export class DietHoursComponent implements OnInit, OnDestroy {
 
   async deleteDailyHours() {
     if (this.areProductsExists) {
-      if (!confirm('Wygląda na to, że są już dodane produkty w tym dniu. przywrócenie globalnych godzin spowoduje usunięcie wszystkich produktów z tego dnia.')) return;
+      if (!confirm('Wygląda na to, że są już dodane produkty w tym dniu. przywrócenie globalnych godzin spowoduje ' +
+        'usunięcie wszystkich produktów z tego dnia.')) return;
       this.removeCustomHours();
       await this._dietService.removeByDate(this.date);
     } else

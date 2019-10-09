@@ -1,10 +1,9 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/finally';
 import {AppUser} from '../../models/app-user';
 import {Somatotype} from '../../models/somatotype';
-import {DropdownListComponent} from '../dropdown-list/dropdown-list.component';
 import {AuthService} from '../../services/auth.service';
 import {SomatotypesService} from '../../services/somatotypes.service';
 import {UserService} from '../../services/user.service';
@@ -19,10 +18,8 @@ import {User} from '../../models/user';
 })
 export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
 
-  @ViewChild('dropdownListComponent', {static: false}) private dropdownListComponent: DropdownListComponent;
   @ViewChild('trainingCheckbox', {static: false}) private trainingCheckbox: MatCheckbox;
   @ViewChild('areobicCheckbox', {static: false}) private areobicCheckbox: MatCheckbox;
-  @ViewChild('selectSomatotype', {static: false}) private selectSomatotype: HTMLSelectElement;
 
   appUser$ = {
     uid: null,
@@ -68,19 +65,6 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
   onAccept() {
     this._userService.update(this.appUser$)
       .then(() => this._toastrService.success('Zaktualizowano'));
-  }
-
-  getSomatotypes() {
-    let array = Array.from(this.somatotypes).map(value => value.name);
-    return (array);
-  }
-
-  onSomatotypeSelected(type: string) {
-    this.appUser$.somatotype = this.somatotypes.find(value => value.name === type);
-  }
-
-  handleError($event: boolean) {
-    this.selectError = $event;
   }
 
   onTrainingsFocusOut() {
@@ -179,20 +163,5 @@ export class CaloriesCalculatorComponent implements OnInit, OnDestroy {
 
   get componentTitle() {
     return 'Kalkulator kalorii';
-  }
-
-  onChange(value: any) {
-    console.log(value)
-  }
-
-  onSelect($event: Event) {
-    console.log($event)
-  }
-
-  onChanges(value) {
-    // this.appUser$.somatotype.name = $event.source.value.name;
-    // this.appUser$.somatotype.value = $event.source.value.value;
-    console.log(value)
-    console.log(this.appUser$.somatotype)
   }
 }

@@ -16,8 +16,20 @@
 
         <div class="row">
           <label for="category">Kategoria</label>
-          <dropdown-list #dropdownListComponent id="category" (item)="onCategoryChoosed($event)"
-                         [items$]="getCategories()"></dropdown-list>
+          <mat-select id="category" required
+                      [formControl]="categoryControl"
+                      [(value)]="product.category"
+                      [placeholder]="product.category">
+            <mat-option [value]="null">-</mat-option>
+            <mat-option *ngFor="let item of categories" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+          <div class="alert alert-danger"
+               *ngIf="categoryControl.hasError('required') &&
+               categoryControl.value == null && categoryControl.dirty">
+            <div>Wybierz produkt</div>
+          </div>
         </div>
 
         <div class="row">

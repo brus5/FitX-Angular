@@ -2,7 +2,7 @@
 
 <div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
   <div id="subtitle" class="text-center">{{date}}</div>
-  <div *ngIf="date" class="alert alert-warning">Każda operacja spowoduje usunięcie </div>
+  <div *ngIf="date" class="alert alert-warning">Każda operacja spowoduje usunięcie</div>
   <table class="table table-striped">
     <thead>
     <tr>
@@ -16,7 +16,7 @@
       <th class="text-left">{{meal.name}}</th>
       <th class="text-center">{{meal.time}}</th>
       <th class="text-right">
-        <a type="button" class="close" aria-label="Close" >
+        <a type="button" class="close" aria-label="Close">
           <span (click)="delete(i)" aria-hidden="true">
             &times;
           </span>
@@ -28,10 +28,10 @@
 
   <div class="row mt-10">
     <a
-      #addMealButtonElement
-      class="btn btn-primary"
-      [ngClass]="(addMealButtonElement.hidden) ? 'hidden' : 'visible'"
-      (click)="addMealButtonElement.hidden = true;">
+        #addMealButtonElement
+        class="btn btn-primary"
+        [ngClass]="(addMealButtonElement.hidden) ? 'hidden' : 'visible'"
+        (click)="addMealButtonElement.hidden = true;">
       Dodaj posiłek
     </a>
 
@@ -63,11 +63,12 @@
         </div>
       </div>
 
-      <div class="row">
-        <label for="category">Godzina</label>
-        <dropdown-list #dropdownListComponent id="category" (item)="onTimeSelected($event)"
-                       [items$]="getCategories()"></dropdown-list>
-      </div>
+      <label for="hour">Godzina</label>
+      <mat-select id="hour" [(value)]="meal.time">
+        <mat-option *ngFor="let item of hours" [value]="item">
+          {{item}}
+        </mat-option>
+      </mat-select>
 
       <div class="row mt-10">
         <button
