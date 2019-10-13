@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Injectable, OnInit, Output} from '@angular/core';
-import {NgbCalendar, NgbDateParserFormatter, NgbDatepickerI18n, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCalendar, NgbDatepickerI18n, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 const CALENDAR_VALUES = {
   pl: {

@@ -1,23 +1,26 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Meta, Title} from '@angular/platform-browser';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
+import {Seo} from '../models/seo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SeoService {
 
-  constructor(private title: Title, private meta: Meta) {
+  constructor(private _aFire: AngularFirestore,
+              private meta: Meta,
+              private title: Title) {}
+
+  public getSeo(componentName: string): Observable<Seo> {
+    let convertedName = componentName
+      .replace('Component','.component')
+      .toLowerCase();
+    return this._aFire.doc<Seo>('seo/' + convertedName).valueChanges();
   }
 
   updateTitle(title: string) {
     this.title.setTitle(title);
-  }
-
-  updateOgUrl(url: string) {
-    this.meta.updateTag({name: 'og:url', content: url})
-  }
-
-  updateDescription(desc: string) {
-    this.meta.updateTag({name: 'description', content: desc})
   }
 }

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {Routes, RouterModule, Router} from '@angular/router';
 
 import {HomeComponent} from './home/components/home/home.component';
 import {LoginComponent} from './core/components/login/login.component';
@@ -18,29 +18,17 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    data: {
-      title: 'Nowości w eKcal',
-      description: 'Aplikacja internetowa śledząca dietę oraz obliczająca tygodniowe zapotrzebowanie kaloryczne.',
-      ogUrl: 'your og url'
-    }
+    data: {title: 'Nowości w eKcal'}
   },
   {
     path: 'login',
     component: LoginComponent,
-    data: {
-      title: 'Logowanie',
-      description: 'Zostań użytkownikiem eKcal.',
-      ogUrl: 'your og url'
-    }
+    data: {title: 'Logowanie'}
   },
   {
     path: 'produkty',
     component: ProductsComponent,
-    data: {
-      title: 'Produkty żywnościowe',
-      description: 'Wyszukaj produkt i dowiedz się to czego potrzebujesz.',
-      ogUrl: 'your og url'
-    }
+    data: {title: 'Produkty żywnościowe'}
   },
   {
     path: 'logoff',
@@ -50,59 +38,36 @@ const routes: Routes = [
     path: 'godziny-posilkow',
     component: DietHoursComponent,
     canActivate: [AuthGuardService],
-    data: {
-      title: 'Godziny posiłków',
-      description: 'Ustal godziny swoich ulubionych posiłków.',
-      ogUrl: 'your og url'
-    }
+    data: {title: 'Godziny posiłków'}
   },
   {
     path: 'opcje-diety',
     component: DietOptionsComponent,
     canActivate: [AuthGuardService],
-    data: {
-      title: 'Opcje diety',
-      description: 'Ustal opcje dotatkowe swojej diety.',
-      ogUrl: 'your og url'
-    }
+    data: {title: 'Opcje diety'}
   },
   {
     path: 'poczekalnia-produktow',
     component: ProductsWaitingRoomComponent,
     canActivate: [AuthGuardService, AdminGuardService],
-    data: {
-      title: 'Poczekalnia produktów',
-      description: 'Produkty czekające na akceptacje administratora.',
-      ogUrl: 'your og url'
-    }},
+    data: {title: 'Poczekalnia produktów'}
+  },
   {
     path: 'kalkulator-kalorii',
     component: CaloriesCalculatorComponent,
-    data: {
-      title: 'Kalkulator kalorii - Oblicz zapotrzebowanie kalorii',
-      description: 'Kalkulator kalorii oblicza zapotrzebowanie na kalorie Twojego organizmu.',
-      ogUrl: 'your og url'
-    }
+    data: {title: 'Kalkulator kalorii - Oblicz zapotrzebowanie kalorii'}
   },
   {
     path: 'dieta',
     component: DietComponent,
     canActivate: [AuthGuardService],
-    data: {
-      title: 'Dieta - Elektroniczny Przewodnik',
-      description: 'Pozwala prowadzić dietę zgodnie z założeniami.',
-      ogUrl: 'your og url'
-    }
+    data: {title: 'Dieta - Elektroniczny Przewodnik'}
   },
   {
     path: 'aktualnosci-dodaj',
     component: NewsFormComponent,
     canActivate: [AuthGuardService, AdminGuardService],
-    data: {
-      title: 'Napisz aktualność',
-      description: 'Napisz nową aktualność.',
-      ogUrl: 'your og url'
-    }
+    data: {title: 'Napisz aktualność'}
   },
 ];
 
@@ -111,4 +76,11 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
+  // Error: Cannot match any routes. URL Segment: 'undefined'
+  // https://stackoverflow.com/a/47649334
+  constructor(private router: Router) {
+    this.router.errorHandler = (error: any) => {
+      this.router.navigate(['404']); // or redirect to default route
+    };
+  }
 }

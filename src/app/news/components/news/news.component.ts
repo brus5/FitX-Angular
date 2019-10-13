@@ -4,7 +4,7 @@ import {NewsService} from '../../services/news.service';
 import {AuthService} from '../../../shared/services/auth.service';
 import {AppUser} from '../../../shared/models/app-user';
 import {Subscription} from 'rxjs';
-import AOS from 'aos';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'news',
@@ -60,10 +60,3 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
 }
-
-// will NOT throw violation
-document.addEventListener("wheel", function(e) {
-
-}, {
-  passive: false
-});

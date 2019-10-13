@@ -43,7 +43,7 @@ registerLocaleData(localePl);
     AdminModule,
     FooterModule,
     NewsModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFirestoreModule,
