@@ -8,8 +8,6 @@ import {DataTableResource} from 'angular5-data-table';
 import {User} from '../../../shared/models/user';
 import {AppUser} from '../../../shared/models/app-user';
 import {SeoService} from '../../../shared/services/seo-service';
-import {Meta, Title} from '@angular/platform-browser';
-import {Seo} from '../../../shared/models/seo';
 
 @Component({
   selector: 'products',
@@ -32,14 +30,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   private productsSubscription: Subscription;
   private userAuthSubscription: Subscription = new Subscription();
   private itemCount: number;
-  private isSeraching: boolean;
+  private isSearching: boolean;
 
   constructor(private _navService: NavService,
               private _productService: ProductService,
               private _auth: AuthService,
-              private _seo: SeoService,
-              private title: Title,
-              private meta: Meta) {}
+              private _seo: SeoService) {}
 
   async ngOnInit() {
     this.productsSubscription = this._productService.getAll()
@@ -51,26 +47,26 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.userAuthSubscription = this._auth.appUser$$
       .subscribe(appUser => this.appUser$ = appUser);
-
-    this._seo.getSeo(this.constructor.name)
-      .subscribe((seo: Seo) => this.initSeo(seo));
+//TODO here
+    this._seo.init('products.component');
   }
 
   ngOnDestroy() {
     this.productsSubscription.unsubscribe();
+    this._seo.unsubscribe();
   }
 
   filter(query: string) {
     const filteredProducts = (query) ?
       this.products.filter(p => p.name.toLowerCase().includes(query.toLowerCase())) :
       this.products;
-    this.isSeraching = (query) ? true : false;
+    this.isSearching = (query) ? true : false;
     this.filteredItems = filteredProducts;
     this.initializeTable(filteredProducts);
   }
 
   pageChanged($event) {
-    if (this.isSeraching)
+    if (this.isSearching)
       this.pageChangedWhileTyping($event);
     else
       this.pageChangedNormally($event);
@@ -115,23 +111,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   private mockUser(): AppUser {
     return new User(null, null, null).mockStats();
-  }
-
-  private initSeo(seo: Seo) {
-    this.title.setTitle(seo.facebook.title);
-    this.meta.addTags([
-      {property: 'fb:app_id', content: seo.facebook.app_id},
-      {property: 'og:url', content: seo.facebook.url},
-      {property: 'og:title', content: seo.facebook.title},
-      {property: 'og:image', content: seo.facebook.image},
-      {property: 'og:type', content: seo.facebook.type},
-      {property: 'og:description', content: seo.facebook.description},
-      {name: 'twitter:card', content: seo.twitter.card},
-      {name: 'twitter:site', content: seo.twitter.site},
-      {name: 'twitter:title', content: seo.twitter.title},
-      {name: 'twitter:description', content: seo.twitter.description},
-      {name: 'twitter:image', content: seo.twitter.image},
-      {name: 'twitter:creator', content: seo.twitter.creator},
-    ]);
   }
 }
