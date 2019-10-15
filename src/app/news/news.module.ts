@@ -29,30 +29,18 @@ import {AdminGuardService} from '../shared/services/admin-guard.service';
         path: 'aktualnosci/nowy',
         component: NewsFormComponent,
         canActivate: [AuthGuardService, AdminGuardService],
-        data: {
-          title: 'Nowa aktualność',
-          description: 'Napisz nowego newsa do portalu.',
-          ogUrl: 'your og url'
-        }
+        data: {title: 'Nowa aktualność'}
       },
       {
         path: 'aktualnosci/edycja/:id',
         component: NewsFormComponent,
         canActivate: [AuthGuardService, AdminGuardService],
-        data: {
-          title: 'Edytuj aktualność',
-          description: 'Edytuj newsa.',
-          ogUrl: 'your og url'
-        }
+        data: {title: 'Edytuj aktualność'}
       },
       {
         path: 'aktualnosci/:title/:id',
         component: NewsReadMoreComponent,
-        data: {
-          title: 'Aktualność',
-          description: 'News.',
-          ogUrl: 'your og url'
-        }
+        data: {title: 'Aktualność'}
       },
     ])
   ],

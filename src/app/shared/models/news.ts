@@ -7,4 +7,5 @@ export interface News {
   imageHeader: string;
   images: string[];
   date: string; // required by firebase :(
+  creator: string;
 }

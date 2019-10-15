@@ -3,9 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NewsService} from '../../services/news.service';
 import {Observable, Subscription} from 'rxjs';
 import {News} from '../../../shared/models/news';
-import * as AOS from 'aos';
 import {SeoService} from '../../../shared/services/seo-service';
-import {Meta, Title} from '@angular/platform-browser';
+import {Seo} from '../../../shared/models/seo';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'news-read-more',
@@ -19,29 +19,29 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
   news = {} as News;
 
   private newsSubscription: Subscription = new Subscription();
+  private initNewsSubscription: Subscription = new Subscription();
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private _newsService: NewsService,
-              private _seo: SeoService,
-              private meta: Meta,
-              private title: Title) { }
+              private _seo: SeoService) { }
 
   ngOnInit() {
-    AOS.init({
-      disable: 'mobile',
-      offset: 0,
-      once: true,
-    });
     this.newsId = this.activatedRoute.snapshot.paramMap.get('id');
-    if (this.newsId)
+    if (this.newsId) {
       this.newsSubscription = this._newsService.getNews(this.newsId)
-        .subscribe(item => {
-          this.initNews(item);
-          this.initMetaTags();
-        });
+        .subscribe(item =>
+           this.initNewsSubscription = this.initNews(item)
+             .pipe(
+               tap(() => this.initMeta())
+             ).subscribe(_ => undefined)
+        );
+    }
   }
 
   ngOnDestroy() {
+    this._seo.disconnect();
+    this.newsSubscription.unsubscribe();
+    this.initNewsSubscription.unsubscribe();
   }
 
   get written(): any {
@@ -53,22 +53,29 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
     return Observable.of(item);
   }
 
-  private initMetaTags() {
-    //TODO work here
-    this.title.setTitle(this.news.title);
-    this.meta.addTags([
-      {property: 'fb:app_id', content: '2439007089753255'},
-      {property: 'og:url', content: this.news.title + '/' + this.newsId},
-      {property: 'og:title', content: this.news.title},
-      {property: 'og:image', content: this.news.imageHeader},
-      {property: 'og:type', content: 'article'},
-      {property: 'og:description', content: this.news.content},
-      {name: 'twitter:card', content: 'summary_large_image'},
-      {name: 'twitter:site', content: this.title + '/' + this.newsId},
-      {name: 'twitter:title', content: this.news.title},
-      {name: 'twitter:description', content: this.news.content},
-      {name: 'twitter:image', content: this.news.imageHeader},
-      {name: 'twitter:creator', content: 'Łukasz Krawczak'},
-    ])
+  private initMeta() {
+    let site = 'https://ekcal.pl/aktualnosci/' +
+      this._newsService.cutLink(this.news.title) + '/' + this.newsId;
+
+    let seo = {
+      name: this.news.title,
+      facebook: {
+        url: site,
+        app_id: this._seo.Facebook.APP_ID,
+        title: this.news.title,
+        image: this.news.imageHeader,
+        type: 'article',
+        description: this.news.content
+      },
+      twitter: {
+        site: site,
+        card: 'summary_large_image',
+        title: this.news.title,
+        description: this.news.content,
+        image: this.news.imageHeader,
+        creator: this.news.creator
+      }
+    } as Seo;
+    this._seo.initTags(seo);
   }
 }

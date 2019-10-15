@@ -3,6 +3,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {News} from '../../shared/models/news';
 import {map} from 'rxjs/operators';
+import {Seo} from '../../shared/models/seo';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,10 @@ export class NewsService {
 
   public remove(news: News) {
     return this._aFire.doc('news/' + news.id).delete();
+  }
+
+  public createSeo(newsId: string, seo: Seo) {
+    return this._aFire.doc('seo/' + newsId).set(seo);
   }
 
   public cutLink(str: string): string {

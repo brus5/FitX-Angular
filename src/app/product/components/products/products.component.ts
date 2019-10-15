@@ -47,13 +47,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.userAuthSubscription = this._auth.appUser$$
       .subscribe(appUser => this.appUser$ = appUser);
-//TODO here
+
     this._seo.init('products.component');
   }
 
   ngOnDestroy() {
     this.productsSubscription.unsubscribe();
-    this._seo.unsubscribe();
+    this._seo.disconnect();
   }
 
   filter(query: string) {

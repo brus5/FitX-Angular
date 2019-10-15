@@ -5,16 +5,12 @@
     {{written | date : 'longDate'}}
   </div>
   <div
-    class="image-top"
-    data-aos="fade"
-    data-aos-duration="2000">
+    class="image-top">
     <img *ngIf="news.imageHeader" [src]="news.imageHeader" width="100%">
   </div>
   <div
     id="content"
     class="col-md-12"
-    data-aos="fade-up"
-    data-aos-duration="1000"
     [innerHTML]="news.content">
   </div>
 </responsive-switcher>
