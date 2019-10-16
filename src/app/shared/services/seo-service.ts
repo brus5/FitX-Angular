@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Meta, Title} from '@angular/platform-browser';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {Seo} from '../models/seo';
 import {NewsService} from '../../news/services/news.service';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,9 @@ export class SeoService {
   public init(componentName?: string): Subscription {
     return this._aFire.doc<Seo>('seo/' + componentName)
       .valueChanges()
+      .pipe(
+        tap(() => this.clearTags())
+      )
       .subscribe(seo => this.initTags(seo));
   }
 
@@ -44,21 +48,23 @@ export class SeoService {
     this.title.setTitle(title);
   }
 
-  public initTags(seo: Seo) {
-    this.pageTitle = seo.facebook.title;
+  public initTags(seo: Seo): Observable<Seo> {
+    this.pageTitle = seo.title;
     this.fbId = seo.facebook.app_id;
-    this.fbUrl = seo.facebook.url;
-    this.fbTitle = seo.facebook.title;
-    this.fbImage = seo.facebook.image;
+    this.fbUrl = seo.url;
+    this.fbTitle = seo.title;
+    this.fbImage = seo.image;
     this.fbType = seo.facebook.type;
-    this.fbDescription = seo.facebook.description.substring(0, 149);
+    this.fbDescription = seo.description.substring(0, 149);
 
     this.twCard = seo.twitter.card;
-    this.twSite = seo.twitter.site;
-    this.twTitle = seo.twitter.title;
-    this.twDescription = seo.twitter.description.substring(0, 199);
-    this.twImage = seo.twitter.image;
+    this.twSite = seo.url;
+    this.twTitle = seo.title;
+    this.twDescription = seo.description.substring(0, 199);
+    this.twImage = seo.image;
     this.twCreator = seo.twitter.creator;
+
+    return Observable.of(seo);
   }
 
   public disconnect(): void {
@@ -66,11 +72,8 @@ export class SeoService {
     this.clearTags();
   }
 
-  private unsubscribe(): void {
-    this.init().unsubscribe();
-  }
-
-  private clearTags(): void {
+  /** Clear tags before any action */
+  public clearTags(): Observable<any> {
     this.meta.removeTag('property=' + '"' + this.Facebook.APP_ID_TAG + '"');
     this.meta.removeTag('property=' + '"' + this.Facebook.URL + '"');
     this.meta.removeTag('property=' + '"' + this.Facebook.TITLE + '"');
@@ -83,6 +86,12 @@ export class SeoService {
     this.meta.removeTag('name=' + '"' + this.Twitter.DESC + '"');
     this.meta.removeTag('name=' + '"' + this.Twitter.IMAGE + '"');
     this.meta.removeTag('name=' + '"' + this.Twitter.CREATOR + '"');
+
+    return Observable.of(null);
+  }
+
+  private unsubscribe(): void {
+    this.init().unsubscribe();
   }
 
   private set pageTitle(title: string) {
@@ -90,7 +99,7 @@ export class SeoService {
   }
 
   private set fbId(id: string) {
-    this.meta.addTag({property: this.Facebook.APP_ID_TAG, content: id})
+    this.meta.addTag({property: this.Facebook.APP_ID_TAG, content: this.Facebook.APP_ID})
   }
 
   private set fbUrl(url: string) {

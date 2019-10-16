@@ -33,7 +33,7 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
            this.initNewsSubscription = this.initNews(item)
              .pipe(
                tap(() => this.initMeta())
-             ).subscribe(_ => undefined)
+             ).subscribe(_ => null)
         );
     }
   }
@@ -58,24 +58,24 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
       this._newsService.cutLink(this.news.title) + '/' + this.newsId;
 
     let seo = {
-      name: this.news.title,
+      title: this.news.title,
+      url: site,
+      image: this.news.imageHeader,
+      description: this.news.content,
+
       facebook: {
-        url: site,
         app_id: this._seo.Facebook.APP_ID,
-        title: this.news.title,
-        image: this.news.imageHeader,
         type: 'article',
-        description: this.news.content
       },
       twitter: {
-        site: site,
         card: 'summary_large_image',
-        title: this.news.title,
-        description: this.news.content,
-        image: this.news.imageHeader,
         creator: this.news.creator
       }
     } as Seo;
-    this._seo.initTags(seo);
+
+    this._seo.clearTags()
+      .pipe(
+        tap(_ => this._seo.initTags(seo))
+      ).subscribe(_ => null);
   }
 }
