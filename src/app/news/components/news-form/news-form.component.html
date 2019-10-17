@@ -30,7 +30,7 @@
           #title="ngModel"
           [(ngModel)]="news.title">
         <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
-          <div *ngIf="title.errors.required">{{Validation.TITLE}}</div>
+          <div *ngIf="title.errors.required">{{Validation.CONTENT}}</div>
         </div>
       </div>
 
@@ -48,6 +48,30 @@
         </textarea>
         <div class="alert alert-danger" *ngIf="newsContent.touched && newsContent.invalid">
           <div *ngIf="newsContent.errors.required">{{Validation.TITLE}}</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="contentShort">Krótka treść widoczna na stronie głównej</label>
+        <textarea
+          id="contentShort"
+          class="form-control"
+          name="newsContentShort" type="text"
+          placeholder="Treść"
+          required
+          rows="5"
+          #newsContentShort="ngModel"
+          [(ngModel)]="news.contentShort">
+        </textarea>
+        <div class="alert alert-danger" *ngIf="newsContentShort.touched && newsContentShort.invalid">
+          <div *ngIf="newsContentShort.errors.required">{{Validation.CONTENT_SHORT}}</div>
+        </div>
+        <div>
+          Ilość znaków:
+          <span [ngClass]="(news.contentShort?.length > 200) ? 'error' : 'valid' &&
+                           (news.contentShort?.length < 160) ? 'error' : 'valid'" >
+            {{news.contentShort?.length}} / 200
+          </span>
         </div>
       </div>
 

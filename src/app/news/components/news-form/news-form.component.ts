@@ -115,7 +115,8 @@ export class NewsFormComponent implements OnInit, OnDestroy {
 
   Validation = {
     TITLE: 'Podaj tytuł',
-
+    CONTENT: 'Podaj zawartość newsa',
+    CONTENT_SHORT: 'Podaj zawartość newsa widoczna na stronie głównej'
   };
 }
 

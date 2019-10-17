@@ -32,6 +32,12 @@
     <a
       [routerLink]="['/aktualnosci/' + cuttedLink(item.title) + '/', item.id]">
       {{item.title}} {{item.date | date : 'd MMM y'}}
+      <i
+        class="material-icons hover md-18"
+        *ngIf="admin"
+        [routerLink]="['/aktualnosci/edycja/', item.id]">
+        edit
+      </i>
     </a>
     <span class="date text-primary">
 

@@ -95,7 +95,7 @@ export class NewsService {
   }
 
   public cutNews(content: string, maxChars: number): string {
-    return content.substring(0, maxChars) + '...';
+    return content.substring(0, maxChars);
   }
 
   public set loading(loading: boolean) {

@@ -3,6 +3,7 @@ export interface News {
   title: string;
   urlTitle: string;
   content: string;
+  contentShort: string;
   bigHeader: boolean;
   imageHeader: string;
   images: string[];
