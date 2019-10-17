@@ -61,7 +61,7 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
       title: this.news.title,
       url: site,
       image: this.news.imageHeader,
-      description: this.news.content,
+      description: this.news.contentShort,
 
       facebook: {
         app_id: this._seo.Facebook.APP_ID,
