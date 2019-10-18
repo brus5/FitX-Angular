@@ -11,7 +11,7 @@ import {Seo} from '../../shared/models/seo';
 export class NewsService {
 
   Config = {
-    MAX_WORDS: 5,
+    MAX_WORDS: 30,
     MAX_LATEST_NEWS: 16,
   };
 

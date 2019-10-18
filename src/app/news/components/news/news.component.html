@@ -1,30 +1,50 @@
 <div *ngIf="!isLoading; else loadingProducts">
-  <ng-container *ngFor="let item of newses">
-    <div *ngIf="item.bigHeader">
-      <news-big-tile [news]="item" [isAdmin]="admin"></news-big-tile>
-    </div>
-  </ng-container>
-
-  <ng-container
-    *ngFor="let item of newses; let i = index">
-    <div *ngIf="!item.bigHeader && i < Config.MAX_TILES">
-      <news-tile  [news]="item" [isAdmin]="admin"></news-tile>
-    </div>
-    <div *ngIf="i >= Config.MAX_TILES">
-      <div
-        *ngIf="i == Config.MAX_TILES">
-        <h4 class="text-center text-primary">
-          <!-- I had to do that, it's ugly i I know. ;(-->
-          &nbsp;<br/>
-          Reszta aktualności
-        </h4>
+  <div class="col-md-12">
+    <ng-container *ngFor="let item of newses">
+      <div *ngIf="item.bigHeader">
+        <news-big-tile [news]="item" [isAdmin]="admin"></news-big-tile>
       </div>
+    </ng-container>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
       <ng-container
-        [ngTemplateOutlet]="i >= Config.MAX_TILES ? archive : null"
-        [ngTemplateOutletContext]="{item: item}">
+        *ngFor="let item of newses; let i = index">
+        <div *ngIf="!item.bigHeader && i < Config.MAX_TILES">
+          <news-tile [news]="item" [isAdmin]="admin"></news-tile>
+        </div>
+        <div
+          *ngIf="i >= Config.MAX_TILES">
+          <div
+            *ngIf="i == Config.MAX_TILES">
+            <h4 class="text-center text-primary">
+              <!-- I had to do that, it's ugly i I know. ;(-->
+              &nbsp;<br/>
+              Reszta aktualności
+            </h4>
+          </div>
+          <ng-container
+            [ngTemplateOutlet]="i >= Config.MAX_TILES ? archive : null"
+            [ngTemplateOutletContext]="{item: item}">
+          </ng-container>
+        </div>
+
       </ng-container>
     </div>
-  </ng-container>
+
+    <div class="col-md-4">
+      <div class="card" style="height: 1000px">
+        <h4 class="card-title">Prawy Panel</h4>
+        <div class="card-body">
+          <p>Tutaj prawy panel, więcej info wkrótce ;-)</p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
 </div>
 
 <ng-template #archive let-item="item">

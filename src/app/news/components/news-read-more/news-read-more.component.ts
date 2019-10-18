@@ -6,6 +6,8 @@ import {News} from '../../../shared/models/news';
 import {SeoService} from '../../../shared/services/seo-service';
 import {Seo} from '../../../shared/models/seo';
 import {tap} from 'rxjs/operators';
+import {AppUser} from '../../../shared/models/app-user';
+import {AuthService} from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'news-read-more',
@@ -17,15 +19,21 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
   @Input('newsId') newsId: string;
 
   news = {} as News;
+  appUser$ = {} as AppUser;
 
   private newsSubscription: Subscription = new Subscription();
   private initNewsSubscription: Subscription = new Subscription();
-  constructor(private activatedRoute: ActivatedRoute,
+  private userSubscription: Subscription = new Subscription();
+
+  constructor(private _authService: AuthService,
+              private activatedRoute: ActivatedRoute,
               private router: Router,
               private _newsService: NewsService,
               private _seo: SeoService) { }
 
   ngOnInit() {
+    this.userSubscription = this._authService.appUser$$
+      .subscribe(user => user ? this.appUser$ = user : this.appUser$);
     this.newsId = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.newsId) {
       this.newsSubscription = this._newsService.getNews(this.newsId)
@@ -42,10 +50,15 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
     this._seo.disconnect();
     this.newsSubscription.unsubscribe();
     this.initNewsSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 
   get written(): any {
     return this.news.date;
+  }
+
+  get admin() {
+    return this.appUser$.isAdmin;
   }
 
   private initNews(item: News): Observable<any> {

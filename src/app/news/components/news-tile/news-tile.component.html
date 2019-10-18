@@ -1,25 +1,23 @@
-<div class="col-md-6">
-  <div class="card">
-    <h5 class="card-title">
-      <a
-        class="btn-link"
-        [routerLink]="['/aktualnosci/' + cuttedLink + '/', news.id]">
-        {{news.title}}
-      </a>
-      <i
-        class="material-icons hover md-18"
-        *ngIf="isAdmin"
-        [routerLink]="['/aktualnosci/edycja/', news.id]">
-        edit
-      </i>
-    </h5>
-    <img [src]="news.imageHeader">
-    <div class="card-body" [innerHTML]="cuttedContent"></div>
+<div class="card">
+  <h5 class="card-title">
     <a
-      class="btn-link card-body"
+      class="btn-link"
       [routerLink]="['/aktualnosci/' + cuttedLink + '/', news.id]">
-      Czytaj więcej
+      {{news.title}}
     </a>
-    <div class="card-body"></div>
-  </div>
+    <i
+      class="material-icons hover md-18"
+      *ngIf="isAdmin"
+      [routerLink]="['/aktualnosci/edycja/', news.id]">
+      edit
+    </i>
+  </h5>
+  <img [src]="news.imageHeader" [alt]="news.title">
+  <div class="card-body" [innerHTML]="cuttedContent"></div>
+  <a
+    class="btn-link card-body"
+    [routerLink]="['/aktualnosci/' + cuttedLink + '/', news.id]">
+    Czytaj więcej
+  </a>
+  <div class="card-body"></div>
 </div>

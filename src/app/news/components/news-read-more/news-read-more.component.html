@@ -4,6 +4,14 @@
   <div class="text-accent date">
     {{written | date : 'longDate'}}
   </div>
+  <div class="text text-center mt-10">
+    <div
+      class="btn btn-default"
+      *ngIf="admin"
+      [routerLink]="['/aktualnosci/edycja/', news.id]">
+      Edytuj newsa
+    </div>
+  </div>
   <div
     class="image-top">
     <img *ngIf="news.imageHeader" [src]="news.imageHeader" width="100%">
