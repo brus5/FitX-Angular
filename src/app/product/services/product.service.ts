@@ -9,6 +9,8 @@ import {map} from 'rxjs/operators';
 })
 export class ProductService {
 
+  private isLoading = true;
+
   constructor(private _db: AngularFireDatabase) {}
 
   public getAll(): Observable<Product[]> {
@@ -68,5 +70,13 @@ export class ProductService {
           actions.map(action => (
             {key: action.payload.key, ...action.payload.val() as Product}))
         ));
+  }
+
+  public set loading(loading: boolean) {
+    this.isLoading = loading;
+  }
+
+  public get loading(): boolean {
+    return this.isLoading;
   }
 }

@@ -2,14 +2,14 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/finally';
-import {AppUser} from '../../models/app-user';
-import {Somatotype} from '../../models/somatotype';
-import {AuthService} from '../../services/auth.service';
-import {SomatotypesService} from '../../services/somatotypes.service';
-import {UserService} from '../../services/user.service';
+import {AppUser} from '../../../shared/models/app-user';
+import {Somatotype} from '../../../shared/models/somatotype';
+import {AuthService} from '../../../shared/services/auth.service';
+import {SomatotypesService} from '../../../shared/services/somatotypes.service';
+import {UserService} from '../../../shared/services/user.service';
 import {ToastrService} from 'ngx-toastr';
 import {MatCheckbox} from '@angular/material';
-import {User} from '../../models/user';
+import {User} from '../../../shared/models/user';
 
 @Component({
   selector: 'calories-calculator',

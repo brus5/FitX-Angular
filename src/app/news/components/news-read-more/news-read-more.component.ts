@@ -24,6 +24,7 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
   private newsSubscription: Subscription = new Subscription();
   private initNewsSubscription: Subscription = new Subscription();
   private userSubscription: Subscription = new Subscription();
+  newsLoading: boolean = true;
 
   constructor(private _authService: AuthService,
               private activatedRoute: ActivatedRoute,
@@ -51,6 +52,7 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
     this.newsSubscription.unsubscribe();
     this.initNewsSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
+    this.newsLoading = true;
   }
 
   get written(): any {
@@ -63,6 +65,7 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
 
   private initNews(item: News): Observable<any> {
     this.news = item;
+    this.newsLoading = false;
     return Observable.of(item);
   }
 

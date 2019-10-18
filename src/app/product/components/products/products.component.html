@@ -1,64 +1,77 @@
 <component-title [title]="productsTitle"></component-title>
-<div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
+<div *ngIf="!productsLoading; else loadingProducts">
+  <div [ngClass]="(isHandset$ | async) ? 'mobile-content' : 'desktop-content'">
 
-  <a
-    type="button"
-    class="btn btn-primary"
-    *ngIf="appUser$"
-    routerLink="/produkty/nowy">
-    Nowy Produkt
-  </a>
-  <input
-      #query
-      (keyup)="filter(query.value)"
-      type="text"
-      class="form-control"
-      placeholder="Nazwa produktu...">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th></th>
-      <th class="text-left">Nazwa produktu</th>
-      <th class="text-center">Ilość</th>
-      <th class="text-right" style="width: 200px">Kalorie/100 g</th>
-      <th class="text-right"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr
-      class="product-row"
-      *ngFor="let product of initializedItems | filterProduct: query.value; let i = index">
-      <th style="width: 100px;">
-        <div [style.backgroundImage]="'url(' + product.imageUrl + ')'" class="thumbnail"></div>
-      </th>
-      <th class="text-left">
-        {{toUpperCase(product.name)}}
-        <br/>
-        <product-nutrition
-          [nutrition]="product.nutrition"
-          [isHandset]="isHandset$">
-        </product-nutrition>
-      </th>
-      <th class="text-center">{{product}}</th>
-      <th class="text-right">{{product.nutrition.kcal}}</th>
-      <th *ngIf="appUser$" class="text-right">
-        <button
-          type="button" class="btn btn-default btn-sm"
-          *ngIf="appUser$.isAdmin"
-          [routerLink]="['/produkty/edycja', product.key]">
-          Edit
-        </button>
-      </th>
-    </tr>
-    </tbody>
-  </table>
-  <div class="row text-center">
-    <div class="col-xs-12 col-12">
-      <pagination
-        [itemsPerPage]="config.itemsPerPage"
-        [totalItems]="fileredProductsCount"
-        (pageChanged)="pageChanged($event)">
-      </pagination>
+    <a
+      type="button"
+      class="btn btn-primary"
+      *ngIf="appUser$"
+      routerLink="/produkty/nowy">
+      Nowy Produkt
+    </a>
+    <input
+        #query
+        (keyup)="filter(query.value)"
+        type="text"
+        class="form-control"
+        placeholder="Nazwa produktu...">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th></th>
+        <th class="text-left">Nazwa produktu</th>
+        <th class="text-center">Ilość</th>
+        <th class="text-right" style="width: 200px">Kalorie/100 g</th>
+        <th class="text-right"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        class="product-row"
+        *ngFor="let product of initializedItems | filterProduct: query.value; let i = index">
+        <th style="width: 100px;">
+          <div [style.backgroundImage]="'url(' + product.imageUrl + ')'" class="thumbnail"></div>
+        </th>
+        <th class="text-left">
+          {{toUpperCase(product.name)}}
+          <br/>
+          <product-nutrition
+            [nutrition]="product.nutrition"
+            [isHandset]="isHandset$">
+          </product-nutrition>
+        </th>
+        <th class="text-center">{{product}}</th>
+        <th class="text-right">{{product.nutrition.kcal}}</th>
+        <th *ngIf="appUser$" class="text-right">
+          <button
+            type="button" class="btn btn-default btn-sm"
+            *ngIf="appUser$.isAdmin"
+            [routerLink]="['/produkty/edycja', product.key]">
+            Edit
+          </button>
+        </th>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row text-center">
+      <div class="col-xs-12 col-12">
+        <pagination
+          [itemsPerPage]="config.itemsPerPage"
+          [totalItems]="fileredProductsCount"
+          (pageChanged)="pageChanged($event)">
+        </pagination>
+      </div>
     </div>
   </div>
 </div>
+
+<ng-template #loadingProducts style="margin-top: 100px">
+  <div>
+    <progress-spinner></progress-spinner>
+  </div>
+</ng-template>
+
+<div *ngIf="!productsLoading">
+  <app-footer></app-footer>
+</div>
+

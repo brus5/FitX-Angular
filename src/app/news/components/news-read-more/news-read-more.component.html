@@ -1,24 +1,38 @@
 <responsive-switcher>
-  <component-title [title]="news.title"></component-title>
-  <hr>
-  <div class="text-accent date">
-    {{written | date : 'longDate'}}
-  </div>
-  <div class="text text-center mt-10">
-    <div
-      class="btn btn-default"
-      *ngIf="admin"
-      [routerLink]="['/aktualnosci/edycja/', news.id]">
-      Edytuj newsa
+  <div *ngIf="!newsLoading; else loadingNews">
+    <div class="row">
+      <component-title [title]="news.title"></component-title>
+      <hr>
+      <div class="text-accent date">
+        {{written | date : 'longDate'}}
+      </div>
+      <div class="text text-center mt-10">
+        <div
+          class="btn btn-default"
+          *ngIf="admin"
+          [routerLink]="['/aktualnosci/edycja/', news.id]">
+          Edytuj newsa
+        </div>
+      </div>
+      <div
+        class="image-top">
+        <img *ngIf="news.imageHeader" [src]="news.imageHeader" width="100%">
+      </div>
+      <div
+        id="content"
+        class="col-md-12"
+        [innerHTML]="news.content">
+      </div>
     </div>
   </div>
-  <div
-    class="image-top">
-    <img *ngIf="news.imageHeader" [src]="news.imageHeader" width="100%">
-  </div>
-  <div
-    id="content"
-    class="col-md-12"
-    [innerHTML]="news.content">
-  </div>
 </responsive-switcher>
+
+<ng-template #loadingNews style="margin-top: 100px">
+  <div>
+    <progress-spinner></progress-spinner>
+  </div>
+</ng-template>
+
+<div *ngIf="!newsLoading">
+  <app-footer></app-footer>
+</div>

@@ -2,6 +2,9 @@ $border-radius-thumbnail: 100%;
 $background-size-thumbnail: cover;
 $margin-thumbnail: 0;
 
+a { margin-top: 16px }
+progress-spinner { margin: 56px}
+
 .mobile-content .thumbnail {
   width: 35px;
   height: 35px;
@@ -26,8 +29,5 @@ table > tbody > tr > th {
   font-weight: normal;
 }
 
-a {
-  margin-top: 16px;
-}
 
 

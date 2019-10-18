@@ -8,6 +8,7 @@ import {ProductNutritionComponent} from './components/product-nutrition/product-
 import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
+import {FooterModule} from '../footer/footer.module';
 
 import {ProductService} from './services/product.service';
 import {AuthGuardService} from '../shared/services/auth-guard.service';
@@ -23,6 +24,7 @@ import {AuthGuardService} from '../shared/services/auth-guard.service';
   imports: [
     SharedModule,
     ReactiveFormsModule,
+    FooterModule,
     RouterModule.forChild([
       {
         path: 'produkty/nowy',

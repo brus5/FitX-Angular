@@ -14,6 +14,7 @@ import {ProductModule} from './product/product.module';
 import {AdminModule} from './admin/admin.module';
 import {FooterModule} from './footer/footer.module';
 import {NewsModule} from './news/news.module';
+import {CalculatorModule} from './calculator/calculator.module';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -43,6 +44,7 @@ registerLocaleData(localePl);
     AdminModule,
     FooterModule,
     NewsModule,
+    CalculatorModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,

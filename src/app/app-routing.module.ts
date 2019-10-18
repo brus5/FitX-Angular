@@ -5,7 +5,7 @@ import {HomeComponent} from './home/components/home/home.component';
 import {LoginComponent} from './core/components/login/login.component';
 import {DietComponent} from './diet/components/diet/diet.component';
 import {DietHoursComponent} from './diet/components/diet-hours/diet-hours.component';
-import {CaloriesCalculatorComponent} from './shared/components/calories-calculator/calories-calculator.component';
+import {CaloriesCalculatorComponent} from './calculator/components/calories-calculator/calories-calculator.component';
 import {LogoffComponent} from './core/components/logoff/logoff.component';
 import {AuthGuardService} from './shared/services/auth-guard.service';
 import {ProductsComponent} from './product/components/products/products.component';

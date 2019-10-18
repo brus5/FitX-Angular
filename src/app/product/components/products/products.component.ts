@@ -54,6 +54,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.productsSubscription.unsubscribe();
     this._seo.disconnect();
+    this._productService.loading = true;
   }
 
   filter(query: string) {
@@ -84,6 +85,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     return 'Lista produktów';
   }
 
+  get productsLoading() {
+    return this._productService.loading;
+  }
+
   private remove(product: Product) {
     this._productService.remove(product.key);
   }
@@ -94,6 +99,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .then(items => this.initializedItems = items);
     this.tableResouce.count()
       .then(count => this.itemCount = count);
+
+    setTimeout(_ => {
+      this._productService.loading = false;
+    },1000);
   }
 
   private pageChangedWhileTyping($event): void {

@@ -14,7 +14,6 @@ import {ResponsiveComponent} from './components/responsive/responsive.component'
 import {DropdownListComponent} from './components/dropdown-list/dropdown-list.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {ProgressSpinnerComponent} from './components/progress-spinner/progress-spinner.component';
-import {CaloriesCalculatorComponent} from './components/calories-calculator/calories-calculator.component';
 import {TitleComponent} from './components/title/title.component';
 import {DescriptionComponent} from './components/description/description.component';
 
@@ -35,7 +34,6 @@ import {HoursService} from './services/hours.service';
     DropdownListComponent,
     CalendarComponent,
     ProgressSpinnerComponent,
-    CaloriesCalculatorComponent,
     TitleComponent,
     DescriptionComponent,
 
@@ -61,7 +59,6 @@ import {HoursService} from './services/hours.service';
     DropdownListComponent,
     CalendarComponent,
     ProgressSpinnerComponent,
-    CaloriesCalculatorComponent,
     TitleComponent,
     DescriptionComponent,
 
