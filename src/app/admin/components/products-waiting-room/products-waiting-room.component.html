@@ -1,10 +1,12 @@
 <responsive-switcher>
   <component-title [title]="waitingRoomTitle"></component-title>
-  <div class="row" *ngIf="products">
-    <ng-container *ngFor="let p of products; let i = index">
-      <div class="col-md-6">
-        <product-card-waiting [product]="p"></product-card-waiting>
-      </div>
-    </ng-container>
+  <div id="content">
+    <div class="row" *ngIf="products">
+      <ng-container *ngFor="let p of products; let i = index">
+        <div class="col-md-6">
+          <product-card-waiting [product]="p"></product-card-waiting>
+        </div>
+      </ng-container>
+    </div>
   </div>
 </responsive-switcher>

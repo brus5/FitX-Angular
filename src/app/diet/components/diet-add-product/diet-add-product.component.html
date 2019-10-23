@@ -30,13 +30,14 @@
 
   </table>
 </div>
-<a #addProductButtonElement
-   type="button" class="btn btn-default btn-sm"
-   [ngClass]="(addProductButtonElement.hidden) ? 'hidden' : 'visible'"
-   (click)="addProductButtonElement.hidden = true">
-  Dodaj posiłek
+<a
+  type="button" class="btn btn-primary btn-sm"
+  #addProductButtonElement
+  [ngClass]="(addProductButtonElement.hidden) ? 'hidden' : 'visible'"
+  (click)="addProductButtonElement.hidden = true"
+>
+  Dodaj
 </a>
-
 <div *ngIf="!addProductButtonElement.hidden; else newProduct"></div>
 
 <ng-template #newProduct>
@@ -54,8 +55,13 @@
             [autofocus]="true">
         <!--(keyup)="keyUp.next(query.value); onInputChanged()" insdead of (keyup) above -->
         <span class="input-group-btn">
-          <button class="btn btn-danger" *ngIf="addProductButtonElement.hidden"
-                  (click)="addProductButtonElement.hidden = false">X</button>
+          <button
+            class="btn btn-danger"
+            *ngIf="addProductButtonElement.hidden"
+            (click)="addProductButtonElement.hidden = false"
+          >
+            X
+          </button>
         </span>
       </div>
     </div>

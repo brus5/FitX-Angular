@@ -1,20 +1,23 @@
 $content-margin-desktop: -15%;
 $content-margin-mobile: -3%;
 $bg-color: #282828;
+$font-color: #cccccc;
+$accent-color: #888;
 
 .desktop-menu {}
 .mobile-menu {}
 .col-xs-4 { background-color: #1c76ba }
+p { color: $font-color }
+hr { border-top: 1px solid $accent-color }
 
 #footer {
   margin-top: 32px;
-  height: 300px;
+  height: 220px;
   background-color: #282828;
   overflow: hidden;
 }
 
 h3 {
-  font-family: 'Patrick Hand', cursive;
-  color: #fff;
+  color: $font-color;
   margin-top: -50px;
 }

@@ -1,8 +1,4 @@
 <div class="card">
-  <img
-    [src]="news.imageHeader"
-    [alt]="news.title"
-    [routerLink]="['/aktualnosci/' + cuttedLink + '/', news.id]">
   <h4 class="card-title">
     <i
       class="material-icons hover md-18 pull-right"
@@ -14,6 +10,7 @@
 
   <div
     class="card-body"
+    [routerLink]="['/aktualnosci/' + cuttedLink + '/', news.id]"
     [innerHTML]="news.content">
   </div>
 

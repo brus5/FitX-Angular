@@ -7,9 +7,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AdsenseModule} from 'ng2-adsense';
 import {RouterModule} from '@angular/router';
 
 import {AdsenseTopComponent} from './components/adsense-top/adsense-top.component';
+import {AdsenseBottomComponent} from './components/adsense-bottom/adsense-bottom.component';
 import {ResponsiveComponent} from './components/responsive/responsive.component';
 import {DropdownListComponent} from './components/dropdown-list/dropdown-list.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
@@ -30,6 +32,7 @@ import {HoursService} from './services/hours.service';
 @NgModule({
   declarations: [
     AdsenseTopComponent,
+    AdsenseBottomComponent,
     ResponsiveComponent,
     DropdownListComponent,
     CalendarComponent,
@@ -52,9 +55,11 @@ import {HoursService} from './services/hours.service';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    AdsenseModule.forRoot({adClient: 'ca-pub-2226661081282412'}),
   ],
   exports: [
     AdsenseTopComponent,
+    AdsenseBottomComponent,
     ResponsiveComponent,
     DropdownListComponent,
     CalendarComponent,
@@ -73,6 +78,7 @@ import {HoursService} from './services/hours.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
+    AdsenseModule,
   ],
   providers: [
     UserService,

@@ -69,7 +69,7 @@
         <div>
           Ilość znaków:
           <span [ngClass]="(news.contentShort?.length > 200) ? 'error' : 'valid' &&
-                           (news.contentShort?.length < 160) ? 'error' : 'valid'" >
+                           (news.contentShort?.length < 160) ? 'error' : 'valid'">
             {{news.contentShort?.length}} / 200
           </span>
         </div>
@@ -84,7 +84,8 @@
           <mat-card class="result">
             <mat-card-content>
               <section class="example-section">
-                <mat-checkbox [checked]="imgHeaderUrl === i" (change)="imgHeaderUrl = i; onHeaderImageChecked(image)"></mat-checkbox>
+                <mat-checkbox [checked]="imgHeaderUrl === i"
+                              (change)="imgHeaderUrl = i; onHeaderImageChecked(image)"></mat-checkbox>
                 <img [src]="image" (error)="image = imgTemp" width="25%">
                 <span></span>
                 <mat-icon (click)="onCopy(image)">file_copy</mat-icon>
@@ -114,6 +115,21 @@
 
       </div>
     </div>
+
+    <div class="col-md-6">
+      <div class="row">
+        Tak będzie wyglądac news
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <h4 class="card-title">{{news.title}}</h4>
+        <div class="card-body" [innerHTML]="news.content">
+        </div>
+      </div>
+    </div>
+
 
   </form>
 

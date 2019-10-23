@@ -17,6 +17,7 @@ $hover-link-color: #333;
 span.label { font-weight: normal }
 
 html, body {
+  background: #fafafa;
   height: 100%;
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -42,10 +43,14 @@ label {
 }
 
 .card-body > p {
-  margin: 6px auto auto 6px;
+  margin: 6px 6px auto 6px;
   &:last-child {
     margin: 6px auto 18px 6px;
   }
+}
+
+.card-body > h4 {
+  margin: 16px 6px 6px 6px
 }
 
 .card-detials {

@@ -70,6 +70,7 @@ export class NewsFormComponent implements OnInit, OnDestroy {
 
   onCopy(item): void {
     let img = '<img src="' + item + '" width="100%">';
+    console.log(item)
     this._clipboardService.copyFromContent(img);
     this._toastrService.info(this.Component.COPIED);
   }

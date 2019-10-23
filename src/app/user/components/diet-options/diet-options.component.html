@@ -68,7 +68,7 @@
 
       <div class="row mt-10">
         <button [disabled]="(form.invalid) || areNutrientsValid" (click)="onAccept()"
-                class="btn btn-primary">Zapisz
+                class="btn btn-success">Zapisz
         </button>
       </div>
     </div>
@@ -81,10 +81,9 @@
           <p>z czego: </p>
           <div class="card-detials">
             <br/>
-            <p>Białko: {{appUser$.maxNutrients.proteins}}</p>
-            <p>Węglowodany: {{appUser$.maxNutrients.carbs}}</p>
-            <p>Tłuszcze: {{appUser$.maxNutrients.fats}}</p>
-            <p>Białko je</p>
+            <p>Białko: {{appUser$.maxNutrients.proteins}} g</p>
+            <p>Węglowodany: {{appUser$.maxNutrients.carbs}} g</p>
+            <p>Tłuszcze: {{appUser$.maxNutrients.fats}} g</p>
           </div>
 
         </div>
@@ -93,5 +92,7 @@
   </form>
 
   <component-description [description]="dietDescription"></component-description>
+
+  <adsense-bottom></adsense-bottom>
 
 </responsive-switcher>

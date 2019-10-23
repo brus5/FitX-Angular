@@ -99,7 +99,7 @@ export class DietHoursComponent implements OnInit, OnDestroy {
   get hours(): string[] {
     return this.hours$;
   }
-  
+
   resetForm() {
     this.resetMealValues();
     this.formElement.reset();
@@ -118,6 +118,14 @@ export class DietHoursComponent implements OnInit, OnDestroy {
 
   get dietHoursTitle() {
     return 'Godziny posiłków';
+  }
+
+  get description() {
+    return 'Dzięki godzinom posiłków będziesz w stanie kontrolować co, ile i o której godzinie ' +
+      'powinieneś jeść. Skontrolowane równych odstępów czasu zagwarantuje Ci, że podczas dnia ' +
+      'przestaniesz odczuwać głód i nie będziesz mieć głodowych napadów. Zacznijmy ' +
+      'od największej ilości węglowodanów od rana, stopniowo zmniejszając wraz ze wzrostem godzin i ' +
+      'na wieczór starajmy się unikać węglowodanowych posiłków. Powodzenia! :)';
   }
 
   private mealExists(): boolean {

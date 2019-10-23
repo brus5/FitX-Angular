@@ -6,6 +6,7 @@ import 'rxjs/add/operator/mergeMap';
 import {Product} from '../../../shared/models/product';
 import {HoursService} from '../../../shared/services/hours.service';
 import {MealTime} from '../../../shared/models/meal-time';
+import {SeoService} from '../../../shared/services/seo-service';
 
 @Component({
   selector: 'diet',
@@ -27,10 +28,12 @@ export class DietComponent implements OnInit, OnDestroy {
 
   constructor(private _navService: NavService,
               private _dietService: DietService,
-              private _mealsHoursService: HoursService) {}
+              private _mealsHoursService: HoursService,
+              private _seo: SeoService) {}
 
   ngOnInit() {
     this.isHandset$ = this._navService.isHandset$;
+    this._seo.init('diet.component');
   }
 
   ngOnDestroy() {
@@ -38,6 +41,7 @@ export class DietComponent implements OnInit, OnDestroy {
     this.isDirtySubscription.unsubscribe();
     this.usersHoursSubscription.unsubscribe();
     this.dirtyHoursSubscription.unsubscribe();
+    this._seo.disconnect();
   }
 
   async onSelectedDate(date: string) {
@@ -77,5 +81,19 @@ export class DietComponent implements OnInit, OnDestroy {
   get dietTitle() {
     return 'Dieta';
   }
+
+  get description() {
+    return '<b>Dieta jest fundamentem naszego życia</b>. Jedni ją prowadzą lepiej lub gorzej, jednak ' +
+      'każdy ją prowadzi żywiąc się różnymi pokarmami. Twoje ciało potrzebuje energii z jedzenia i ' +
+      'nieustannie zużywa ją podczas działania w każdej intensywności. Podtrzymane muszą być ' +
+      'podstawowe funkcje życiowe organizmu takie jak oddychanie, pompowanie krwi, trawienie. ' +
+      'Energia z żywności przekształcana jest albo na fizyczną energię albo w postaci tłuszczu, białka i ' +
+      'węglowodanów. Przechowywana energia pozostaje w zapasach dopóki jej nie zużyjesz, najczęściej ' +
+      'są to zapasy tłuszczu. Jeżeli jednak zdecydujesz się inaczej zmuszając organizm do wysiłku, najpierw ' +
+      'zacznie korzystać z bieżącej energii: węglowodanów, białka, a później zacznie czerpać energię z ' +
+      'tłuszczu. Zwiększając aktywność fizyczną zwiększamy szanse, że nasz organizm przestanie ' +
+      'magazynować duże ilości tłuszczu, bo dostarczana energia będzie wykorzystywana na bieżąco.';
+  }
+
 
 }

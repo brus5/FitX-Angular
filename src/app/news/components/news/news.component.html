@@ -15,6 +15,21 @@
           <news-tile [news]="item" [isAdmin]="admin"></news-tile>
         </div>
         <div
+          id="ad"
+          class="text-center"
+          *ngIf="i == Config.AD_SENSE_NEWS">
+
+          <ng-adsense
+            [className]="'adsbygoogle'"
+            [adClient]="'ca-pub-2226661081282412'"
+            [adSlot]="7486736452"
+            [display]="'block'"
+            [adFormat]="'fluid'"
+            [layout]="'-6t+ed+2i-1n-4w'"
+          ></ng-adsense>
+
+        </div>
+        <div
           *ngIf="i >= Config.MAX_TILES">
           <div
             *ngIf="i == Config.MAX_TILES">

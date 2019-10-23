@@ -31,10 +31,10 @@
   <div class="col-md-6">
     <div class="row">
       <a
-          #addMealButtonElement
-          class="btn btn-primary"
-          [ngClass]="(addMealButtonElement.hidden) ? 'hidden' : 'visible'"
-          (click)="addMealButtonElement.hidden = true;">
+        class="btn btn-success"
+        #addMealButtonElement
+        [ngClass]="(addMealButtonElement.hidden) ? 'hidden' : 'visible'"
+        (click)="addMealButtonElement.hidden = true;">
         Dodaj posiłek
       </a>
 
@@ -49,15 +49,18 @@
       </div>
 
       <div class="row mt-10">
-        <button class="btn btn-secondary pull-right" *ngIf="addMealButtonElement.hidden"
-                (click)="addMealButtonElement.hidden = false">Zamknij
+        <button
+          class="btn btn-default pull-right"
+          *ngIf="addMealButtonElement.hidden"
+          (click)="addMealButtonElement.hidden = false">
+          Zamknij
         </button>
       </div>
     </div>
   </div>
 
   <div class="col-md-12">
-    <component-description [description]="'asdasd'" ></component-description>
+    <component-description [description]="description" ></component-description>
   </div>
 
   <ng-template #newMealTime>
@@ -82,14 +85,19 @@
 
       <div class="row mt-10">
         <button
+          class="btn btn-success"
           type="button"
-          class="btn btn-primary"
           [disabled]="!form.valid || !meal.time"
-          (click)="onAccept()"
-        >
+          (click)="onAccept()">
           Zapisz
         </button>
-        <button (click)="resetForm()" class="btn btn-secondary pull-right">Resetuj</button>
+
+        <button
+          class="btn btn-danger pull-right"
+          type="button"
+          (click)="resetForm()">
+          Resetuj
+        </button>
       </div>
 
     </form>

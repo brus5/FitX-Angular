@@ -16,7 +16,8 @@ export class NewsComponent implements OnInit, OnDestroy {
   appUser$ = {} as AppUser;
 
   Config = {
-    MAX_TILES: 4
+    MAX_TILES: 4,
+    AD_SENSE_NEWS: 1,
   };
 
   private userSubscription: Subscription = new Subscription();

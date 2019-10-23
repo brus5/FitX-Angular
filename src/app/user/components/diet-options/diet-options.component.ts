@@ -71,10 +71,11 @@ export class DietOptionsComponent implements OnInit, OnDestroy {
   }
 
   get dietDescription() {
-    return 'Białko jako jeden z makroelementów odgrywa kluczową rolę. Zawarte w nim aminokwasy są wykorzystywane głównie w celach\n' +
-      '  anabolicznych, wspierają wzrost, rozwój i regenerację tkanek, pomagają rozwijać masę mięśniową. Ponadto pełnią funkcje\n' +
-      '  regulacyjne – uczestniczą w produkcji hormonów, enzymów i DNA. Wpływają na funkcje układu odpornościowego oraz\n' +
-      '  nerwowego, ułatwiają neutralizację i oczyszczanie organizmu z toksyn.';
+    return 'Nie da się ułożyć optymalnej diety dla wszystkich. Każdy organizm jest inny, dlatego też potrzebujemy ' +
+      'różnie rozłożonych procentowo makroskładników. Obserwuj swój organizm i dowiedz się jak układać dietę. Mała ' +
+      'podpowiedź: jeżeli łatwo przychodzi Ci zyskiwanie masy, postaraj się zmniejszyć procentową liczbę węglowodanów ' +
+      'na rzecz białka i tłuszczów. Jeżeli zaś trudno Ci zyskać masę, spróbuj na odwrót i zwiększ procenty w węglowodanach. ' +
+      'To takie proste a wystarczy trochę pokombinować i nie trzymać się stale tych samych decyzji :)';
   }
 
   private calculateIntake(nutrient: number, isFat: boolean): number {

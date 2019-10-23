@@ -2,8 +2,14 @@
 
   <div [ngClass]="(isHandset$ | async) ? 'mobile-ad' : 'desktop-ad'">
 
-    <div *ngIf="isHandset$ | async">mobile ad</div>
-    <div *ngIf="!(isHandset$ | async)">desktop ad</div>
+    <div *ngIf="isHandset$ | async">
+
+    </div>
+    <div *ngIf="!(isHandset$ | async)">
+
+      <div class="text-center" >
+      </div>
+    </div>
 
   </div>
 

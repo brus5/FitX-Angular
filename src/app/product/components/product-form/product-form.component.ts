@@ -109,6 +109,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       .then(() => this.navigateToProductsPage());
   }
 
+  get description() {
+    return 'Nowy produkt musi poczekać na weryfikację administratora. Zwykle to długo nie trwa, dołóż swoją cegiełke dietetycznej społeczności ;)';
+  }
+
   private onFileSelected(event) {
     this.selectedFile = event.target.files[0];
     this._uploadImageService.selectFile(event.target.files[0]);

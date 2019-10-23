@@ -13,6 +13,9 @@ import {DietOptionsComponent} from './user/components/diet-options/diet-options.
 import {ProductsWaitingRoomComponent} from './admin/components/products-waiting-room/products-waiting-room.component';
 import {AdminGuardService} from './shared/services/admin-guard.service';
 import {NewsFormComponent} from './news/components/news-form/news-form.component';
+import {AboutusComponent} from './aboutus/components/aboutus/aboutus.component';
+import {ContactComponent} from './contact/components/contact/contact.component';
+import {HelpComponent} from './help/components/help/help.component';
 
 const routes: Routes = [
   {
@@ -68,6 +71,21 @@ const routes: Routes = [
     component: NewsFormComponent,
     canActivate: [AuthGuardService, AdminGuardService],
     data: {title: 'Napisz aktualność'}
+  },
+  {
+    path: 'o-nas',
+    component: AboutusComponent,
+    data: {title: 'O nas'}
+  },
+  {
+    path: 'kontakt',
+    component: ContactComponent,
+    data: {title: 'Kontakt'}
+  },
+  {
+    path: 'pomoc',
+    component: HelpComponent,
+    data: {title: 'Pomoc'}
   },
 ];
 
