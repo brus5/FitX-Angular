@@ -33,7 +33,9 @@
           <div [style.backgroundImage]="'url(' + product.imageUrl + ')'" class="thumbnail"></div>
         </th>
         <th class="text-left">
-          {{toUpperCase(product.name)}}
+          <a [routerLink]="['/produkt', product.key]">
+            {{toUpperCase(product.name)}}
+          </a>
           <br/>
           <product-nutrition
             [nutrition]="product.nutrition"

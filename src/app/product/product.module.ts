@@ -4,6 +4,7 @@ import {ProductsComponent} from './components/products/products.component';
 import {ProductFormComponent} from './components/product-form/product-form.component';
 import {ProductComponent} from './components/product/product.component';
 import {ProductNutritionComponent} from './components/product-nutrition/product-nutrition.component';
+import {ProductDetailsComponent} from './components/product-details/product-details.component';
 
 import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from '@angular/router';
@@ -19,7 +20,8 @@ import {AuthGuardService} from '../shared/services/auth-guard.service';
     ProductsComponent,
     ProductFormComponent,
     ProductComponent,
-    ProductNutritionComponent
+    ProductNutritionComponent,
+    ProductDetailsComponent
   ],
   imports: [
     SharedModule,
@@ -45,6 +47,10 @@ import {AuthGuardService} from '../shared/services/auth-guard.service';
           description: 'Edytuj produkt.',
           ogUrl: 'your og url'
         }
+      },
+      {
+        path: 'produkt/:id',
+        component: ProductDetailsComponent,
       }
     ])
   ],
