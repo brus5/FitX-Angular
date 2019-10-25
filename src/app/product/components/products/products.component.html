@@ -20,8 +20,7 @@
       <tr>
         <th></th>
         <th class="text-left">Nazwa produktu</th>
-        <th class="text-center">Ilość</th>
-        <th class="text-right" style="width: 200px">Kalorie/100 g</th>
+        <th class="text-center" style="width: 200px">Kalorie/100 g</th>
         <th class="text-right"></th>
       </tr>
       </thead>
@@ -33,7 +32,7 @@
           <div [style.backgroundImage]="'url(' + product.imageUrl + ')'" class="thumbnail"></div>
         </th>
         <th class="text-left">
-          <a [routerLink]="['/produkt', product.key]">
+          <a [routerLink]="['/produkt/' + productLink(product) + '/', product.key]">
             {{toUpperCase(product.name)}}
           </a>
           <br/>
@@ -42,8 +41,7 @@
             [isHandset]="isHandset$">
           </product-nutrition>
         </th>
-        <th class="text-center">{{product}}</th>
-        <th class="text-right">{{product.nutrition.kcal}}</th>
+        <th class="text-center">{{product.nutrition.kcal}}</th>
         <th *ngIf="appUser$" class="text-right">
           <button
             type="button" class="btn btn-default btn-sm"

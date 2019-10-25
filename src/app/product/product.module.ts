@@ -32,25 +32,18 @@ import {AuthGuardService} from '../shared/services/auth-guard.service';
         path: 'produkty/nowy',
         component: ProductFormComponent,
         canActivate: [AuthGuardService],
-        data: {
-          title: 'Nowy produkt',
-          description: 'Dodaj produkt do bazy danych.',
-          ogUrl: 'your og url'
-        }
+        data: { title: 'Nowy produkt' }
       },
       {
         path: 'produkty/edycja/:id',
         component: ProductFormComponent,
         canActivate: [AuthGuardService],
-        data: {
-          title: 'Edytuj produkt',
-          description: 'Edytuj produkt.',
-          ogUrl: 'your og url'
-        }
+        data: { title: 'Edytuj produkt' }
       },
       {
-        path: 'produkt/:id',
+        path: 'produkt/:title/:id',
         component: ProductDetailsComponent,
+        data: { title: 'Produkt' }
       }
     ])
   ],

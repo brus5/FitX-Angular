@@ -8,6 +8,7 @@ import {DataTableResource} from 'angular5-data-table';
 import {User} from '../../../shared/models/user';
 import {AppUser} from '../../../shared/models/app-user';
 import {SeoService} from '../../../shared/services/seo-service';
+import {LinkService} from '../../../shared/services/link.service';
 
 @Component({
   selector: 'products',
@@ -35,7 +36,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor(private _navService: NavService,
               private _productService: ProductService,
               private _auth: AuthService,
-              private _seo: SeoService) {}
+              private _seo: SeoService,
+              private _linkService: LinkService) {}
 
   async ngOnInit() {
     this.productsSubscription = this._productService.getAll()
@@ -115,6 +117,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       '<p><b>Tłuszcze</b>, jest sumą wszystkich spożywanych tłuszczy: nasyconych, jednonienasyconych, wielonasyconych i ' +
       'tłuszczów trans. Są jednym z trzech źródeł energii dla organizmu (tuż obok białek i węglowodanów). Jeden gram tłuszczu ' +
       'zawiera aż 9 kilokalorii w przeciwieństwie do białek i węglowodanów gdzie jeden gram ma 4 kilokalorie.</p>';
+  }
+
+  productLink(product: Product): string {
+    return this._linkService.cutLink(product.name);
   }
 
   private remove(product: Product) {
