@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NewsService} from '../../services/news.service';
 import {Subscription} from 'rxjs';
 import {News} from '../../../shared/models/news';
+import {LinkService} from '../../../shared/services/link.service';
 
 @Component({
   selector: 'news-archive',
@@ -14,7 +15,8 @@ export class NewsArchiveComponent implements OnInit, OnDestroy {
 
   private archiveSubscription: Subscription = new Subscription();
 
-  constructor(private _newsService: NewsService) { }
+  constructor(private _newsService: NewsService,
+              private _linkService: LinkService) { }
 
   ngOnInit() {
     this.archiveSubscription = this._newsService.getAllArchive()
@@ -26,7 +28,7 @@ export class NewsArchiveComponent implements OnInit, OnDestroy {
   }
 
   cuttedLink(link: string): string {
-    return this._newsService.cutLink(link);
+    return this._linkService.cutLink(link);
   }
 
 }

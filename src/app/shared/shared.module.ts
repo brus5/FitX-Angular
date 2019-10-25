@@ -28,6 +28,7 @@ import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {ImageUploadService} from './services/image-upload.service';
 import {HoursService} from './services/hours.service';
+import {LinkService} from './services/link.service';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import {HoursService} from './services/hours.service';
     UserService,
     AuthService,
     ImageUploadService,
-    HoursService
+    HoursService,
+    LinkService
   ]
 })
 

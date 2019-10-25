@@ -4,6 +4,7 @@ import {NewsService} from '../../services/news.service';
 import {AuthService} from '../../../shared/services/auth.service';
 import {AppUser} from '../../../shared/models/app-user';
 import {Subscription} from 'rxjs';
+import {LinkService} from '../../../shared/services/link.service';
 
 @Component({
   selector: 'news',
@@ -24,7 +25,8 @@ export class NewsComponent implements OnInit, OnDestroy {
   private newsesSubscription: Subscription = new Subscription();
 
   constructor(private _authService: AuthService,
-              private _newsService: NewsService) { }
+              private _newsService: NewsService,
+              private _linkService: LinkService) { }
 
   ngOnInit() {
     this.userSubscription = this._authService.appUser$$
@@ -43,7 +45,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   cuttedLink(link: string): string {
-    return this._newsService.cutLink(link);
+    return this._linkService.cutLink(link);
   }
 
   get admin() {

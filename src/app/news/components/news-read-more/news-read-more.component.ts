@@ -8,6 +8,7 @@ import {Seo} from '../../../shared/models/seo';
 import {tap} from 'rxjs/operators';
 import {AppUser} from '../../../shared/models/app-user';
 import {AuthService} from '../../../shared/services/auth.service';
+import {LinkService} from '../../../shared/services/link.service';
 
 @Component({
   selector: 'news-read-more',
@@ -30,7 +31,8 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private _newsService: NewsService,
-              private _seo: SeoService) { }
+              private _seo: SeoService,
+              private _linkService: LinkService) { }
 
   ngOnInit() {
     this.userSubscription = this._authService.appUser$$
@@ -71,7 +73,7 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
 
   private initMeta() {
     let site = 'https://ekcal.pl/aktualnosci/' +
-      this._newsService.cutLink(this.news.title) + '/' + this.newsId;
+      this._linkService.cutLink(this.news.title) + '/' + this.newsId;
 
     let seo = {
       title: this.news.title,

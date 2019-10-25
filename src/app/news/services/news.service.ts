@@ -11,7 +11,6 @@ import {Seo} from '../../shared/models/seo';
 export class NewsService {
 
   Config = {
-    MAX_WORDS: 30,
     MAX_LATEST_NEWS: 16,
   };
 
@@ -77,16 +76,6 @@ export class NewsService {
     return this._aFire.doc('seo/' + newsId).set(seo);
   }
 
-  public cutLink(str: string): string {
-    return this.removeAccents(
-      str
-        .split(' ')
-        .splice(0, this.Config.MAX_WORDS)
-        .join(' ')
-        .replace(/\s/g, '-')
-    ).toLowerCase();
-  }
-
   public cutContent(content: string, maxWords: number): string {
     return content
       .split(' ')
@@ -104,22 +93,6 @@ export class NewsService {
 
   public get loading(): boolean {
     return this.isLoading;
-  }
-
-  private removeAccents(strAccents): string {
-    var strAccents = strAccents.split('');
-    var strAccentsOut = [];
-    const strAccentsLen = strAccents.length;
-    let accents = 'ÀÁÂÃÄÅĄàáâãäåąßÒÓÔÕÕÖØŐòóôőõöøĎďDŽdžÈÉÊËĘèéêëęðÇçČčĆćÐÌÍÎÏìíîïÙÚÛÜŰùűúûüĽĹŁľĺłÑŇŃňñńŔŕŠŚšśŤťŸÝÿýŽŻŹžżź';
-    let accentsOut = "AAAAAAAaaaaaaasOOOOOOOOoooooooDdDZdzEEEEEeeeeeeCcCcCcDIIIIiiiiUUUUUuuuuuLLLlllNNNnnnRrSSssTtYYyyZZZzzz";
-    for (let y = 0; y < strAccentsLen; y++) {
-      if (accents.indexOf(strAccents[y]) != -1) {
-        strAccentsOut[y] = accentsOut.substr(accents.indexOf(strAccents[y]), 1);
-      } else
-        strAccentsOut[y] = strAccents[y];
-    }
-    strAccentsOut = <any>strAccentsOut.join('');
-    return strAccentsOut.toString();
   }
 
 }

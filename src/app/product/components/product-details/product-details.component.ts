@@ -6,6 +6,7 @@ import {SeoService} from '../../../shared/services/seo-service';
 import {Observable, Subscription} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {NewsService} from '../../../news/services/news.service';
+import {LinkService} from '../../../shared/services/link.service';
 
 @Component({
   selector: 'product-details',
@@ -24,7 +25,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   constructor(private _productService: ProductService,
               private _activatedRoute: ActivatedRoute,
               private _seo: SeoService,
-              private _newsService: NewsService) {}
+              private _newsService: NewsService,
+              private _linkService: LinkService) {}
 
   ngOnInit() {
     this.productId = this._activatedRoute.snapshot.paramMap.get('id');
@@ -43,6 +45,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this._seo.disconnect();
   }
 
+  cuttedLink(link: string): string {
+    return this._linkService.cutLink(link);
+  }
+
   private initProduct(prod: Product): Observable<any> {
     this.product = prod;
     return Observable.of(prod);
@@ -50,7 +56,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   private initMeta() {
     let site = 'https://ekcal.pl/produkt/' +
-      this._newsService.cutLink(this.product.name) + '/' + this.productId;
+      this._linkService.cutLink(this.product.name) + '/' + this.productId;
   }
 
 
