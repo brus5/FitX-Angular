@@ -7,6 +7,7 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {HoursService} from '../../../shared/services/hours.service';
+import {LinkService} from '../../../shared/services/link.service';
 
 @Component({
   selector: 'diet-add-product',
@@ -41,7 +42,8 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
   constructor(private _productService: ProductService,
               private _dietService: DietService,
               private _toastrService: ToastrService,
-              private _hoursService: HoursService) {}
+              private _hoursService: HoursService,
+              private _linkService: LinkService) {}
 
   ngOnInit() {
     this.productsSubscription = this._productService.getAll()
@@ -98,6 +100,10 @@ export class DietAddProductComponent implements OnInit, OnDestroy, OnChanges {
       this.filteredProducts$.filter(p =>
         p.name.toLowerCase().includes(query.toLowerCase())) : this.filteredProducts$;
     this.isSearching = false;
+  }
+
+  productLink(product: Product): string {
+    return this._linkService.cutLink(product.name);
   }
 
   private checkDayContainsMealSubscription() {

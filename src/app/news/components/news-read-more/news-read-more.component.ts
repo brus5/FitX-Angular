@@ -87,13 +87,13 @@ export class NewsReadMoreComponent implements OnInit, OnDestroy {
       },
       twitter: {
         card: 'summary_large_image',
-        creator: this.news.creator
+        creator: 'eKcal.pl'
       }
     } as Seo;
 
     this._seo.clearTags()
       .pipe(
         tap(_ => this._seo.initTags(seo))
-      ).subscribe(_ => null);
+      ).subscribe();
   }
 }

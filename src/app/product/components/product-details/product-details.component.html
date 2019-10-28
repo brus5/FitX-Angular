@@ -1,3 +1,84 @@
 <responsive-switcher>
-  <p>{{product | json}}</p>
+  <form #form="ngForm">
+    <div id="content" class="row">
+      <div class="col-md-6">
+
+        <div class="card">
+          <img [src]="product.imageUrl" class="rounded-top" style="width: 100%;"
+               alt="{{product.name}}">
+          <h4 class="card-title">{{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}</h4>
+          <div class="card-body">
+
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="card">
+
+          <table class="table">
+            <thead>
+            <tr>
+              <div class="nutrition title">Dane żywnościowe</div>
+            </tr>
+            <tr>
+              <div class="nutrition">Waga produktu: 100 gramów</div>
+            </tr>
+            <tr>
+              <div class="thick">
+                <hr>
+              </div>
+            </tr>
+            <tr>
+              <div class="nutrition second-title">
+                <h4>Ilość produktu na porcję</h4>
+              </div>
+            </tr>
+            <tr>
+              <div class="nutrition calories pull-left">Kalorii</div>
+              <div class="nutrition calories pull-right">{{product.nutrition.kcal}}</div>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <div class="medium">
+                <hr>
+              </div>
+            </tr>
+            <tr>
+              <div class="nutrition pull-left">Tłuszcze</div>
+              <div class="nutrition pull-right">{{product.nutrition.fats}}</div>
+            </tr>
+            <tr>
+              <div class="medium">
+                <hr>
+              </div>
+            </tr>
+            <tr>
+              <div class="nutrition pull-left">Węglowodany</div>
+              <div class="nutrition pull-right">{{product.nutrition.carbs}}</div>
+            </tr>
+            <tr>
+              <div class="medium">
+                <hr>
+              </div>
+            </tr>
+            <tr>
+              <div class="nutrition pull-left">Białko</div>
+              <div class="nutrition pull-right">{{product.nutrition.proteins}}</div>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
 </responsive-switcher>
+
+<app-footer></app-footer>

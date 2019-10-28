@@ -1,0 +1,34 @@
+$hr-width: 97%;
+$hr-color: #000;
+$hr-margin: 6px auto 6px auto;
+
+#content { height: 768px }
+.nutrition { margin: 6px 12px 6px 12px }
+.nutrition-secondary { margin: 6px 12px 6px 32px }
+.card-body { margin: 6px }
+.title {
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+.second-title > h4 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.thick > hr {
+  width: $hr-width;
+  border-top: 10px solid $hr-color;
+  margin: $hr-margin;
+}
+
+.medium > hr {
+  border-top: 1px solid $hr-color;
+  width: $hr-width;
+  margin: $hr-margin;
+}
+
+.calories {
+  font-size: 16px;
+  font-weight: bold;
+}

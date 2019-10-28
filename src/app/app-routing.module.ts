@@ -73,9 +73,9 @@ const routes: Routes = [
     data: {title: 'Napisz aktualność'}
   },
   {
-    path: 'o-nas',
+    path: 'o-mnie',
     component: AboutusComponent,
-    data: {title: 'O nas'}
+    data: {title: 'O mnie'}
   },
   {
     path: 'kontakt',

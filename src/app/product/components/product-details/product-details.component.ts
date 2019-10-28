@@ -7,6 +7,7 @@ import {Observable, Subscription} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {NewsService} from '../../../news/services/news.service';
 import {LinkService} from '../../../shared/services/link.service';
+import {Seo} from '../../../shared/models/seo';
 
 @Component({
   selector: 'product-details',
@@ -57,6 +58,29 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   private initMeta() {
     let site = 'https://ekcal.pl/produkt/' +
       this._linkService.cutLink(this.product.name) + '/' + this.productId;
+
+    let seo = {
+      title: this.product.name.charAt(0).toUpperCase() + this.product.name.substring(1),
+      url: site,
+      image: this.product.imageUrl,
+      description: 'Bi: ' + this.product.nutrition.proteins + 'g ' +
+                    'Ww: ' + this.product.nutrition.carbs + 'g ' +
+                    'Tł: ' + this.product.nutrition.fats + 'g ',
+
+      facebook: {
+        app_id: this._seo.Facebook.APP_ID,
+        type: 'site'
+      },
+      twitter: {
+        card: 'summary_large_image',
+        creator: 'eKcal.pl'
+      }
+    } as Seo;
+
+    this._seo.clearTags()
+      .pipe(
+        tap(_ => this._seo.initTags(seo))
+      ).subscribe();
   }
 
 

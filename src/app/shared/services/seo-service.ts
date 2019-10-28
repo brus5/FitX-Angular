@@ -1,10 +1,11 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Meta, Title} from '@angular/platform-browser';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable, Subscription} from 'rxjs';
 import {Seo} from '../models/seo';
 import {NewsService} from '../../news/services/news.service';
 import {tap} from 'rxjs/operators';
+import {DOCUMENT} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,8 @@ export class SeoService {
   constructor(private _aFire: AngularFirestore,
               private meta: Meta,
               private title: Title,
-              private _newsService: NewsService) {}
+              private _newsService: NewsService,
+              @Inject(DOCUMENT) private doc) {}
 
   public init(componentName?: string): Subscription {
     return this._aFire.doc<Seo>('seo/' + componentName)
@@ -64,6 +66,8 @@ export class SeoService {
     this.twImage = seo.image;
     this.twCreator = seo.twitter.creator;
 
+    this.createLinkForCanonicalURL(seo.url);
+
     return Observable.of(seo);
   }
 
@@ -88,6 +92,13 @@ export class SeoService {
     this.meta.removeTag('name=' + '"' + this.Twitter.CREATOR + '"');
 
     return Observable.of(null);
+  }
+
+  public createLinkForCanonicalURL(url: string) {
+    let link: HTMLLinkElement = this.doc.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    this.doc.head.appendChild(link);
+    link.setAttribute('href', url);
   }
 
   private unsubscribe(): void {

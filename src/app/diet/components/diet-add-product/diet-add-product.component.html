@@ -5,7 +5,8 @@
     <tbody>
     <tr *ngFor="let product of dailyProducts$; let i = index">
       <th class="text-left">
-        <a matTooltip="B: {{product.nutrition.proteins | number: '1.0-0'}} |
+        <a [routerLink]="['/produkt/' + productLink(product) + '/', product.key]"
+           matTooltip="B: {{product.nutrition.proteins | number: '1.0-0'}} |
                        W: {{product.nutrition.carbs | number: '1.0-0'}} |
                        T: {{product.nutrition.fats | number: '1.0-0'}}">
           {{product.name.charAt(0).toUpperCase() + product.name.substring(1)}}
