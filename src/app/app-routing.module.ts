@@ -16,6 +16,7 @@ import {NewsFormComponent} from './news/components/news-form/news-form.component
 import {AboutusComponent} from './aboutus/components/aboutus/aboutus.component';
 import {ContactComponent} from './contact/components/contact/contact.component';
 import {HelpComponent} from './help/components/help/help.component';
+import {ErrorComponent} from './error/components/error/error.component';
 
 const routes: Routes = [
   {
@@ -86,6 +87,11 @@ const routes: Routes = [
     path: 'pomoc',
     component: HelpComponent,
     data: {title: 'Pomoc'}
+  },
+  {
+    path: '404',
+    component: ErrorComponent,
+    data: {title: 'Error'}
   },
 ];
 

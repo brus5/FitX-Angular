@@ -66,7 +66,7 @@ export class SeoService {
     this.twImage = seo.image;
     this.twCreator = seo.twitter.creator;
 
-    this.createLinkForCanonicalURL(seo.url);
+    // this.createLinkForCanonicalURL(seo.url);
 
     return Observable.of(seo);
   }

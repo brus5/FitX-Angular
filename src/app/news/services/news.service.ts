@@ -20,7 +20,7 @@ export class NewsService {
 
   public getLatestNews(): Observable<News[]> {
     return this._aFire.collection<News>('news', ref =>
-      ref.orderBy('date','desc').limit(this.Config.MAX_LATEST_NEWS))
+      ref.orderBy('date','asc').limit(this.Config.MAX_LATEST_NEWS))
       .snapshotChanges().pipe(
         map(actions => {
           return actions.map(action => {
@@ -45,7 +45,7 @@ export class NewsService {
 
   public getAllArchive(): Observable<any> {
     return this._aFire.collection<News>('news', ref =>
-      ref.orderBy('date', 'desc'))
+      ref.orderBy('date', 'asc'))
       .snapshotChanges().pipe(
         map(actions => {
           return actions.map(action => {

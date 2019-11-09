@@ -31,9 +31,9 @@ export class MainNavComponent implements OnInit {
   ngOnInit() {
     let breakpoints = [
       Breakpoints.Handset,
-      Breakpoints.Tablet,
+/*      Breakpoints.Tablet,
       Breakpoints.TabletLandscape,
-      Breakpoints.TabletPortrait];
+      Breakpoints.TabletPortrait*/];
 
     this.isHandset$ = this._breakpointObserver
       .observe(breakpoints)

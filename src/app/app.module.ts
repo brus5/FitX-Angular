@@ -29,6 +29,7 @@ import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {environment} from '../environments/environment';
 import {registerLocaleData} from '@angular/common';
 import localePl from '@angular/common/locales/pl';
+import {ErrorModule} from './error/error.module';
 
 registerLocaleData(localePl);
 
@@ -51,6 +52,7 @@ registerLocaleData(localePl);
     AboutusModule,
     HelpModule,
     ContactModule,
+    ErrorModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,

@@ -5,6 +5,7 @@
 $font-color-accent: #777;
 $color-primary: #555;
 $hover-link-color: #333;
+$h-margin: 16px 6px 6px 6px;
 
 #content { margin-top: 55px }
 .mt-10 { margin-top: 10px }
@@ -50,7 +51,13 @@ label {
 }
 
 .card-body > h4 {
-  margin: 16px 6px 6px 6px
+  margin: $h-margin;
+  font-size: large;
+}
+
+.card-body > h5 {
+  margin: $h-margin;
+  font-size: larger;
 }
 
 .card-detials {
