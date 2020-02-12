@@ -5,7 +5,7 @@
     <div *ngIf="appUser$ as user; else loginButton">
       <div class="login-btn">
 
-        <a>{{user.name}}</a>
+        <a>{{shortUserEmail(user.email)}}</a>
 
         <div class="profile-buttons" *ngIf="appUser$">
 

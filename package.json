@@ -1,6 +1,6 @@
 {
   "name": "fitx-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "ng": "ng",
     "start": "npm install && npm run serve:ssr",

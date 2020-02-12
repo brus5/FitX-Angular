@@ -11,6 +11,7 @@ import {NewsReadMoreComponent} from './components/news-read-more/news-read-more.
 import {NewsArchiveComponent} from './components/news-archive/news-archive.component';
 import {AuthGuardService} from '../shared/services/auth-guard.service';
 import {AdminGuardService} from '../shared/services/admin-guard.service';
+import {CoreModule} from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {AdminGuardService} from '../shared/services/admin-guard.service';
   imports: [
     SharedModule,
     FooterModule,
+    CoreModule,
     RouterModule.forChild([
       {
         path: 'aktualnosci/nowy',

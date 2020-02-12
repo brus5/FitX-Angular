@@ -26,7 +26,8 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   constructor(private _authService: AuthService,
               private _newsService: NewsService,
-              private _linkService: LinkService) { }
+              private _linkService: LinkService,
+              private _auth: AuthService) { }
 
   ngOnInit() {
     this.userSubscription = this._authService.appUser$$
@@ -48,6 +49,10 @@ export class NewsComponent implements OnInit, OnDestroy {
     return this._linkService.cutLink(link);
   }
 
+  login() {
+    this._auth.login();
+  }
+
   get admin() {
     return this.appUser$.isAdmin;
   }
@@ -55,5 +60,4 @@ export class NewsComponent implements OnInit, OnDestroy {
   get isLoading() {
     return this._newsService.loading;
   }
-
 }

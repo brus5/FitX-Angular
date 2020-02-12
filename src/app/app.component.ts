@@ -21,7 +21,6 @@ export class AppComponent implements OnInit{
               private _titleService: Title,
               private _meta: Meta,
               private _seoService: SeoService,
-              private router: Router,
               private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -30,7 +29,7 @@ export class AppComponent implements OnInit{
   }
 
   private initRouterHolder() {
-    this.router.events.pipe(
+    this._router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map(() => this.activatedRoute),
       map((route) => {

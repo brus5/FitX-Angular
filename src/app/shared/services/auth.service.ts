@@ -14,7 +14,7 @@ import {AppUser} from '../models/app-user';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements Authentication {
   public user$: Observable<firebase.User>;
 
   constructor(
@@ -32,6 +32,14 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut();
+  }
+
+  loginWithEmail(user: UserCridentials) {
+    return this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+  }
+
+  createUserWithEmailAndPassword(user: UserCridentials) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
   }
 
   get appUser$(): Observable<firebase.User> {

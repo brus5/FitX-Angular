@@ -33,4 +33,8 @@ export class ProfileNavComponent implements OnInit {
   get adminLinks() {
     return ADMIN_LINKS;
   }
+
+  shortUserEmail(email: string) {
+    return email.substr(0, email.indexOf("@"));
+  }
 }

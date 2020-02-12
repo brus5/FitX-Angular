@@ -1,0 +1,4 @@
+interface Authentication {
+  login();
+  logout();
+}

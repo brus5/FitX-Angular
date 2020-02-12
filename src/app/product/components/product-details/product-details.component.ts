@@ -18,7 +18,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   @Input() productId: string;
 
-  product = { nutrition: {} } as Product;
+  product = {
+    name: '',
+    nutrition: {}
+  } as Product;
 
   private productSubscription: Subscription = new Subscription();
   private initProductSubscription: Subscription = new Subscription();
@@ -48,6 +51,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   cuttedLink(link: string): string {
     return this._linkService.cutLink(link);
+  }
+
+  productName() {
+    return this.product.name.charAt(0).toUpperCase() + this.product.name.slice(1);
   }
 
   private initProduct(prod: Product): Observable<any> {

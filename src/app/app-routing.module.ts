@@ -17,6 +17,7 @@ import {AboutusComponent} from './aboutus/components/aboutus/aboutus.component';
 import {ContactComponent} from './contact/components/contact/contact.component';
 import {HelpComponent} from './help/components/help/help.component';
 import {ErrorComponent} from './error/components/error/error.component';
+import {RegisterEmailComponent} from './core/components/register-email/register-email.component';
 
 const routes: Routes = [
   {
@@ -87,6 +88,11 @@ const routes: Routes = [
     path: 'pomoc',
     component: HelpComponent,
     data: {title: 'Pomoc'}
+  },
+  {
+    path: 'rejestracja',
+    component: RegisterEmailComponent,
+    data: {title: 'Rejestracja'}
   },
   {
     path: '404',
